@@ -19,25 +19,25 @@
             <form action="./register" method="POST" enctype="multipart/form-data" class="form-account" type="register" id="fm-register">
                 <div class="field">
                     <div class="input-field" field="username">
-                        <input type="text" name="" placeholder="Nhập Tài Khoản">
+                        <input type="text" name="username" placeholder="Nhập Tài Khoản">
                         <i class="bx bx-user"></i>
                     </div>
                 </div>
                 <div class="field">
                     <div class="input-field" field="password">
-                        <input type="password" name="" placeholder="Nhập Mật Khẩu">
+                        <input type="password" name="password" placeholder="Nhập Mật Khẩu">
                         <i class="bx bx-lock-alt"></i>
                     </div>
                 </div>
                 <div class="field">
                     <div class="input-field" field="phone">
-                        <input type="number" name="" placeholder="Nhập Số Điện Thoại">
+                        <input type="number" name="phone" placeholder="Nhập Số Điện Thoại">
                         <i class="bx bx-phone"></i>
                     </div>
                 </div>
                 <div class="field">
                     <div class="input-field" field="email">
-                        <input type="text" name="" placeholder="Nhập Email">
+                        <input type="text" name="email" placeholder="Nhập Email">
                         <i class="bx bx-envelope"></i>
                     </div>
                 </div>
@@ -59,7 +59,54 @@
 
             // Register
             $("#fm-register").validate({
-                
+                rules: {
+                    username: {
+                        required: true,
+                        rangelength: [6, 25],
+                    },
+                    password: {
+                        required: true,
+                        rangelength: [6, 50],
+                    },
+                    phone: {
+                        required: true,
+                        number: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "*Bạn Chưa Nhập Tài Khoản",
+                        rangelength: "*Tài Khoản Chỉ Nhận Từ 6 Đến 25 Ký Tự",
+                    },
+                    password: {
+                        required: "*Bạn Chưa Nhập Mật Khẩu",
+                        rangelength: "*Mật Khẩu Chỉ Nhận Từ 6 Đến 50 Ký Tự",
+                    },
+                    phone: {
+                        required: "*Bạn Chưa Nhập Số Điện Thoại",
+                        number: "*Số Điện Thoại Phải Là Ký Số",
+                    },
+                    email: {
+                        required: "*Bạn Chưa Nhập Email",
+                        email: "*Email Không Đúng Định Dạng",
+                    }
+                },
+                submitHandler: function(form) {
+                    // form.submit()
+                    // console.log($(form).serializeArray());
+                    $.ajax({
+                        type: "POST",
+                        url: "../../normal-pattern/views/action/action_auth",
+                        data: $(form).serializeArray(),
+                        success: function(data) {
+
+                        }
+                    });
+                }
             });
 
         })(jQuery);

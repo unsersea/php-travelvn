@@ -310,3 +310,10 @@ body {
 .section[type="register"] .container .form-account .other-link a:hover {
     color: var(--c-blue-hover);
 }
+
+.form-account label.error {
+    color: var(--c-red) !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    margin-bottom: 0.25rem !important;
+}
