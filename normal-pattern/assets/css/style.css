@@ -142,18 +142,22 @@ body {
 
 /* Login / Register */
 .section[type="register"] input::-webkit-outer-spin-button,
-.section[type="register"] input::-webkit-inner-spin-button {
+.section[type="register"] input::-webkit-inner-spin-button,
+.section[type="token"] input::-webkit-outer-spin-button,
+.section[type="token"] input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.section[type="register"] input[type="number"] {
+.section[type="register"] input[type="number"],
+.section[type="token"] input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
 
 .section[type="login"],
-.section[type="register"] {
+.section[type="register"],
+.section[type="token"] {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -162,7 +166,8 @@ body {
 }
 
 .section[type="login"] .container,
-.section[type="register"] .container {
+.section[type="register"] .container,
+.section[type="token"] .container {
     position: relative;
     max-width: 370px;
     width: 100%;
@@ -173,7 +178,8 @@ body {
 }
 
 .section[type="login"] .container .logo,
-.section[type="register"] .container .logo {
+.section[type="register"] .container .logo,
+.section[type="token"] .container .logo {
     display: flex;
     align-items: center;
     font-family: var(--ff-bruno) !important;
@@ -181,29 +187,34 @@ body {
 }
 
 .section[type="login"] .container .logo .logo-name,
-.section[type="register"] .container .logo .logo-name {
+.section[type="register"] .container .logo .logo-name,
+.section[type="token"] .container .logo .logo-name {
     margin-left: 0.425rem;
 }
 
 .section[type="login"] .container .form-account,
-.section[type="register"] .container .form-account {
+.section[type="register"] .container .form-account,
+.section[type="token"] .container .form-token {
     margin-top: 1.475rem;
 }
 
 .section[type="login"] .container .form-account .field,
-.section[type="register"] .container .form-account .field {
+.section[type="register"] .container .form-account .field,
+.section[type="token"] .container .form-token .field {
     margin-bottom: 1.75rem;
 }
 
 .section[type="login"] .container .form-account .field .input-field,
-.section[type="register"] .container .form-account .field .input-field {
+.section[type="register"] .container .form-account .field .input-field,
+.section[type="token"] .container .form-token .field .input-field {
     position: relative;
     width: 100%;
     height: 50px;
 }
 
 .section[type="login"] .container .form-account .field .input-field i,
-.section[type="register"] .container .form-account .field .input-field i {
+.section[type="register"] .container .form-account .field .input-field i,
+.section[type="token"] .container .form-token .field .input-field i {
     position: absolute;
     right: 16px;
     top: 50%;
@@ -213,7 +224,8 @@ body {
 }
 
 .section[type="login"] .container .form-account .field .input-field input,
-.section[type="register"] .container .form-account .field .input-field input {
+.section[type="register"] .container .form-account .field .input-field input,
+.section[type="token"] .container .form-token .field .input-field input {
     width: 100%;
     height: 100%;
     outline: none;
@@ -241,7 +253,8 @@ body {
 }
 
 .section[type="login"] .container .form-account .button-submit button,
-.section[type="register"] .container .form-account .button-submit button {
+.section[type="register"] .container .form-account .button-submit button,
+.section[type="token"] .container .form-token .button-submit button {
     border: 0 !important;
     color: var(--c-light-gray);
     font-size: 1rem;
@@ -286,18 +299,21 @@ body {
 .section[type="login"] .container .form-account .button-google,
 .section[type="login"] .container .form-account .other-link,
 .section[type="register"] .container .form-account .button-submit button,
-.section[type="register"] .container .form-account .other-link a {
+.section[type="register"] .container .form-account .other-link a,
+.section[type="token"] .container .form-token .button-submit button {
     margin: 6px 0;
 }
 
 .section[type="login"] .container .form-account .button-submit button:hover,
-.section[type="register"] .container .form-account .button-submit button:hover {
+.section[type="register"] .container .form-account .button-submit button:hover,
+.section[type="token"] .container .form-token .button-submit button:hover {
     background-color: var(--c-blue-hover);
 }
 
 .section[type="login"] .container .form-account .button-submit button:hover,
 .section[type="login"] .container .form-account .button-google button:hover,
-.section[type="register"] .container .form-account .button-submit button:hover  {
+.section[type="register"] .container .form-account .button-submit button:hover,
+.section[type="token"] .container .form-token .button-submit button:hover {
     color: var(--c-white) !important;
 }
 

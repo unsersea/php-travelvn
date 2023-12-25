@@ -63,6 +63,15 @@
                     username: {
                         required: true,
                         rangelength: [6, 25],
+                        remote: {
+                            url: "../../normal-pattern/views/action/check_auth.php",
+                            type: "POST",
+                            data: {
+                                username: function() { 
+                                    return $("#fm-register :input[name='username']").val(); 
+                                }
+                            }
+                        }
                     },
                     password: {
                         required: true,
@@ -71,6 +80,15 @@
                     phone: {
                         required: true,
                         number: true,
+                        remote: {
+                            url: "../../normal-pattern/views/includes/validate/auth/validate_phone.php",
+                            type: "POST",
+                            data: { 
+                                phone: function() { 
+                                    return $("#fm-register :input[name='phone']").val(); 
+                                }
+                            }
+                        }
                     },
                     email: {
                         required: true,
@@ -81,6 +99,7 @@
                     username: {
                         required: "*Bạn Chưa Nhập Tài Khoản",
                         rangelength: "*Tài Khoản Chỉ Nhận Từ 6 Đến 25 Ký Tự",
+                        remote: "*Tài Khoản Này Đã Tồn Tại",
                     },
                     password: {
                         required: "*Bạn Chưa Nhập Mật Khẩu",
@@ -89,6 +108,7 @@
                     phone: {
                         required: "*Bạn Chưa Nhập Số Điện Thoại",
                         number: "*Số Điện Thoại Phải Là Ký Số",
+                        remote: "*Số Điện Thoại Phải Đủ 10 Ký Số",
                     },
                     email: {
                         required: "*Bạn Chưa Nhập Email",
@@ -103,7 +123,7 @@
                         url: "../../normal-pattern/views/action/action_auth",
                         data: $(form).serializeArray(),
                         success: function(data) {
-
+                            return location.href = "../../normal-pattern/views/_token.php";
                         }
                     });
                 }
