@@ -7,7 +7,7 @@
  * Description: Connect Database
  */
 
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/define.php';
 
 function connectDB() {
     $host = DB_HOST;
