@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         // Register
         if($action === "register") {
             // print_r($_REQUEST);
-
+            session_start();
             // Account
             $username = $_REQUEST["username"];
             $password = $_REQUEST["password"];

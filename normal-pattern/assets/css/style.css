@@ -327,9 +327,14 @@ body {
     color: var(--c-blue-hover);
 }
 
-.form-account label.error {
+.form-account label.error,
+.form-token .error-token {
     color: var(--c-red) !important;
     font-size: 0.875rem !important;
     font-weight: 400 !important;
     margin-bottom: 0.25rem !important;
+}
+
+.form-token .error-token {
+    display: none !important;
 }

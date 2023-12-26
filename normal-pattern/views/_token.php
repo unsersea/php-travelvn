@@ -13,15 +13,16 @@
     <section class="section" type="token">
         <div class="container">
             <div class="logo">
-                <img src="../../assets/img/logo.png" alt="" class="logo-img" width="40" height="40">
+                <img src="../../normal-pattern/assets/img/logo.png" alt="" class="logo-img" width="40" height="40">
                 <span class="logo-name">TravelVN</span>
             </div>
-            <form class="form-token" type="token" id="fm-token">
+            <form action="./_token.php" class="form-token" type="token" id="fm-token" method="POST" enctype="multipart/form-data">
                 <div class="field">
                     <div class="input-field" field="token">
-                        <input type="number" name="" id="">
+                        <input type="number" name="token" id="">
                         <i class="bx bx-lock"></i>
                     </div>
+                    <div class="error-token" id="error-token"></div>
                 </div>
                 <div class="button-submit">
                     <button type="submit" id="btn-token">Xác Minh Tài Khoản</button>
@@ -31,9 +32,8 @@
     </section>
 
     <?php include "../../normal-pattern/views/includes/footer-account.php"; ?>
-    <?php include "../../normal-pattern/assets/js/Token.js"; ?>
-
-    <!-- Script Validate -->
-
+    
+    <!-- Script Token -->
+    <script type="text/javascript" src="../../normal-pattern/assets/js/Token.js"></script>
 </body>
 </html>

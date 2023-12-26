@@ -7,6 +7,7 @@ include "../../classes/AuthClass.php";
 session_start();
 
 // print_r($_REQUEST);
+
 if(!empty(isset($_REQUEST["token"]))) {
     $token = $_REQUEST["token"];
 
@@ -20,9 +21,14 @@ if(!empty(isset($_REQUEST["token"]))) {
         // Add Session Navbar Name
         $_SESSION["navbar_username"] = $session_username;
 
-        echo json_encode("success");
+        // Unset
+        unset($_SESSION["token"]);
+        unset($_SESSION["email"]);
+
+        echo"success";
     } else {
         // echo json_encode("");
+        echo"*Mã Xác Minh Không Chính Xác";
     }
 
 }
