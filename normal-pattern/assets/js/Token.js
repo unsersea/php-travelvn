@@ -8,8 +8,8 @@
     // const AEL_Backspace = "backspace";
     const Form_Token = document.getElementById("fm-token");
     const Submit_Token = Form_Token.querySelector("#btn-token");
-    const Error_Token = document.querySelector("#error-token span");
-    
+    const Error_Token = document.querySelector("#error-token");
+
     $("#fm-token input").attr({
         "max": 9999,
         "min": 1,

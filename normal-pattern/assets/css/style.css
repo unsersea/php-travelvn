@@ -336,5 +336,5 @@ body {
 }
 
 .form-token .error-token {
-    display: none !important;
+    display: none;
 }

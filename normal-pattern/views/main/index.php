@@ -1,5 +1,1 @@
-<?php
-
-echo("index.php");
-
-?>
+<?php ?>
