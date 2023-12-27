@@ -335,6 +335,13 @@ body {
     margin-bottom: 0.25rem !important;
 }
 
-.form-token .error-token {
+.form-account #alert-login {
+    color: var(--c-red) !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+}
+
+.form-token .error-token,
+.form-account #alert-login {
     display: none;
 }
