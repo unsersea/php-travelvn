@@ -366,3 +366,30 @@ body {
 .form-account #alert-login {
     display: none;
 }
+
+/* Index | Service | Event | Contact (User) */
+article[article-type="index"] > header[type="top-page"] {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+article[article-type="index"] .logo-navbar {
+    width: 45px;
+    height: 45px;
+
+}
+
+article[article-type="index"] .logo-name {
+    font-family: var(--ff-bruno) !important;
+    font-size: 1.125rem;
+    margin-left: 0.125rem;
+}
+
+article[article-type="index"] .navbar-menu .navbar-nav .nav-item > a {
+    font-weight: 400;
+    font-size: 1rem;
+    font-family: var(--ff-poppins) !important;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
