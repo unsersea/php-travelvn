@@ -288,6 +288,23 @@ body {
     border-radius: 6px;
 }
 
+.section[type="login"] .container .form-account .button-google a {
+    border: 0 !important;
+    color: var(--c-light-gray);
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: var(--c-red);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
 .section[type="login"] .container .form-account .button-google span:nth-child(1) {
     display: flex;
     align-items: center;
@@ -314,6 +331,10 @@ body {
 .section[type="login"] .container .form-account .button-google button:hover,
 .section[type="register"] .container .form-account .button-submit button:hover,
 .section[type="token"] .container .form-token .button-submit button:hover {
+    color: var(--c-white) !important;
+}
+
+.section[type="login"] .container .form-account .button-google a:hover {
     color: var(--c-white) !important;
 }
 

@@ -1,3 +1,29 @@
+<?php 
+
+include("../../normal-pattern/config/database.php");
+
+require_once("../../normal-pattern/config/google.php");
+// Google Login
+session_start();
+
+$google_button = '';
+
+if(isset($_SESSION["user_token"])) {
+
+} else {
+    $google_button 
+        = '
+            <a href='.$google_client->createAuthUrl().' class="btn btn-login-google" id="btn-login-google">
+                <span>
+                    <i class="bx bxl-google"></i>
+                </span>
+                <span>Đăng Nhập Bằng Google</span>
+            </a>
+        ';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -44,14 +70,15 @@
                     <button type="submit" id="btn-login">Đăng Nhập</button>
                 </div>
                 <div class="button-google">
-                    <button type="button">
-                        <span>
-                            <i class="bx bxl-google"></i>
-                        </span>
-                        <span>
-                            Đăng Nhập Bằng Google
-                        </span>
-                    </button>
+                    <?php 
+                    
+                    if($google_button == '') {
+
+                    } else {
+                        echo $google_button;
+                    }
+                    
+                    ?>
                 </div>
                 <div class="other-link">
                     <span>Bạn chưa có tài khoản? <a href="">Đăng ký</a></span>
