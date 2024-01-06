@@ -29,4 +29,21 @@ function disconnectDB($conn) {
     $conn->close();
 }
 
+function connectPDO() {
+    $host = DB_HOST;
+    $user = DB_USER;
+    $password = DB_PASSWORD;
+    $database = DB_NAME;
+
+    try {
+        $conn = new PDO('mysql:host='.$host.';dbname='.$database.'', $user, $password);
+    } catch (PDOException $ex) {
+        die("Connection Failed: ". $ex);
+    }
+
+    return $conn;
+
+    // disconnect PDO return = null;
+}
+
 ?>

@@ -147,6 +147,21 @@ Class CategoryClass {
         disconnectDB($conn);
         echo json_encode($row);
     }
+
+    // Datatables
+    public static function ListByPDO() {
+        $conn = connectPDO();
+
+        $sql = "SELECT * FROM `category`";
+
+        $result = $conn->prepare($sql);
+        $result->execute();
+        $result->fetchAll();
+
+        $conn = null;
+        
+        return $result->rowCount();
+    }
 }
 
 ?>
