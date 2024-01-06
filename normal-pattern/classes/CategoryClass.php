@@ -79,6 +79,17 @@ Class CategoryClass {
         return $result;
     }
 
+    public static function Delete($id) {
+        $conn = connectDB();
+
+        $sql = "DELETE FROM `category` WHERE `category`.`id` = '$id'";
+
+        $result = $conn->query($sql);
+
+        disconnectDB($conn);
+        return $result;
+    }
+
     public static function FindById($id) {
         $conn = connectDB();
 
