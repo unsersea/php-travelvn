@@ -393,3 +393,19 @@ article[article-type="index"] .navbar-menu .navbar-nav .nav-item > a {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
 }
+
+/* Dashboard */
+/* Logo */
+
+.main-sidebar a[type="logo-link"] span {
+    font-family: var(--ff-bruno) !important;
+    font-size: 1.125rem;
+}
+
+.main-footer {
+    font-size: 1rem;
+}
+
+.main-copyright[type="logo"] {
+    font-family: var(--ff-bruno) !important;
+}

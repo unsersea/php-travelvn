@@ -13,6 +13,7 @@ session_start();
     <title>php-travelvn | trang chủ người dùng | v1.0</title>
     <?php include "../../views/includes/head-user.php"; ?>
 </head>
+<body page="index" id="bd-main-index">
     <?php include "../../views/includes/load.php"; ?>
     
     <article class="article" article-type="index">

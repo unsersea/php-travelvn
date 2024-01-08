@@ -24,7 +24,7 @@
                     if(data == "*user account success") {
                         location.href = "../../normal-pattern/views/main/index.php";
                     } else if(data == "*admin account success") {
-
+                        location.href = "../../normal-pattern/views/main/dashboard.php";
                     } else {
                         Error_Login.textContent = data;
                         Error_Login.style.display = "block";

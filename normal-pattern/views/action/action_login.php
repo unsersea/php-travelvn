@@ -26,7 +26,8 @@ if(!empty($_REQUEST["username"]) && !empty($_REQUEST["password"])) {
             }
 
             if($check_auth["role"] == 1) {
-
+                $_SESSION["sidebar_username"] = $username;
+                echo "*admin account success";
             }
         }
     }
