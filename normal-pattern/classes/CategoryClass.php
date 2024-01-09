@@ -37,10 +37,10 @@ Class CategoryClass {
         $sql = "INSERT INTO `category` (`category`, `content`)
         VALUES ('$categoryClass->category', '$categoryClass->content')";
 
-        $result = $conn->query($sql);
+        $statement = $conn->query($sql);
 
         disconnectDB($conn);
-        return $result;
+        return $statement;
     }
 
     public static function Read() {
@@ -48,17 +48,17 @@ Class CategoryClass {
 
         $sql = "SELECT * FROM `category`";
 
-        $result = $conn->query($sql);
+        $statement = $conn->query($sql);
 
-        if($result === false) {
+        if($statement === false) {
 
         } else {
             $array = array();
 
-            while($row = $result->fetch_assoc()) {
+            while($row = $statement->fetch_assoc()) {
                 $array[] = $row;
             }
-            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            // while ($row = mysqli_fetch_array($statement, MYSQLI_ASSOC)) {
             //     $array = $row;
             // }
         }
@@ -73,10 +73,10 @@ Class CategoryClass {
         $sql = "UPDATE `category` SET `category` = '$categoryClass->category', `content` = '$categoryClass->content' 
                 WHERE `category`.`id` = '$id'";
 
-        $result = $conn->query($sql);
+        $statement = $conn->query($sql);
 
         disconnectDB($conn);
-        return $result;
+        return $statement;
     }
 
     public static function Delete($id) {
@@ -84,27 +84,27 @@ Class CategoryClass {
 
         $sql = "DELETE FROM `category` WHERE `category`.`id` = '$id'";
 
-        $result = $conn->query($sql);
+        $statement = $conn->query($sql);
 
         disconnectDB($conn);
-        return $result;
+        return $statement;
     }
 
     public static function FindById($id) {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `category` WHERE `id` = '$id'";
-        $result = $conn->query($sql);
+        $statement = $conn->query($sql);
 
-        if ($result === false) {
+        if ($statement === false) {
 
         } else {
             $array = array();
 
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $statement->fetch_assoc()) {
                 $array = $row;
             }
-            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            // while ($row = mysqli_fetch_array($statement, MYSQLI_ASSOC)) {
             //     $array = $row;
             // }
         }
@@ -117,17 +117,17 @@ Class CategoryClass {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `category` WHERE `category` LIKE '%$category%'";
-        $result = $conn->query($sql);
+        $statement = $conn->query($sql);
 
-        if ($result === false) {
+        if ($statement === false) {
 
         } else {
             $array = array();
 
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $statement->fetch_assoc()) {
                 $array = $row;
             }
-            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            // while ($row = mysqli_fetch_array($statement, MYSQLI_ASSOC)) {
             //     $array = $row;
             // }
         }
@@ -141,8 +141,8 @@ Class CategoryClass {
 
         $sql = "SELECT * FROM `category` WHERE `id` = '$id' LIMIT 1";
 
-        $result = $conn->query($sql);
-        $row = mysqli_fetch_assoc($result);
+        $statement = $conn->query($sql);
+        $row = mysqli_fetch_assoc($statement);
 
         disconnectDB($conn);
         echo json_encode($row);
@@ -154,13 +154,13 @@ Class CategoryClass {
 
         $sql = "SELECT * FROM `category`";
 
-        $result = $conn->prepare($sql);
-        $result->execute();
-        $result->fetchAll();
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $statement->fetchAll();
 
-        $conn = null;
+        // $conn = null;
         
-        return $result->rowCount();
+        return $statement->rowCount();
     }
 }
 

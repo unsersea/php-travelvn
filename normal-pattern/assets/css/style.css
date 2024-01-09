@@ -356,6 +356,13 @@ body {
     margin-bottom: 0.25rem !important;
 }
 
+label.error {
+    color: var(--c-red) !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    margin-bottom: 0.25rem !important;
+}
+
 .form-account #alert-login {
     color: var(--c-red) !important;
     font-size: 0.875rem !important;
@@ -393,6 +400,29 @@ article[article-type="index"] .navbar-menu .navbar-nav .nav-item > a {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
 }
+
+/* DataTabels */
+.dataTables_wrapper {
+    width: auto !important;
+    margin: 0 !important;
+}
+
+table {
+    width: 100% !important;
+}
+
+/* Modal */
+.form-modal .form-label {
+    margin-bottom: 0.25rem !important;
+}
+
+.form-modal .field-modal,
+.form-modal .field-modal.textarea {
+    position: relative;
+    margin-bottom: 0.75rem !important;
+}
+
+
 
 /* Dashboard */
 /* Logo */

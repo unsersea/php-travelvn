@@ -17,11 +17,11 @@ $conn = connectPDO();
 
 $query = '';
 
-$output = '';
+$output = array();
 
 $table = 'category';
 
-$query .= 'SELECT * FROM '.$table.'';
+$query .= "SELECT * FROM $table ";
 
 // Check Isset Search Value
 if(isset($_POST["search"]["value"])) {
@@ -41,7 +41,7 @@ if($_POST["length"] != -1) {
     $query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
 }
 
-$statement = $connect->prepare($query);
+$statement = $conn->prepare($query);
 $statement->execute();
 $result = $statement->fetchAll();
 $data = array();
@@ -54,6 +54,18 @@ foreach($result as $row) {
     $sub_array[] = $row["id"];
     $sub_array[] = $row["category"];
     $sub_array[] = $row["content"];
+    $sub_array[] = 
+    '
+        <a class="btn btn-info text-white" data-id="'.$row["id"].'" id="btn-update-category">
+            <i class="bx bx-edit-alt"></i>
+        </a>
+        <a class="btn btn-danger text-white" data-id="'.$row["id"].'" id="btn-delete-category"> 
+            <i class="bx bx-trash"></i>
+        </a>
+        <a class="btn btn-warning text-white" data-id="'.$row["id"].'" id="btn-detail-category">
+            <i class="bx bx-detail"></i>
+        </a>
+    ';
 
     $data[] = $sub_array;
 }
@@ -64,5 +76,7 @@ $output = array(
     "recordsFiltered" => CategoryClass::ListByPDO(),
     "data" => $data
 );
+
+echo json_encode($output);
 
 ?>

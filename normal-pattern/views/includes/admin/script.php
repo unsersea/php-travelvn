@@ -12,6 +12,7 @@
 <!-- TinyMCE -->
 <script type="text/javascript" src=""></script>
 <!--  -->
+<script type="text/javascript" src="../../libraries/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../../assets/js/App.js"></script>
 <script type="text/javascript" src="../../assets/js/Validate.js"></script>
 <script type="text/javascript" src="../../assets/js/admin/Config.js"></script>

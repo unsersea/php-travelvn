@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         // Create
         if($action == "submit_category_create") {
             $category = $_REQUEST["category"];
-            $content = $_REQUEST["content"];
+            $content = $_REQUEST["get-tmce-content-category"];
 
             $create_category = new CategoryClass($category, $content);
 
@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         if($action == "submit_category_update") {
             $id = $_REQUEST["id"];
             $category = $_REQUEST["category"];
-            $content = $_REQUEST["content"];
+            $content = $_REQUEST["get-tmce-content-category"];
 
             $create_category = new CategoryClass($category, $content);
 
