@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         if($action == "submit_category_update") {
             $id = $_REQUEST["id"];
             $category = $_REQUEST["category"];
-            $content = $_REQUEST["get-tmce-content-category"];
+            $content = $_REQUEST["get-tmce-content-category-update"];
 
             $create_category = new CategoryClass($category, $content);
 

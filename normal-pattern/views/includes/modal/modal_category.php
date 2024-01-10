@@ -65,7 +65,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" value="submit_category_create" name="action">Lưu Thay Đổi</button>
+                    <button type="submit" class="btn btn-primary" value="submit_category_update" name="action">Lưu Thay Đổi</button>
                 </div>
             </form>
         </div>

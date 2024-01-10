@@ -10,7 +10,10 @@
 <!-- Select Option -->
 <script type="text/javascript" src="../../assets/plugins/select2/js/select2.full.min.js"></script>
 <!-- TinyMCE -->
-<script type="text/javascript" src=""></script>
+<!-- <script type="text/javascript" src=""></script> -->
+<!-- Sweetalert2 -->
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script> -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--  -->
 <script type="text/javascript" src="../../libraries/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../../assets/js/App.js"></script>

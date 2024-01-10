@@ -22,5 +22,7 @@
 <!-- Select Option -->
 <link rel="stylesheet" href="../../assets/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="../../assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- Sweetalert2 -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"> -->
 <!-- Script Ajax -->
 <script type="text/javascript" src="../../assets/js/Load.js"></script>
