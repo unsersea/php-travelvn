@@ -103,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
                 $images_path = $folder_images . "/" . $images_rand;
 
                 // Unlink
-                unlink($folder_images . "/" . $find_event[0]["images"]);
+                unlink($folder_images . "/" . $find_event["images"]);
                 
                 move_uploaded_file($images_tmp_name, $images_path);
 
@@ -114,8 +114,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             ## Thumbnail
             if((isset($_FILES["thumbnail"])) && (!$_FILES["thumbnail"]["error"])) {
                 ## Images
-                $thumbnail = $_FILES["images"]["name"];
-                $thumbnail_tmp_name = $_FILES["images"]["tmp_name"];
+                $thumbnail = $_FILES["thumbnail"]["name"];
+                $thumbnail_tmp_name = $_FILES["thumbnail"]["tmp_name"];
                 $thumbnail_extension = explode(".", $thumbnail);
                 $thumbnail_extension = strtolower(end($thumbnail_extension));
                 // Random Name
@@ -124,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
                 $thumbnail_path = $folder_thumbnail . "/" . $thumbnail_rand;
 
                 // Unlink
-                unlink($folder_thumbnail . "/" . $find_event[0]["thumbnail"]);
+                unlink($folder_thumbnail . "/" . $find_event["thumbnail"]);
                 
                 move_uploaded_file($thumbnail_tmp_name, $thumbnail_path);
 

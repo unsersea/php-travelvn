@@ -700,6 +700,75 @@ var MODAL_FEEDBACK_ADMIN;
 
                         // Datetime
                         $("#datetime-event-update").val(response.datetime);
+
+                        // 
+                        const form_update_category = $("#form-update-event").validate({
+                            ignore: "",
+                            rules: {
+                                "title": {
+                                    required: true,
+                                    rangelength: [6, 50]
+                                },
+                                "get-tmce-header-event-update": {
+                                    required: true,
+                                    minlength: 50
+                                },
+                                "get-tmce-content-event-update": {
+                                    required: true,
+                                    minlength: 50
+                                },
+                                "thumbnail": {
+                                    // required: true,
+                                    fileSizeLimit: 1000000
+                                },
+                                "images": {
+                                    // required: true,
+                                    fileSizeLimit: 1000000
+                                },
+                            },
+                            messages: {
+                                "title": {
+                                    required: "*Bạn Chưa Nhập Tựa Đề",
+                                    rangelength: "*Tựa Đề Chỉ Nhận Từ 6 Đến 50 Ký Tự"
+                                },
+                                "get-tmce-header-event-update": {
+                                    required: "*Bạn Chưa Nhập Phần Đầu",
+                                    minlength: "*Phần Đầu Chỉ Nhận Từ 50 Ký Tự Trở Lên"
+                                },
+                                "get-tmce-content-event-update": {
+                                    required: "*Bạn Chưa Nhập Phần Nội Dung",
+                                    minlength: "*Phần Nội Dung Chỉ Nhận Từ 50 Ký Tự Trở Lên"
+                                },
+                                "thumbnail": {
+                                    // required: "*Bạn Chưa Nhập Hình Ảnh 1"
+                                },
+                                "images": {
+                                    // required: "*Bạn Chưa Nhập Hình Ảnh 2"
+                                },
+                            },
+                            submitHandler: function (form) {
+                                $.ajax({
+                                    type: TYPE_POST,
+                                    url: URL_ACTION_VALIDATE+"action_event.php",
+                                    data: new FormData(form),
+                                    contentType: false,
+                                    processData: false,
+                                    // dataType: "json",
+                                    // cache : false,
+                                    success: function (data) {
+                                        var datatables = $("#datatables-event-list").DataTable();
+            
+                                        datatables.ajax.reload();
+            
+                                        // Close Modal
+                                        $("#modal-update-event").modal("hide");
+            
+                                        // Form Input Reset
+                                        $("#form-create-event")[0].reset();
+                                    }
+                                });
+                            },
+                        });
                     }
                 });
             });
