@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="../../normal-pattern/assets/css/font.css">
 <link rel="stylesheet" href="../../normal-pattern/assets/css/style.css">
 <!-- SCSS -->
-<link rel="stylesheet" href="../../normal-pattern/assets/scss/style.scss">
+<!-- <link rel="stylesheet" href="../../normal-pattern/assets/scss/style.scss"> -->
 
 <!-- Script AjaX -->
 <script type="text/javascript" src="../../normal-pattern/assets/js/Load.js"></script>

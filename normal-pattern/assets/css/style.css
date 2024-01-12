@@ -36,10 +36,6 @@
     --fw-900: 900;
 }
 
-body, h1, h2, h3, h4, h5, h6 {
-    font-family: var(--ff-poppins) !important;
-}
-
 * {
     padding: 0;
     margin: 0;
@@ -426,7 +422,11 @@ table {
     margin-bottom: 0.75rem !important;
 }
 
-
+.field-flex-file {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
 
 /* Dashboard */
 /* Logo */

@@ -102,14 +102,14 @@ var MODAL_FEEDBACK_ADMIN;
             dayNames: DAY_NAME,
             dayNamesShort: DAY_NAME_SHORT,
             dayNamesMin: DAY_NAME_SHORT,
-            days: DAY_NAME
-        }
+            days: DAY_NAME,
+        };
 
         $.datepicker.setDefaults($.datepicker.regional['vi']);
 
         if(document.querySelector(".datepicker-config")) {
             try {
-                return $(".datepicker-cofig").datepicker({
+                return $(".datepicker-config").datepicker({
                     dateFormat: "dd/mm/yy",
                     minDate: new Date("01/01/1970"),
                     duration: "fast"
@@ -462,7 +462,7 @@ var MODAL_FEEDBACK_ADMIN;
                     },          
                     "columnDefs": [
                         { 
-                            "targets": [0, 3],
+                            "targets": [0, 4],
                             "searchable": false,
                             "orderable": false,
                             // "visible": false
@@ -609,6 +609,101 @@ var MODAL_FEEDBACK_ADMIN;
             });
         }
         // Update Modal
+        if(document.querySelector("#dis-tmce-content-event-update") && document.querySelector("#dis-tmce-header-event-update")) {
+            const tinymce_update_event_content = tinymce.init({
+                selector: TEXTAREA_INIT+"dis-tmce-content-event-update",
+                width: WIDTH_INIT,
+                height: HEIGHT_INIT,
+                language: LANGUAGE_VI,
+                element_format: ELEMENT_FORMAT,
+                mode: "textareas",
+                // remove logo tinymce
+                branding: false,
+                promotion: false,
+                // resize textarea
+                resize: false,
+                setup: function(editor, ed) {
+                    editor.on("init keydown change", (e) => {
+                        var get_content = document.querySelector("#get-tmce-content-event-update");
+                        // innerHTML
+                        get_content.innerHTML = editor.getContent();
+                    });
+                }
+            });
+            const tinymce_update_event_header = tinymce.init({
+                selector: TEXTAREA_INIT+"dis-tmce-header-event-update",
+                width: WIDTH_INIT,
+                height: HEIGHT_INIT,
+                language: LANGUAGE_VI,
+                element_format: ELEMENT_FORMAT,
+                mode: "textareas",
+                // remove logo tinymce
+                branding: false,
+                promotion: false,
+                // resize textarea
+                resize: false,
+                setup: function(editor, ed) {
+                    editor.on("init keydown change", (e) => {
+                        var get_content = document.querySelector("#get-tmce-header-event-update");
+                        // innerHTML
+                        get_content.innerHTML = editor.getContent();
+                    });
+                }
+            });
+            // Find
+            $("#datatables-event-list").on("click", "#btn-update-event", function (e) {
+                // var datatables = $("#datatables-event-list").DataTable();
+                // Get Id From tag data-id
+                e.preventDefault();
+                var data_id = $(this).data("id");
+
+                // Open Modal
+                $("#modal-update-event").modal("show");
+
+                $.ajax({
+                    url: URL_ACTION_FIND+"action_event.php",
+                    data: {
+                        id: data_id,
+                        action: "submit_event_find"
+                    },
+                    type: TYPE_POST,
+                    success: function (data) {
+                        var response = JSON.parse(data);
+                        
+                        // Add Data in Input Value
+                        $("#single-update-id-event").val(response.id);
+                        $("#single-update-title-event").val(response.title);
+
+                        $("#upload-update-thumbnail-event").attr("src", "../../../normal-pattern/upload/thumbnail/"+response.thumbnail+"");
+                        $("#upload-update-images-event").attr("src", "../../../normal-pattern/upload/images/"+response.images+"");
+
+                        // TinyMCE
+                        tinymce.get("dis-tmce-header-event-update").setContent(response.header);
+                        $("#dis-tmce-header-event-update").val(response.header);
+
+                        tinymce.get("dis-tmce-content-event-update").setContent(response.content);
+                        $("#dis-tmce-content-event-update").val(response.content);
+
+                        var str = [response.category_id];
+                        var str_stringify = JSON.stringify(str[0]).trim();
+                        var arr = str_stringify.split(",");
+
+                        var clear_arr = arr.map(function (el) {
+                            return el.replace(/["\\]/g, '');
+                        });
+
+                        var values = clear_arr;
+                        var select_el = $("#select2-category-event-update");
+
+                        select_el.val(values);
+                        select_el.trigger("change");
+
+                        // Datetime
+                        $("#datetime-event-update").val(response.datetime);
+                    }
+                });
+            });
+        }
         // Delete Modal
         // Detail Modal
     }
@@ -620,5 +715,6 @@ FILE_VALIDATE();
 SELECT2();
 SELECT2_BOOTSTRAP4();
 // CALCULATE_DATE(TODAY, DAY, MONTH, YEAR);
+DATEPICKER();
 MODAL_CATEGORY_ADMIN();
 MODAL_EVENT_ADMIN();

@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="../../assets/css/font.css">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <!-- SCSS -->
-<link rel="stylesheet" href="../../assets/scss/style.scss">
+<!-- <link rel="stylesheet" href="../../assets/scss/style.scss"> -->
 <!-- jQuery Theme -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- DataTables -->
