@@ -376,7 +376,7 @@ var MODAL_FEEDBACK_ADMIN;
         });
         // Detail Modal
         if(document.querySelector("#dis-tmce-content-category-detail")) {
-            const tinymce_update_category = tinymce.init({
+            const tinymce_detail_category = tinymce.init({
                 selector: TEXTAREA_INIT+"dis-tmce-content-category-detail",
                 width: WIDTH_INIT,
                 height: HEIGHT_INIT,
@@ -774,7 +774,133 @@ var MODAL_FEEDBACK_ADMIN;
             });
         }
         // Delete Modal
+        $("#datatables-event-list").on("click", "#btn-delete-event", function (e) {
+            var datatables = $("#datatables-event-list").DataTable();
+            e.preventDefault();
+            // Get Id From tag data-id
+            var data_id = $(this).data("id");
+
+            // Create Sweetalert2
+            Swal.fire({
+                title: "Bạn có chắc không?",
+                text: "Bạn sẽ không thể phục hồi sự kiện mã ["+data_id+"] này nữa!",
+                icon: ICON_WARNING,
+                showCancelButton: true,
+                confirmButtonColor: CONFIRM_BUTTON_COLOR,
+                cancelButtonColor: CANCEL_BUTTON_COLOR,
+                confirmButtonText: CONFIRM_BUTTON_TEXT,
+                cancelButtonText: CANCEL_BUTTON_TEXT,
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    // Delete
+                    $.ajax({
+                        url: URL_ACTION_FIND+"action_event.php",
+                        data: {
+                            id: data_id,
+                            action: "submit_event_delete"
+                        },
+                        type: TYPE_POST,
+                        success: function (data) {
+                            datatables.ajax.reload();
+                            // Check Status or Display Alert
+                            Swal.fire({
+                                title: "Đã xóa!",
+                                text: "Dữ liệu đã xóa thành công.",
+                                icon: "success"
+                            });
+                        }
+                    });
+                }
+            });
+        });
         // Detail Modal
+        if(document.querySelector("#dis-tmce-content-event-detail") && document.querySelector("#dis-tmce-header-event-detail")) {
+            const tinymce_detail_event_content = tinymce.init({
+                selector: TEXTAREA_INIT+"dis-tmce-content-event-detail",
+                width: WIDTH_INIT,
+                height: HEIGHT_INIT,
+                language: LANGUAGE_VI,
+                element_format: ELEMENT_FORMAT,
+                mode: "textareas",
+                // remove logo tinymce
+                branding: false,
+                promotion: false,
+                // resize textarea
+                resize: false,
+                // readonly
+                readonly: true,
+            });
+            const tinymce_detail_event_header = tinymce.init({
+                selector: TEXTAREA_INIT+"dis-tmce-header-event-detail",
+                width: WIDTH_INIT,
+                height: HEIGHT_INIT,
+                language: LANGUAGE_VI,
+                element_format: ELEMENT_FORMAT,
+                mode: "textareas",
+                // remove logo tinymce
+                branding: false,
+                promotion: false,
+                // resize textarea
+                resize: false,
+                // readonly
+                readonly: true,
+            });
+            $("#datatables-event-list").on("click", "#btn-detail-event", function (e) {
+                // var datatables = $("#datatables-event-list").DataTable();
+                // e.preventDefault();
+                // Get Id From tag data-id
+                var data_id = $(this).data("id");
+
+                // Open Modal
+                $("#modal-detail-event").modal("show");
+                // Call Ajax
+                $.ajax({
+                    url: URL_ACTION_FIND+"action_event.php",
+                    data: {
+                        id: data_id,
+                        action: "submit_event_find"
+                    },
+                    type: TYPE_POST,
+                    success: function (data) {
+                        var response = JSON.parse(data);
+
+                        // Add Data in Input Value
+                        $("#single-detail-id-event").val(response.id);
+                        $("#single-detail-title-event").val(response.title);
+
+                        $("#upload-detail-thumbnail-event").attr("src", "../../../normal-pattern/upload/thumbnail/"+response.thumbnail+"");
+                        $("#upload-detail-images-event").attr("src", "../../../normal-pattern/upload/images/"+response.images+"");
+
+                        // TinyMCE
+                        tinymce.get("dis-tmce-header-event-detail").setContent(response.header);
+
+                        tinymce.get("dis-tmce-content-event-detail").setContent(response.content);
+
+                        var str = [response.category_id];
+                        var str_stringify = JSON.stringify(str[0]).trim();
+                        var arr = str_stringify.split(",");
+
+                        var clear_arr = arr.map(function (el) {
+                            return el.replace(/["\\]/g, '');
+                        });
+
+                        var values = clear_arr;
+                        var select_el = $("#select2-category-event-detail");
+
+                        select_el.val(values);
+                        select_el.trigger("change");
+
+                        $("#select2-category-event-detail").val(response.category_id);
+                        $("#datetime-event-detail").val(response.datetime);
+
+                        // Create at
+                        $("#single-detail-create-at-event").val(response.create_at);
+                    }
+                });
+            });
+        }
+        // Button
+
     }
 
     //

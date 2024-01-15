@@ -151,3 +151,72 @@
         </div>
     </div>
 </div>
+
+<!-- Detail Event -->
+<div class="modal fade" id="modal-detail-event" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="../../views/includes/modal/modal_event.php" id="form-detail-event" class="form form-modal" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ex-modal-label">Xem Chi Tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="bx bx-x"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="field-modal d-none">
+                        <label class="form-label">Mã</label>
+                        <input type="text" name="id" class="form-control" id="single-detail-id-event" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Tựa Đề</label>
+                        <input type="text" name="title" class="form-control" id="single-detail-title-event" readonly="true">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="field-modal">
+                                <label class="form-label">Hình Ảnh 1</label>
+                                <img class="mt-2 mb-2" src="" alt="" id="upload-detail-thumbnail-event" width="100" height="75">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-modal">
+                                <label class="form-label">Hình Ảnh 2</label>
+                                <img class="mt-2 mb-2" src="" alt="" id="upload-detail-images-event" width="100" height="75">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-modal textarea">
+                        <label class="form-label">Phần Đầu</label>
+                        
+                        <!-- Setup Textarea -->
+                        <textarea name="dis-tmce-header-event-detail" id="dis-tmce-header-event-detail" rows="4" class="form-control tinymce"></textarea>
+                    </div>
+                    <div class="field-modal textarea">
+                        <label class="form-label">Nội Dung</label>
+                        
+                        <!-- Setup Textarea -->
+                        <textarea name="dis-tmce-content-event-detail" id="dis-tmce-content-event-detail" rows="4" class="form-control tinymce"></textarea>
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Thể Loại</label>
+                        <textarea name="category" id="select2-category-event-detail" rows="4" class="form-control"></textarea>
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày</label>
+                        <input type="text" id="datetime-event-detail" class="form-control datepicker-config" name="datetime" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày Cập Nhật</label>
+                        <input type="text" name="create_at" class="form-control" id="single-detail-create-at-event" readonly="true">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
