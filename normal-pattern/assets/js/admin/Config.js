@@ -1,9 +1,11 @@
 const LANG_VI_URL_DATATABLES = "https://cdn.datatables.net/plug-ins/1.13.4/i18n/vi.json";
 const TYPE_POST = "POST";
+const TYPE_GET = "GET";
 
 const URL_FOLDER_DATATABLES = "../../views/includes/data/";
 const URL_DATATABLES_CATEGORY = "data_category.php";
 const URL_DATATABLES_EVENT = "data_event.php";
+const URL_DATATABLES_LOCATION = "data_location.php";
 
 // Textarea
 const TEXTAREA_INIT = "textarea#";
@@ -903,6 +905,115 @@ var MODAL_FEEDBACK_ADMIN;
 
     }
 
+    // Modal Location Admin
+    MODAL_LOCATION_ADMIN = function modal_location_admin() {
+        // DataTables Setup
+        if(document.getElementById("datatables-location-list")) {
+            try {
+                $("#datatables-location-list").DataTable({
+                    "language": {"url": LANG_VI_URL_DATATABLES},
+                    "processing": true,
+                    "serverSide": true,
+                    "padding": true,
+                    "responsive": true,
+                    //
+                    "colReorder": true,
+                    "autoWidth": true,
+                    "scrollX": true,
+                    "stateSave": true,
+                    //
+                    "order": [],
+                    // Button
+                    "dom": 'Bfrtip',
+                    "buttons": [
+                        'csv', 'excel', 'print'
+                    ],
+                    "ajax": {
+                        "url": "../../views/includes/data/data_location.php",
+                        "type": TYPE_POST
+                    },
+                    "fnCreateRow": function( nRow, aData, iDataIndex) {
+                        // Add Data Id in tag <tr>
+                        $(nRow).attr("id", aData[0]);
+                        //
+                    },          
+                    "columnDefs": [
+                        { 
+                            "targets": [0, 4],
+                            "searchable": false,
+                            "orderable": false,
+                            // "visible": false
+                        },
+                        // {
+                        //     "targets": '_all', 
+                        //     "visible": false
+                        // }
+                    ],
+                });
+            } catch (ex) {
+                return console.log(ex);
+            }
+        }
+        // Create Modal
+        const form_create_location = $("#form-create-location").validate({
+            ignore: "",
+            rules: {
+                location_name: {
+                    required: true,
+                    rangelength: [3, 25]
+                },
+                city: {
+                    required: true,
+                    rangelength: [3, 50]
+                },
+                acronym: {
+                    // required: false,
+                    rangelength: [0, 10]
+                },
+                address: {
+                    // required: false,
+                    rangelength: [0, 100]
+                }
+            },
+            messages: {
+                location_name: {
+                    required: "*Bạn Chưa Nhập Khu Vực",
+                    rangelength: "*Khu Vực Chỉ Nhận Từ 3 Đến 25 Ký Tự"
+                },
+                city: {
+                    required: "*Bạn Chưa Nhập Thành Phố",
+                    rangelength: "*Thành Phố Chỉ Nhận Từ 3 Đến 50 Ký Tự"
+                },
+                acronym: {
+                    rangelength: "*Ký Tự Chỉ Nhận Từ 0 Đến 10 Ký Tự"
+                },
+                address: {
+                    rangelength: "*Địa Chỉ Chỉ Nhận Từ 0 Đến 100 Ký Tự"
+                }
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    type: TYPE_POST,
+                    url: URL_ACTION_VALIDATE+"action_location.php",
+                    data: $(form).serializeArray(),
+                    success: function (data) {
+                        // console.log($(form).serializeArray());
+                        var datatables = $("#datatables-location-list").DataTable();
+            
+                        datatables.ajax.reload();
+                        // Close Modal
+                        $("#modal-create-location").modal("hide");
+    
+                        // Refesh Map
+    
+                        // Form Input Reset
+                        $("#form-create-location")[0].reset();
+                    }
+                });
+            }
+        });
+    }
+
     //
 })(jQuery);
 
@@ -913,3 +1024,4 @@ SELECT2_BOOTSTRAP4();
 DATEPICKER();
 MODAL_CATEGORY_ADMIN();
 MODAL_EVENT_ADMIN();
+MODAL_LOCATION_ADMIN();
