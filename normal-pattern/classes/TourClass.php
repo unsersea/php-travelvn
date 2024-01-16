@@ -156,6 +156,21 @@ Class TourClass {
         disconnectDB($conn);
         echo json_encode($row);
     }
+
+    // Datatables
+    public static function ListByPDO() {
+        $conn = connectPDO();
+
+        $sql = "SELECT * FROM `tour`";
+
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $statement->fetchAll();
+
+        // $conn = null;
+        
+        return $statement->rowCount();
+    }
 }
 
 ?>

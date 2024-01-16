@@ -6,6 +6,8 @@ const URL_FOLDER_DATATABLES = "../../views/includes/data/";
 const URL_DATATABLES_CATEGORY = "data_category.php";
 const URL_DATATABLES_EVENT = "data_event.php";
 const URL_DATATABLES_LOCATION = "data_location.php";
+const URL_DATATABLES_TOUR = "data_tour.php";
+const URL_DATATABLES_SCHEDULE = "data_schedule.php";
 
 // Textarea
 const TEXTAREA_INIT = "textarea#";
@@ -1172,7 +1174,62 @@ var MODAL_FEEDBACK_ADMIN;
         });
     }
 
-    //
+    // Modal Tour Admin
+    MODAL_TOUR_ADMIN = function modal_tour_admin() {
+        if(document.getElementById("datatables-tour-list")) {
+            try {
+                $("#datatables-tour-list").DataTable({
+                    "language": {"url": LANG_VI_URL_DATATABLES},
+                    "processing": true,
+                    "serverSide": true,
+                    "padding": true,
+                    "responsive": true,
+                    //
+                    "colReorder": true,
+                    "autoWidth": true,
+                    "scrollX": true,
+                    "stateSave": true,
+                    //
+                    "order": [],
+                    // Button
+                    "dom": 'Bfrtip',
+                    "buttons": [
+                        'csv', 'excel', 'print'
+                    ],
+                    "ajax": {
+                        "url": "../../views/includes/data/data_tour.php",
+                        "type": TYPE_POST
+                    },
+                    "fnCreateRow": function( nRow, aData, iDataIndex) {
+                        // Add Data Id in tag <tr>
+                        $(nRow).attr("id", aData[0]);
+                        //
+                    },          
+                    "columnDefs": [
+                        { 
+                            "targets": [0, 5],
+                            "searchable": false,
+                            "orderable": false,
+                            // "visible": false
+                        },
+                        // {
+                        //     "targets": '_all', 
+                        //     "visible": false
+                        // }
+                    ],
+                });
+            } catch (ex) {
+                return console.log(ex);
+            }
+        }
+        // Create Modal
+
+        // Update Modal
+
+        // Delete Modal
+
+        // Detail Modal
+    }
 })(jQuery);
 
 FILE_VALIDATE();
@@ -1183,3 +1240,4 @@ DATEPICKER();
 MODAL_CATEGORY_ADMIN();
 MODAL_EVENT_ADMIN();
 MODAL_LOCATION_ADMIN();
+MODAL_TOUR_ADMIN();
