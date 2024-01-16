@@ -166,7 +166,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="field-modal d-none">
+                    <div class="field-modal">
                         <label class="form-label">Mã</label>
                         <input type="text" name="id" class="form-control" id="single-detail-id-event" readonly="true">
                     </div>
