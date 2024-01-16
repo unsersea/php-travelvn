@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Required Config / Include Database, Auth
 session_start();
@@ -10,11 +10,11 @@ require_once "../../config/google.php";
 
 // Google Login
 
-if(!isset($_SESSION["user_token"])) {
+if (!isset($_SESSION["user_token"])) {
 
 }
 
-if(isset($_GET["code"])) {
+if (isset($_GET["code"])) {
     $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
 
     $google_client->setAccessToken($token["access_token"]);
@@ -51,7 +51,7 @@ if(isset($_GET["code"])) {
 
     $create_auth = new AuthClass($username, $password, $role, $active, $token, $fullname, $email, $phone, $gender, $dob, $avatar);
 
-    if(AuthClass::VerifyGoogle($username, $create_auth) === false) {
+    if (AuthClass::VerifyGoogle($username, $create_auth) === false) {
         $_SESSION["navbar_username"] = substr($email, 0, strpos($email, '@'));
 
         $_SESSION["user_token"] = $info_data["token"];
@@ -68,6 +68,3 @@ if(isset($_GET["code"])) {
     }
 
 }
-
-
-?>

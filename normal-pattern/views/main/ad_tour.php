@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Session
 session_Start();
@@ -11,10 +11,12 @@ $list_location = LocationClass::Read();
 
 ?>
 <?php include "../../views/includes/doctype.php"; ?>
+
 <head>
     <title>php-travelvn | trang sản phẩm | v1.0</title>
     <?php include "../../views/includes/head-admin.php"; ?>
 </head>
+
 <body page="ad-tour" id="bd-main-ad-tour">
     <?php include "../../views/includes/load.php"; ?>
 
@@ -50,14 +52,16 @@ $list_location = LocationClass::Read();
                             <div class="card">
                                 <div class="card-header">
                                     <div class="btn-link-create-tour">
-                                        <a href="#" data-id="" data-toggle="modal" data-target="#modal-create-tour" class="btn btn-success text-white">
+                                        <a href="#" data-id="" data-toggle="modal" data-target="#modal-create-tour"
+                                            class="btn btn-success text-white">
                                             <i class="bx bx-plus"></i>
                                             <span>Tạo Mới</span>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="datatables-tour-list" class="display table table-bordered table-hover nowrap datatables">
+                                    <table id="datatables-tour-list"
+                                        class="display table table-bordered table-hover nowrap datatables">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -85,4 +89,5 @@ $list_location = LocationClass::Read();
     <!-- Script -->
     <?php include "../../views/includes/admin/script.php"; ?>
 </body>
+
 </html>

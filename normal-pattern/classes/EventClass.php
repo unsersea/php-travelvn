@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * File: EventClass.php
@@ -12,7 +12,8 @@
 
 include __DIR__ . "/../config/timezone.php";
 
-Class EventClass {
+class EventClass
+{
     // Primary Key
     // public $id
 
@@ -33,7 +34,8 @@ Class EventClass {
      * @param [type] $isShow
      * @param [type] $datetime
      */
-    public function __construct($title, $thumbnail, $images, $header, $content, $isShow, $datetime, $category_id) {
+    public function __construct($title, $thumbnail, $images, $header, $content, $isShow, $datetime, $category_id)
+    {
         $this->title = $title;
         $this->thumbnail = $thumbnail;
         $this->images = $images;
@@ -45,7 +47,8 @@ Class EventClass {
     }
 
     // Function
-    public static function Create(EventClass $eventClass) {
+    public static function Create(EventClass $eventClass)
+    {
         $conn = connectDB();
 
         $sql = "INSERT INTO `event` (`title`, `thumbnail`, `images`, `header`, `content`, `isShow`, `datetime`, `category_id`)
@@ -57,19 +60,20 @@ Class EventClass {
         return $result;
     }
 
-    public static function Read() {
+    public static function Read()
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `event`";
 
         $result = $conn->query($sql);
 
-        if($result === false) {
+        if ($result === false) {
 
         } else {
             $array = array();
 
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $array[] = $row;
             }
             // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -81,7 +85,8 @@ Class EventClass {
         return $array;
     }
 
-    public static function Update($id, EventClass $eventClass) {
+    public static function Update($id, EventClass $eventClass)
+    {
         $conn = connectDB();
 
         $sql = "UPDATE `event` SET `title` = '$eventClass->title', `thumbnail` = '$eventClass->thumbnail', `images` = '$eventClass->images', `header` = '$eventClass->header',
@@ -93,7 +98,8 @@ Class EventClass {
         return $result;
     }
 
-    public static function Delete($id) {
+    public static function Delete($id)
+    {
         $conn = connectDB();
 
         $sql = "DELETE FROM `event` WHERE `event`.`id` = '$id'";
@@ -104,7 +110,8 @@ Class EventClass {
         return $result;
     }
 
-    public static function FindById($id) {
+    public static function FindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `event` WHERE `id` = '$id'";
@@ -127,7 +134,8 @@ Class EventClass {
         return $array;
     }
 
-    public static function FindByCategory($category_id) {
+    public static function FindByCategory($category_id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `event` WHERE `category_id` = '$category_id'";
@@ -150,7 +158,8 @@ Class EventClass {
         return $array;
     }
 
-    public static function FindByTitle($title) {
+    public static function FindByTitle($title)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `event` WHERE `title` LIKE '%$title%'";
@@ -173,7 +182,8 @@ Class EventClass {
         return $array;
     }
 
-    public static function JsonEncodeFindById($id) {
+    public static function JsonEncodeFindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `event` WHERE `id` = '$id' LIMIT 1";
@@ -186,7 +196,8 @@ Class EventClass {
     }
 
     // Datatables
-    public static function ListByPDO() {
+    public static function ListByPDO()
+    {
         $conn = connectPDO();
 
         $sql = "SELECT * FROM `event`";
@@ -196,9 +207,7 @@ Class EventClass {
         $statement->fetchAll();
 
         // $conn = null;
-        
+
         return $statement->rowCount();
     }
 }
-
-?>

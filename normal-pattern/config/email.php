@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Setup
 use PHPMailer\PHPMailer\PHPMailer;
@@ -18,7 +18,4 @@ $phpmailer->Password = SMTP_PASS;
 $phpmailer->SMTPSecure = SMTP_SECURE;
 $phpmailer->Port = SMTP_PORT;
 $phpmailer->isHTML(SMTP_HTML);
-
 $phpmailer->setFrom(SMTP_USER, 'php-travelvn');
-
-?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * File: LocationClass.php
@@ -12,7 +12,8 @@
 
 include __DIR__ . "/../config/timezone.php";
 
-Class LocationClass {
+class LocationClass
+{
     // Primary Key
     // public $id
 
@@ -23,7 +24,8 @@ Class LocationClass {
      * Construct
      */
 
-    public function __construct($location_name, $city, $acronym, $address, $isShow) {
+    public function __construct($location_name, $city, $acronym, $address, $isShow)
+    {
         $this->location_name = $location_name;
         $this->city = $city;
         $this->acronym = $acronym;
@@ -32,7 +34,8 @@ Class LocationClass {
     }
 
     // Function
-    public static function Create(LocationClass $locationClass) {
+    public static function Create(LocationClass $locationClass)
+    {
         $conn = connectDB();
 
         $sql = "INSERT INTO `location` (`location_name`, `city`, `acronym`, `address`, `isShow`)
@@ -44,19 +47,20 @@ Class LocationClass {
         return $result;
     }
 
-    public static function Read() {
+    public static function Read()
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `location`";
 
         $result = $conn->query($sql);
 
-        if($result === false) {
+        if ($result === false) {
 
         } else {
             $array = array();
 
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $array[] = $row;
             }
             // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -68,7 +72,8 @@ Class LocationClass {
         return $array;
     }
 
-    public static function Update($id, LocationClass $locationClass) {
+    public static function Update($id, LocationClass $locationClass)
+    {
         $conn = connectDB();
 
         $sql = "UPDATE `location` SET `location_name` = '$locationClass->location_name', `city` = '$locationClass->city', `acronym` = '$locationClass->acronym',
@@ -80,7 +85,8 @@ Class LocationClass {
         return $result;
     }
 
-    public static function Delete($id) {
+    public static function Delete($id)
+    {
         $conn = connectDB();
 
         $sql = "DELETE FROM `location` WHERE `location`.`id` = '$id'";
@@ -91,7 +97,8 @@ Class LocationClass {
         return $result;
     }
 
-    public static function FindById($id) {
+    public static function FindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `location` WHERE `id` = '$id'";
@@ -114,7 +121,8 @@ Class LocationClass {
         return $array;
     }
 
-    public static function FindByLocationName($location_name) {
+    public static function FindByLocationName($location_name)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `location` WHERE `location_name` LIKE '%$location_name%'";
@@ -137,7 +145,8 @@ Class LocationClass {
         return $array;
     }
 
-    public static function JsonEncodeFindById($id) {
+    public static function JsonEncodeFindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `location` WHERE `id` = '$id' LIMIT 1";
@@ -150,7 +159,8 @@ Class LocationClass {
     }
 
     // Datatables
-    public static function ListByPDO() {
+    public static function ListByPDO()
+    {
         $conn = connectPDO();
 
         $sql = "SELECT * FROM `location`";
@@ -160,9 +170,7 @@ Class LocationClass {
         $statement->fetchAll();
 
         // $conn = null;
-        
+
         return $statement->rowCount();
     }
 }
-
-?>

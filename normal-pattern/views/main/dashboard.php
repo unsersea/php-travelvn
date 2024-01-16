@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Session
 session_Start();
@@ -8,10 +8,12 @@ include "../../classes/AuthClass.php";
 
 ?>
 <?php include "../../views/includes/doctype.php"; ?>
+
 <head>
     <title>php-travelvn | trang chủ quản trị viên | v1.0</title>
     <?php include "../../views/includes/head-admin.php"; ?>
 </head>
+
 <body page="dashboard" id="bd-main-dashboard">
     <?php include "../../views/includes/load.php"; ?>
 
@@ -102,4 +104,5 @@ include "../../classes/AuthClass.php";
 
     <?php include "../../views/includes/admin/script.php"; ?>
 </body>
+
 </html>

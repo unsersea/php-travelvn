@@ -2,7 +2,8 @@
 <div class="modal fade" id="modal-create-location" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="../../views/includes/modal/modal_location.php" id="form-create-location" class="form form-modal" enctype="multipart/form-data">
+            <form action="../../views/includes/modal/modal_location.php" id="form-create-location"
+                class="form form-modal" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ex-modal-label">Tạo Mới</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -31,7 +32,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" value="submit_location_create" name="action">Lưu Thay Đổi</button>
+                    <button type="submit" class="btn btn-primary" value="submit_location_create" name="action">Lưu Thay
+                        Đổi</button>
                 </div>
             </form>
         </div>
@@ -42,7 +44,8 @@
 <div class="modal fade" id="modal-update-location" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="../../views/includes/modal/modal_location.php" id="form-update-location" class="form form-modal" enctype="multipart/form-data">
+            <form action="../../views/includes/modal/modal_location.php" id="form-update-location"
+                class="form form-modal" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ex-modal-label">Cập Nhật</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -75,7 +78,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" value="submit_location_update" name="action">Lưu Thay Đổi</button>
+                    <button type="submit" class="btn btn-primary" value="submit_location_update" name="action">Lưu Thay
+                        Đổi</button>
                 </div>
             </form>
         </div>
@@ -86,7 +90,8 @@
 <div class="modal fade" id="modal-detail-location" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="../../views/includes/modal/modal_location.php" id="form-detail-location" class="form form-modal" enctype="multipart/form-data">
+            <form action="../../views/includes/modal/modal_location.php" id="form-detail-location"
+                class="form form-modal" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ex-modal-label">Xem Chi Tiết</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -98,27 +103,33 @@
                 <div class="modal-body">
                     <div class="field-modal">
                         <label class="form-label">Mã</label>
-                        <input type="text" name="id" class="form-control" id="single-detail-id-location" readonly="true">
+                        <input type="text" name="id" class="form-control" id="single-detail-id-location"
+                            readonly="true">
                     </div>
                     <div class="field-modal">
                         <label class="form-label">Khu Vực</label>
-                        <input type="text" name="location_name" class="form-control" id="single-detail-name-location" readonly="true">
+                        <input type="text" name="location_name" class="form-control" id="single-detail-name-location"
+                            readonly="true">
                     </div>
                     <div class="field-modal">
                         <label class="form-label">Thành Phố</label>
-                        <input type="text" name="city" class="form-control" id="single-detail-city-location" readonly="true">
+                        <input type="text" name="city" class="form-control" id="single-detail-city-location"
+                            readonly="true">
                     </div>
                     <div class="field-modal">
                         <label class="form-label">Ký Tự (nếu có)</label>
-                        <input type="text" name="acronym" class="form-control" id="single-detail-acronym-location" readonly="true">
+                        <input type="text" name="acronym" class="form-control" id="single-detail-acronym-location"
+                            readonly="true">
                     </div>
                     <div class="field-modal">
                         <label class="form-label">Địa Chỉ (nếu có)</label>
-                        <input type="text" name="address" class="form-control" id="single-detail-address-location" readonly="true">
+                        <input type="text" name="address" class="form-control" id="single-detail-address-location"
+                            readonly="true">
                     </div>
                     <div class="field-modal">
                         <label class="form-label">Ngày Cập Nhật</label>
-                        <input type="text" name="create_at" class="form-control" id="single-detail-create-at-location" readonly="true">
+                        <input type="text" name="create_at" class="form-control" id="single-detail-create-at-location"
+                            readonly="true">
                     </div>
                 </div>
                 <div class="modal-footer">

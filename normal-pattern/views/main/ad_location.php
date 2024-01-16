@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Session
 session_Start();
@@ -8,10 +8,12 @@ include "../../classes/AuthClass.php";
 
 ?>
 <?php include "../../views/includes/doctype.php"; ?>
+
 <head>
     <title>php-travelvn | trang khu vực | v1.0</title>
     <?php include "../../views/includes/head-admin.php"; ?>
 </head>
+
 <body page="ad-location" id="bd-main-ad-location">
     <?php include "../../views/includes/load.php"; ?>
 
@@ -47,14 +49,16 @@ include "../../classes/AuthClass.php";
                             <div class="card">
                                 <div class="card-header">
                                     <div class="btn-link-create-location">
-                                        <a href="#" data-id="" data-toggle="modal" data-target="#modal-create-location" class="btn btn-success text-white">
+                                        <a href="#" data-id="" data-toggle="modal" data-target="#modal-create-location"
+                                            class="btn btn-success text-white">
                                             <i class="bx bx-plus"></i>
                                             <span>Tạo Mới</span>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="datatables-location-list" class="display table table-bordered table-hover nowrap datatables">
+                                    <table id="datatables-location-list"
+                                        class="display table table-bordered table-hover nowrap datatables">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -81,4 +85,5 @@ include "../../classes/AuthClass.php";
     <!-- Script -->
     <?php include "../../views/includes/admin/script.php"; ?>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Required Config / Include Database, Auth
 include "../../config/database.php";
@@ -8,11 +8,11 @@ include "../../classes/EventClass.php";
 // Test Run Data
 // print_r($_REQUEST);
 
-if($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Check Empty
 
-    if(!empty($_REQUEST["action"])) {
+    if (!empty($_REQUEST["action"])) {
         $action = $_REQUEST["action"];
 
         // Set Up Folder
@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         $folder_thumbnail = "../../upload/thumbnail";
 
         // Create
-        if($action == "submit_event_create") {
+        if ($action == "submit_event_create") {
             $title = $_REQUEST["title"];
 
             $header = $_REQUEST["get-tmce-header-event"];
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             $datetime = $_REQUEST["datetime"];
 
             // Check Category Foreign Key
-            if(!empty($_REQUEST["category"])) {
+            if (!empty($_REQUEST["category"])) {
                 $replace = array('[', ']', '"');
                 $category = str_replace($replace, "", json_encode($_REQUEST["category"], JSON_UNESCAPED_UNICODE));
             } else {
@@ -65,9 +65,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
             EventClass::Create($create_event);
         }
-        
+
         // Update
-        if($action == "submit_event_update") {
+        if ($action == "submit_event_update") {
             $id = $_REQUEST["id"];
             $title = $_REQUEST["title"];
 
@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             $datetime = $_REQUEST["datetime"];
 
             // Check Category Foreign Key
-            if(!empty($_REQUEST["category"])) {
+            if (!empty($_REQUEST["category"])) {
                 $replace = array('[', ']', '"');
                 $category = str_replace($replace, "", json_encode($_REQUEST["category"], JSON_UNESCAPED_UNICODE));
             } else {
@@ -91,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             $thumbnail_rand = "";
 
             ## Images
-            if((isset($_FILES["images"])) && (!$_FILES["images"]["error"])) {
+            if ((isset($_FILES["images"])) && (!$_FILES["images"]["error"])) {
                 ## Images
                 $images = $_FILES["images"]["name"];
                 $images_tmp_name = $_FILES["images"]["tmp_name"];
@@ -104,7 +104,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 // Unlink
                 unlink($folder_images . "/" . $find_event["images"]);
-                
+
                 move_uploaded_file($images_tmp_name, $images_path);
 
             } else {
@@ -112,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
             ## Thumbnail
-            if((isset($_FILES["thumbnail"])) && (!$_FILES["thumbnail"]["error"])) {
+            if ((isset($_FILES["thumbnail"])) && (!$_FILES["thumbnail"]["error"])) {
                 ## Images
                 $thumbnail = $_FILES["thumbnail"]["name"];
                 $thumbnail_tmp_name = $_FILES["thumbnail"]["tmp_name"];
@@ -125,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 // Unlink
                 unlink($folder_thumbnail . "/" . $find_event["thumbnail"]);
-                
+
                 move_uploaded_file($thumbnail_tmp_name, $thumbnail_path);
 
             } else {
@@ -138,19 +138,17 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Delete
-        if($action == "submit_event_delete") {
+        if ($action == "submit_event_delete") {
             $id = $_REQUEST["id"];
 
             return EventClass::Delete($id);
         }
 
         // Find
-        if($action == "submit_event_find") {
+        if ($action == "submit_event_find") {
             $id = $_REQUEST["id"];
 
             return EventClass::JsonEncodeFindById($id);
         }
     }
 }
-
-?>

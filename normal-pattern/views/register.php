@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <!-- Title -->
     <title>php-travelvn | trang đăng ký | v1.0</title>
     <?php include "../../normal-pattern/views/includes/head-account.php"; ?>
 </head>
+
 <body page="register" id="bd-main-register">
 
     <?php include "../../normal-pattern/views/includes/load.php"; ?>
@@ -16,7 +18,8 @@
                 <img src="../../normal-pattern/assets/img/logo.png" alt="" class="logo-img" width="40" height="40">
                 <span class="logo-name">TravelVN</span>
             </div>
-            <form action="./register" method="POST" enctype="multipart/form-data" class="form-account" type="register" id="fm-register">
+            <form action="./register" method="POST" enctype="multipart/form-data" class="form-account" type="register"
+                id="fm-register">
                 <div class="field">
                     <div class="input-field" field="username">
                         <input type="text" name="username" placeholder="Nhập Tài Khoản">
@@ -55,7 +58,7 @@
 
     <!-- Script Validate -->
     <script type="text/javascript">
-        (function($) {
+        (function ($) {
 
             // Register
             $("#fm-register").validate({
@@ -67,8 +70,8 @@
                             url: "../../normal-pattern/views/action/check_auth.php",
                             type: "POST",
                             data: {
-                                username: function() { 
-                                    return $("#fm-register :input[name='username']").val(); 
+                                username: function () {
+                                    return $("#fm-register :input[name='username']").val();
                                 }
                             }
                         }
@@ -83,9 +86,9 @@
                         remote: {
                             url: "../../normal-pattern/views/includes/validate/auth/validate_phone.php",
                             type: "POST",
-                            data: { 
-                                phone: function() { 
-                                    return $("#fm-register :input[name='phone']").val(); 
+                            data: {
+                                phone: function () {
+                                    return $("#fm-register :input[name='phone']").val();
                                 }
                             }
                         }
@@ -115,14 +118,14 @@
                         email: "*Email Không Đúng Định Dạng",
                     }
                 },
-                submitHandler: function(form) {
+                submitHandler: function (form) {
                     // form.submit()
                     // console.log($(form).serializeArray());
                     $.ajax({
                         type: "POST",
                         url: "../../normal-pattern/views/action/action_auth",
                         data: $(form).serializeArray(),
-                        success: function(data) {
+                        success: function (data) {
                             return location.href = "../../normal-pattern/views/_token.php";
                         }
                     });
@@ -132,4 +135,5 @@
         })(jQuery);
     </script>
 </body>
+
 </html>

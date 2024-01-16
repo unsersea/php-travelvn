@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * File: ScheduleClass.php
@@ -12,7 +12,8 @@
 
 include __DIR__ . "/../config/timezone.php";
 
-Class ScheduleClass {
+class ScheduleClass
+{
     // Primary Key
     // public $id
 
@@ -25,7 +26,8 @@ Class ScheduleClass {
     /**
      * Construct
      */
-    public function __construct($start_datetime, $end_datetime, $remaining, $note, $tour_id, $feedback_id) {
+    public function __construct($start_datetime, $end_datetime, $remaining, $note, $tour_id, $feedback_id)
+    {
         $this->start_datetime = $start_datetime;
         $this->end_datetime = $end_datetime;
         $this->remaining = $remaining;
@@ -35,7 +37,8 @@ Class ScheduleClass {
     }
 
     // Function
-    public static function Create(ScheduleClass $scheduleClass) {
+    public static function Create(ScheduleClass $scheduleClass)
+    {
         $conn = connectDB();
 
         $sql = "INSERT INTO `schedule` (`start_datetime`, `end_datetime`, `remaining`, `note`, `tour_id`, `feedback_id`)
@@ -47,19 +50,20 @@ Class ScheduleClass {
         return $result;
     }
 
-    public static function Read() {
+    public static function Read()
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `schedule`";
 
         $result = $conn->query($sql);
 
-        if($result === false) {
+        if ($result === false) {
 
         } else {
             $array = array();
 
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $array[] = $row;
             }
             // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -71,7 +75,8 @@ Class ScheduleClass {
         return $array;
     }
 
-    public static function Update($id, ScheduleClass $scheduleClass) {
+    public static function Update($id, ScheduleClass $scheduleClass)
+    {
         $conn = connectDB();
 
         $sql = "UPDATE `schedule` SET `start_datetime` = '$scheduleClass->start_datetime', `end_datetime` = '$scheduleClass->end_datetime', `remaining` = '$scheduleClass->remaining',
@@ -83,7 +88,8 @@ Class ScheduleClass {
         return $result;
     }
 
-    public static function Delete($id) {
+    public static function Delete($id)
+    {
         $conn = connectDB();
 
         $sql = "DELETE FROM `schedule` WHERE `schedule`.`id` = '$id'";
@@ -94,7 +100,8 @@ Class ScheduleClass {
         return $result;
     }
 
-    public static function FindById($id) {
+    public static function FindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `schedule` WHERE `id` = '$id'";
@@ -117,7 +124,8 @@ Class ScheduleClass {
         return $array;
     }
 
-    public static function JsonEncodeFindById($id) {
+    public static function JsonEncodeFindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `schedule` WHERE `id` = '$id' LIMIT 1";
@@ -129,5 +137,3 @@ Class ScheduleClass {
         echo json_encode($row);
     }
 }
-
-?>

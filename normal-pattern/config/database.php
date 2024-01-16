@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * File Name: database.php
@@ -9,7 +9,8 @@
 
 require_once __DIR__ . '/../config/define.php';
 
-function connectDB() {
+function connectDB()
+{
     $host = DB_HOST;
     $user = DB_USER;
     $password = DB_PASSWORD;
@@ -20,30 +21,32 @@ function connectDB() {
      */
     $conn = mysqli_connect($host, $user, $password, $database);
 
-    if(!$conn) { die("Connection Failed: " . mysqli_connect_error()); }
-    
+    if (!$conn) {
+        die("Connection Failed: " . mysqli_connect_error());
+    }
+
     return $conn;
 }
 
-function disconnectDB($conn) {
+function disconnectDB($conn)
+{
     $conn->close();
 }
 
-function connectPDO() {
+function connectPDO()
+{
     $host = DB_HOST;
     $user = DB_USER;
     $password = DB_PASSWORD;
     $database = DB_NAME;
 
     try {
-        $conn = new PDO('mysql:host='.$host.';dbname='.$database.'', $user, $password);
+        $conn = new PDO('mysql:host=' . $host . ';dbname=' . $database . '', $user, $password);
     } catch (PDOException $ex) {
-        die("Connection Failed: ". $ex);
+        die("Connection Failed: " . $ex);
     }
 
     return $conn;
 
     // disconnect PDO return = null;
 }
-
-?>

@@ -2,5 +2,5 @@
  * jQuery Loader
  */
 setTimeout(function () {
-    $(".loader").fadeToggle();
+  $(".loader").fadeToggle();
 }, 2500);

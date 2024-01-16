@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * File: TourClass.php
@@ -12,7 +12,8 @@
 
 include __DIR__ . "/../config/timezone.php";
 
-Class TourClass {
+class TourClass
+{
     // Primary Key
     // public $id
 
@@ -25,7 +26,8 @@ Class TourClass {
     /**
      * Construct
      */
-    public function __construct($title, $thumbnail, $images, $price_total, $price_children, $price_person, $content, $days, $number_of_seat, $isShow, $location_id) {
+    public function __construct($title, $thumbnail, $images, $price_total, $price_children, $price_person, $content, $days, $number_of_seat, $isShow, $location_id)
+    {
         $this->title = $title;
         $this->thumbnail = $thumbnail;
         $this->images = $images;
@@ -40,7 +42,8 @@ Class TourClass {
     }
 
     // Function
-    public static function Create(TourClass $tourClass) {
+    public static function Create(TourClass $tourClass)
+    {
         $conn = connectDB();
 
         $sql = "INSERT INTO `tour` (`title`, `thumbnail`, `images`, `price_total`, `price_children`, `price_person`, `content`, `days`, `number_of_seat`, `isShow`, `location_id`) 
@@ -52,19 +55,20 @@ Class TourClass {
         return $result;
     }
 
-    public static function Read() {
+    public static function Read()
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `tour`";
 
         $result = $conn->query($sql);
 
-        if($result === false) {
+        if ($result === false) {
 
         } else {
             $array = array();
 
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $array[] = $row;
             }
             // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -76,7 +80,8 @@ Class TourClass {
         return $array;
     }
 
-    public static function Update($id, TourClass $tourClass) {
+    public static function Update($id, TourClass $tourClass)
+    {
         $conn = connectDB();
 
         $sql = "UPDATE `tour` SET `title` = '$tourClass->title', `thumbnail` = '$tourClass->thumbnail', `images` = '$tourClass->images', `price_total` = '$tourClass->price_total', `price_children` = '$tourClass->price_children',
@@ -88,7 +93,8 @@ Class TourClass {
         return $result;
     }
 
-    public static function Delete($id) {
+    public static function Delete($id)
+    {
         $conn = connectDB();
 
         $sql = "DELETE FROM `tour` WHERE `tour`.`id` = '$id'";
@@ -99,7 +105,8 @@ Class TourClass {
         return $result;
     }
 
-    public static function FindById($id) {
+    public static function FindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `tour` WHERE `id` = '$id'";
@@ -122,7 +129,8 @@ Class TourClass {
         return $array;
     }
 
-    public static function FindByTitle($title) {
+    public static function FindByTitle($title)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `tour` WHERE `title` LIKE '%$title%'";
@@ -145,7 +153,8 @@ Class TourClass {
         return $array;
     }
 
-    public static function JsonEncodeFindById($id) {
+    public static function JsonEncodeFindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `tour` WHERE `id` = '$id' LIMIT 1";
@@ -158,7 +167,8 @@ Class TourClass {
     }
 
     // Datatables
-    public static function ListByPDO() {
+    public static function ListByPDO()
+    {
         $conn = connectPDO();
 
         $sql = "SELECT * FROM `tour`";
@@ -168,9 +178,7 @@ Class TourClass {
         $statement->fetchAll();
 
         // $conn = null;
-        
+
         return $statement->rowCount();
     }
 }
-
-?>

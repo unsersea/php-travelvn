@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Required Config / Include Database, Auth
 include "../../config/database.php";
@@ -8,14 +8,14 @@ session_start();
 
 // print_r($_REQUEST);
 
-if(!empty(isset($_REQUEST["token"]))) {
+if (!empty(isset($_REQUEST["token"]))) {
     $token = $_REQUEST["token"];
 
     $session_token = $_SESSION["token"];
     $session_email = $_SESSION["email"];
     $session_username = $_SESSION["username"];
 
-    if($token == $session_token) {
+    if ($token == $session_token) {
         AuthClass::VerifyAccount($token, $session_username);
 
         // Add Session Navbar Name
@@ -25,13 +25,10 @@ if(!empty(isset($_REQUEST["token"]))) {
         unset($_SESSION["token"]);
         unset($_SESSION["email"]);
 
-        echo"success";
+        echo "success";
     } else {
         // echo json_encode("");
-        echo"*Mã Xác Minh Không Chính Xác";
+        echo "*Mã Xác Minh Không Chính Xác";
     }
 
 }
-
-
-?>

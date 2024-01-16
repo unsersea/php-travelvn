@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * File: CategoryClass.php
@@ -12,7 +12,8 @@
 
 include __DIR__ . "/../config/timezone.php";
 
-Class CategoryClass {
+class CategoryClass
+{
     // Primary Key
     // public $id;
 
@@ -25,13 +26,15 @@ Class CategoryClass {
     /**
      * Construct
      */
-    public function __construct($category, $content) {
+    public function __construct($category, $content)
+    {
         $this->category = $category;
         $this->content = $content;
     }
 
     // Function
-    public static function Create(CategoryClass $categoryClass) {
+    public static function Create(CategoryClass $categoryClass)
+    {
         $conn = connectDB();
 
         $sql = "INSERT INTO `category` (`category`, `content`)
@@ -43,19 +46,20 @@ Class CategoryClass {
         return $statement;
     }
 
-    public static function Read() {
+    public static function Read()
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `category`";
 
         $statement = $conn->query($sql);
 
-        if($statement === false) {
+        if ($statement === false) {
 
         } else {
             $array = array();
 
-            while($row = $statement->fetch_assoc()) {
+            while ($row = $statement->fetch_assoc()) {
                 $array[] = $row;
             }
             // while ($row = mysqli_fetch_array($statement, MYSQLI_ASSOC)) {
@@ -67,7 +71,8 @@ Class CategoryClass {
         return $array;
     }
 
-    public static function Update($id, CategoryClass $categoryClass) {
+    public static function Update($id, CategoryClass $categoryClass)
+    {
         $conn = connectDB();
 
         $sql = "UPDATE `category` SET `category` = '$categoryClass->category', `content` = '$categoryClass->content' 
@@ -79,7 +84,8 @@ Class CategoryClass {
         return $statement;
     }
 
-    public static function Delete($id) {
+    public static function Delete($id)
+    {
         $conn = connectDB();
 
         $sql = "DELETE FROM `category` WHERE `category`.`id` = '$id'";
@@ -90,7 +96,8 @@ Class CategoryClass {
         return $statement;
     }
 
-    public static function FindById($id) {
+    public static function FindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `category` WHERE `id` = '$id'";
@@ -113,7 +120,8 @@ Class CategoryClass {
         return $array;
     }
 
-    public static function FindByCategory($category) {
+    public static function FindByCategory($category)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `category` WHERE `category` LIKE '%$category%'";
@@ -136,7 +144,8 @@ Class CategoryClass {
         return $array;
     }
 
-    public static function JsonEncodeFindById($id) {
+    public static function JsonEncodeFindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `category` WHERE `id` = '$id' LIMIT 1";
@@ -149,7 +158,8 @@ Class CategoryClass {
     }
 
     // Datatables
-    public static function ListByPDO() {
+    public static function ListByPDO()
+    {
         $conn = connectPDO();
 
         $sql = "SELECT * FROM `category`";
@@ -159,9 +169,7 @@ Class CategoryClass {
         $statement->fetchAll();
 
         // $conn = null;
-        
+
         return $statement->rowCount();
     }
 }
-
-?>

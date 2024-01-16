@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include("../../normal-pattern/config/database.php");
 
@@ -8,12 +8,12 @@ session_start();
 
 $google_button = '';
 
-if(isset($_SESSION["user_token"])) {
+if (isset($_SESSION["user_token"])) {
 
 } else {
-    $google_button 
+    $google_button
         = '
-            <a href='.$google_client->createAuthUrl().' class="btn btn-login-google" id="btn-login-google">
+            <a href=' . $google_client->createAuthUrl() . ' class="btn btn-login-google" id="btn-login-google">
                 <span>
                     <i class="bx bxl-google"></i>
                 </span>
@@ -26,11 +26,13 @@ if(isset($_SESSION["user_token"])) {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <!-- Title -->
     <title>php-travelvn | trang đăng nhập | v1.0</title>
     <?php include "../../normal-pattern/views/includes/head-account.php"; ?>
 </head>
+
 <body page="login" id="bd-main-login">
     <div class="loader">
         <div class="shape"></div>
@@ -43,7 +45,8 @@ if(isset($_SESSION["user_token"])) {
                 <img src="../../normal-pattern/assets/img/logo.png" alt="" class="logo-img" width="40" height="40">
                 <span class="logo-name">TravelVN</span>
             </div>
-            <form action="./login.php" class="form-account" type="login" id="fm-login" method="POST" enctype="multipart/form-data">
+            <form action="./login.php" class="form-account" type="login" id="fm-login" method="POST"
+                enctype="multipart/form-data">
                 <div class="alert alert-danger" role="alert" id="alert-login"></div>
                 <div class="field">
                     <div class="input-field" field="username">
@@ -70,14 +73,14 @@ if(isset($_SESSION["user_token"])) {
                     <button type="submit" id="btn-login">Đăng Nhập</button>
                 </div>
                 <div class="button-google">
-                    <?php 
-                    
-                    if($google_button == '') {
+                    <?php
+
+                    if ($google_button == '') {
 
                     } else {
                         echo $google_button;
                     }
-                    
+
                     ?>
                 </div>
                 <div class="other-link">
@@ -88,8 +91,9 @@ if(isset($_SESSION["user_token"])) {
     </section>
 
     <?php include "../../normal-pattern/views/includes/footer-account.php"; ?>
-    
+
     <!-- Script Login -->
     <script type="text/javascript" src="../../normal-pattern/assets/js/Login.js"></script>
 </body>
+
 </html>

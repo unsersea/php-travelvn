@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * File: FeedbackClass.php
@@ -12,7 +12,8 @@
 
 include __DIR__ . "/../config/timezone.php";
 
-Class FeedbackClass {
+class FeedbackClass
+{
     // Primary Key
     // public $id
 
@@ -25,7 +26,8 @@ Class FeedbackClass {
     /**
      * Construct
      */
-    public function __construct($fullname, $phone, $email, $promotion, $quality, $note, $isShow, $user_id, $admin_id, $booking_id) {
+    public function __construct($fullname, $phone, $email, $promotion, $quality, $note, $isShow, $user_id, $admin_id, $booking_id)
+    {
         $this->fullname = $fullname;
         $this->phone = $phone;
         $this->email = $email;
@@ -39,7 +41,8 @@ Class FeedbackClass {
     }
 
     // Function
-    public static function Create(FeedbackClass $feedbackClass) {
+    public static function Create(FeedbackClass $feedbackClass)
+    {
         $conn = connectDB();
 
         $sql = "INSERT INTO `feedback` (`fullname`, `phone`, `email`, `promotion`, `quality`, `note`, `isShow`, `user_id`, `admin_id`, `booking_id`)
@@ -51,19 +54,20 @@ Class FeedbackClass {
         return $result;
     }
 
-    public static function Read() {
+    public static function Read()
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `feedback`";
 
         $result = $conn->query($sql);
 
-        if($result === false) {
+        if ($result === false) {
 
         } else {
             $array = array();
 
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $array[] = $row;
             }
             // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -75,7 +79,8 @@ Class FeedbackClass {
         return $array;
     }
 
-    public static function Update($id, FeedbackClass $feedbackClass) {
+    public static function Update($id, FeedbackClass $feedbackClass)
+    {
         $conn = connectDB();
 
         $sql = "";
@@ -85,7 +90,8 @@ Class FeedbackClass {
         return $result;
     }
 
-    public static function Delete($id) {
+    public static function Delete($id)
+    {
         $conn = connectDB();
 
         $sql = "DELETE FROM `feedback` WHERE `feedback`.`id` = '$id'";
@@ -96,7 +102,8 @@ Class FeedbackClass {
         return $result;
     }
 
-    public static function FindById($id) {
+    public static function FindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `feedback` WHERE `id` = '$id'";
@@ -119,7 +126,8 @@ Class FeedbackClass {
         return $array;
     }
 
-    public static function JsonEncodeFindById($id) {
+    public static function JsonEncodeFindById($id)
+    {
         $conn = connectDB();
 
         $sql = "SELECT * FROM `feedback` WHERE `id` = '$id' LIMIT 1";
@@ -131,5 +139,3 @@ Class FeedbackClass {
         echo json_encode($row);
     }
 }
-
-?>
