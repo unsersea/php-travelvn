@@ -188,3 +188,86 @@
         </div>
     </div>
 </div>
+
+<!-- Detail Modal -->
+<div class="modal fade" id="modal-detail-tour" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="../../views/includes/modal/modal_tour.php" id="form-detail-tour" class="form form-modal"
+                enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ex-modal-label">Xem Chi Tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="bx bx-x"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="field-modal">
+                        <label class="form-label">Mã</label>
+                        <input type="text" name="id" class="form-control" id="single-detail-id-tour" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Tựa Đề</label>
+                        <input type="text" name="title" class="form-control" id="single-detail-title-tour" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Tổng Giá Tiền</label>
+                        <input type="text" name="price_total" class="form-control" id="single-detail-price-total-tour" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Giá Trẻ Em</label>
+                        <input type="text" name="price_children" class="form-control"
+                            id="single-detail-price-children-tour" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Giá Người Lớn</label>
+                        <input type="text" name="price_person" class="form-control"
+                            id="single-detail-price-person-tour" readonly="true">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="field-modal">
+                                <label class="form-label">Hình Ảnh 1</label>
+                                <img class="mt-2 mb-2" src="" alt="" id="upload-detail-thumbnail-tour" width="100"
+                                    height="75">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-modal">
+                                <label class="form-label">Hình Ảnh 2</label>
+                                <img class="mt-2 mb-2" src="" alt="" id="upload-detail-images-tour" width="100"
+                                    height="75">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-modal textarea">
+                        <label class="form-label">Nội Dung</label>
+
+                        <!-- Setup Textarea -->
+                        <textarea name="dis-tmce-content-tour-detail" id="dis-tmce-content-tour-detail" rows="4"
+                            class="form-control tinymce"></textarea>
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Số Ngày</label>
+                        <input type="text" name="days" class="form-control" id="single-detail-days-tour" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Số Chổ</label>
+                        <input type="text" name="number_of_seat" class="form-control"
+                            id="single-detail-number-of-seat-tour" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày Cập Nhật</label>
+                        <input type="text" name="create_at" class="form-control" id="single-detail-create-at-tour"
+                            readonly="true">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

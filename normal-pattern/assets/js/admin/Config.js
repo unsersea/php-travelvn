@@ -1281,6 +1281,7 @@ var MODAL_FEEDBACK_ADMIN;
 
   // Modal Tour Admin
   MODAL_TOUR_ADMIN = function modal_tour_admin() {
+    // DataTables Setup
     if (document.getElementById("datatables-tour-list")) {
       try {
         $("#datatables-tour-list").DataTable({
@@ -1578,7 +1579,9 @@ var MODAL_FEEDBACK_ADMIN;
             $("#single-update-id-tour").val(response.id);
             $("#single-update-title-tour").val(response.title);
             $("#single-update-price-total-tour").val(response.price_total);
-            $("#single-update-price-children-tour").val(response.price_children);
+            $("#single-update-price-children-tour").val(
+              response.price_children
+            );
             $("#single-update-price-person-tour").val(response.price_person);
 
             $("#upload-update-thumbnail-tour").attr(
@@ -1598,7 +1601,9 @@ var MODAL_FEEDBACK_ADMIN;
               .setContent(response.content);
 
             $("#single-update-days-tour").val(response.days);
-            $("#single-update-number-of-seat-tour").val(response.number_of_seat);
+            $("#single-update-number-of-seat-tour").val(
+              response.number_of_seat
+            );
             var select_el = $("#select2-location-tour-update");
 
             select_el.val(response.location_id);
@@ -1762,12 +1767,12 @@ var MODAL_FEEDBACK_ADMIN;
                   // cache : false,
                   success: function (data) {
                     var datatables = $("#datatables-tour-list").DataTable();
-      
+
                     datatables.ajax.reload();
-      
+
                     // Close Modal
                     $("#modal-update-tour").modal("hide");
-      
+
                     // Form Input Reset
                     $("#form-update-tour")[0].reset();
                   },
@@ -1779,55 +1784,168 @@ var MODAL_FEEDBACK_ADMIN;
       });
     }
     // Delete Modal
-    $("#datatables-tour-list").on(
-      "click",
-      "#btn-delete-tour",
-      function (e) {
-        var datatables = $("#datatables-tour-list").DataTable();
-        e.preventDefault();
+    $("#datatables-tour-list").on("click", "#btn-delete-tour", function (e) {
+      var datatables = $("#datatables-tour-list").DataTable();
+      e.preventDefault();
+      // Get Id From tag data-id
+      var data_id = $(this).data("id");
+
+      // Create Sweetalert2
+      Swal.fire({
+        title: "Bạn có chắc không?",
+        text:
+          "Bạn sẽ không thể phục hồi sản phẩm mã [" + data_id + "] này nữa!",
+        icon: ICON_WARNING,
+        showCancelButton: true,
+        confirmButtonColor: CONFIRM_BUTTON_COLOR,
+        cancelButtonColor: CANCEL_BUTTON_COLOR,
+        confirmButtonText: CONFIRM_BUTTON_TEXT,
+        cancelButtonText: CANCEL_BUTTON_TEXT,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Delete
+          $.ajax({
+            url: URL_ACTION_FIND + "action_tour.php",
+            data: {
+              id: data_id,
+              action: "submit_tour_delete",
+            },
+            type: TYPE_POST,
+            success: function (data) {
+              datatables.ajax.reload();
+              // Check Status or Display Alert
+              Swal.fire({
+                title: "Đã xóa!",
+                text: "Dữ liệu đã xóa thành công.",
+                icon: "success",
+              });
+            },
+          });
+        }
+      });
+    });
+    // Detail Modal
+    if (document.querySelector("#dis-tmce-content-tour-detail")) {
+      const tinymce_detail_tour = tinymce.init({
+        selector: TEXTAREA_INIT + "dis-tmce-content-tour-detail",
+        width: WIDTH_INIT,
+        height: HEIGHT_INIT,
+        language: LANGUAGE_VI,
+        element_format: ELEMENT_FORMAT,
+        mode: "textareas",
+        // remove logo tinymce
+        branding: false,
+        promotion: false,
+        // resize textarea
+        resize: false,
+        // readonly
+        readonly: true,
+      });
+      $("#datatables-tour-list").on("click", "#btn-detail-tour", function (e) {
+        // var datatables = $("#datatables-tour-list").DataTable();
         // Get Id From tag data-id
+        e.preventDefault();
         var data_id = $(this).data("id");
 
-        // Create Sweetalert2
-        Swal.fire({
-          title: "Bạn có chắc không?",
-          text:
-            "Bạn sẽ không thể phục hồi sản phẩm mã [" + data_id + "] này nữa!",
-          icon: ICON_WARNING,
-          showCancelButton: true,
-          confirmButtonColor: CONFIRM_BUTTON_COLOR,
-          cancelButtonColor: CANCEL_BUTTON_COLOR,
-          confirmButtonText: CONFIRM_BUTTON_TEXT,
-          cancelButtonText: CANCEL_BUTTON_TEXT,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Delete
-            $.ajax({
-              url: URL_ACTION_FIND + "action_tour.php",
-              data: {
-                id: data_id,
-                action: "submit_tour_delete",
-              },
-              type: TYPE_POST,
-              success: function (data) {
-                datatables.ajax.reload();
-                // Check Status or Display Alert
-                Swal.fire({
-                  title: "Đã xóa!",
-                  text: "Dữ liệu đã xóa thành công.",
-                  icon: "success",
-                });
-              },
-            });
-          }
+        // Open Modal
+        $("#modal-detail-tour").modal("show");
+
+        $.ajax({
+          url: URL_ACTION_FIND + "action_tour.php",
+          data: {
+            id: data_id,
+            action: "submit_tour_find",
+          },
+          type: TYPE_POST,
+          success: function (data) {
+            var response = JSON.parse(data);
+
+            // Add Data in Input Value
+            $("#single-detail-id-tour").val(response.id);
+            $("#single-detail-title-tour").val(response.title);
+            $("#single-detail-price-total-tour").val(response.price_total);
+            $("#single-detail-price-children-tour").val(
+              response.price_children
+            );
+            $("#single-detail-price-person-tour").val(response.price_person);
+
+            $("#upload-detail-thumbnail-tour").attr(
+              "src",
+              "../../../normal-pattern/upload/thumbnail/" +
+                response.thumbnail +
+                ""
+            );
+            $("#upload-detail-images-tour").attr(
+              "src",
+              "../../../normal-pattern/upload/images/" + response.images + ""
+            );
+
+            // TinyMCE
+            tinymce
+              .get("dis-tmce-content-tour-detail")
+              .setContent(response.content);
+
+            $("#single-detail-days-tour").val(response.days);
+            $("#single-detail-number-of-seat-tour").val(
+              response.number_of_seat
+            );
+
+            // Create at
+            $("#single-detail-create-at-tour").val(response.create_at);
+          },
         });
-      }
-    );
-    // Detail Modal
-    // if(document.querySelector("")) {
-      
-    // }
+      });
+    }
   };
+
+  // Modal Schedule Admin
+  MODAL_SCHEDULE_ADMIN = function modal_schedule_admin() {
+    // DataTables Setup
+    if (document.getElementById("datatables-schedule-list")) {
+      try {
+        $("#datatables-schedule-list").DataTable({
+          language: { url: LANG_VI_URL_DATATABLES },
+          processing: true,
+          serverSide: true,
+          padding: true,
+          responsive: true,
+          //
+          colReorder: true,
+          autoWidth: true,
+          scrollX: true,
+          stateSave: true,
+          //
+          order: [],
+          // Button
+          dom: "Bfrtip",
+          buttons: ["csv", "excel", "print"],
+          ajax: {
+            url: "../../views/includes/data/data_schedule.php",
+            type: TYPE_POST,
+          },
+          fnCreateRow: function (nRow, aData, iDataIndex) {
+            // Add Data Id in tag <tr>
+            $(nRow).attr("id", aData[0]);
+            //
+          },
+          columnDefs: [
+            {
+              targets: [0, 4],
+              searchable: false,
+              orderable: false,
+              // "visible": false
+            },
+            // {
+            //     "targets": '_all',
+            //     "visible": false
+            // }
+          ],
+        });
+      } catch (ex) {
+        return console.log(ex);
+      }
+    }
+  }
 })(jQuery);
 
 FILE_VALIDATE();
@@ -1839,3 +1957,4 @@ MODAL_CATEGORY_ADMIN();
 MODAL_EVENT_ADMIN();
 MODAL_LOCATION_ADMIN();
 MODAL_TOUR_ADMIN();
+MODAL_SCHEDULE_ADMIN();
