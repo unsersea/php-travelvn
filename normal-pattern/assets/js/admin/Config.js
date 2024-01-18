@@ -114,7 +114,7 @@ var MODAL_FEEDBACK_ADMIN;
         return $(".select2bs4-location-tour").select2({
           theme: "bootstrap4",
           placeholder: "Chọn Khu Vực",
-          allowClear: true
+          allowClear: true,
         });
       } catch (ex) {
         return console.log(ex);
@@ -1524,7 +1524,7 @@ var MODAL_FEEDBACK_ADMIN;
                 theme: "bootstrap4",
                 placeholder: "Chọn Khu Vực",
                 allowClear: true,
-                tag: []
+                tag: [],
               });
             },
           });
@@ -1532,14 +1532,300 @@ var MODAL_FEEDBACK_ADMIN;
       });
     }
     // Update Modal
-    // if(document.querySelector("")) {
+    if (document.querySelector("#dis-tmce-content-tour-update")) {
+      const tinymce_update_tour = tinymce.init({
+        selector: TEXTAREA_INIT + "dis-tmce-content-tour-update",
+        width: WIDTH_INIT,
+        height: HEIGHT_INIT,
+        language: LANGUAGE_VI,
+        element_format: ELEMENT_FORMAT,
+        mode: "textareas",
+        // remove logo tinymce
+        branding: false,
+        promotion: false,
+        // resize textarea
+        resize: false,
+        setup: function (editor, ed) {
+          editor.on("init keydown change", (e) => {
+            var get_content = document.querySelector(
+              "#get-tmce-content-tour-update"
+            );
+            // innerHTML
+            get_content.innerHTML = editor.getContent();
+          });
+        },
+      });
+      $("#datatables-tour-list").on("click", "#btn-update-tour", function (e) {
+        // var datatables = $("#datatables-tour-list").DataTable();
+        // Get Id From tag data-id
+        e.preventDefault();
+        var data_id = $(this).data("id");
 
-    // }
+        // Open Modal
+        $("#modal-update-tour").modal("show");
+
+        $.ajax({
+          url: URL_ACTION_FIND + "action_tour.php",
+          data: {
+            id: data_id,
+            action: "submit_tour_find",
+          },
+          type: TYPE_POST,
+          success: function (data) {
+            var response = JSON.parse(data);
+
+            // Add Data in Input Value
+            $("#single-update-id-tour").val(response.id);
+            $("#single-update-title-tour").val(response.title);
+            $("#single-update-price-total-tour").val(response.price_total);
+            $("#single-update-price-children-tour").val(response.price_children);
+            $("#single-update-price-person-tour").val(response.price_person);
+
+            $("#upload-update-thumbnail-tour").attr(
+              "src",
+              "../../../normal-pattern/upload/thumbnail/" +
+                response.thumbnail +
+                ""
+            );
+            $("#upload-update-images-tour").attr(
+              "src",
+              "../../../normal-pattern/upload/images/" + response.images + ""
+            );
+
+            // TinyMCE
+            tinymce
+              .get("dis-tmce-content-tour-update")
+              .setContent(response.content);
+
+            $("#single-update-days-tour").val(response.days);
+            $("#single-update-number-of-seat-tour").val(response.number_of_seat);
+            var select_el = $("#select2-location-tour-update");
+
+            select_el.val(response.location_id);
+            select_el.trigger("change");
+
+            const form_update_tour = $("#form-update-tour").validate({
+              ignore: [],
+              rules: {
+                title: {
+                  required: true,
+                  rangelength: [6, 50],
+                },
+                price_total: {
+                  required: true,
+                  number: true,
+                  remote: {
+                    url: "../../../normal-pattern/views/includes/validate/tour/validate_price_total.php",
+                    type: TYPE_POST,
+                    data: {
+                      price_total: function () {
+                        return $(
+                          "#form-update-tour :input[name='price_total']"
+                        ).val();
+                      },
+                    },
+                  },
+                },
+                price_children: {
+                  required: true,
+                  number: true,
+                  remote: {
+                    url: "../../../normal-pattern/views/includes/validate/tour/validate_price_children.php",
+                    type: TYPE_POST,
+                    data: {
+                      price_children: function () {
+                        return $(
+                          "#form-update-tour :input[name='price_children']"
+                        ).val();
+                      },
+                    },
+                  },
+                },
+                price_person: {
+                  required: true,
+                  number: true,
+                  remote: {
+                    url: "../../../normal-pattern/views/includes/validate/tour/validate_price_person.php",
+                    type: TYPE_POST,
+                    data: {
+                      price_person: function () {
+                        return $(
+                          "#form-update-tour :input[name='price_person']"
+                        ).val();
+                      },
+                    },
+                  },
+                },
+                content: {
+                  // required: true,
+                  minlength: 50,
+                },
+                thumbnail: {
+                  // required: true,
+                  fileSizeLimit: 1000000,
+                },
+                images: {
+                  // required: true,
+                  fileSizeLimit: 1000000,
+                },
+                days: {
+                  required: true,
+                  number: true,
+                  remote: {
+                    url: "../../../normal-pattern/views/includes/validate/tour/validate_days.php",
+                    type: TYPE_POST,
+                    data: {
+                      days: function () {
+                        return $("#form-update-tour :input[name='days']").val();
+                      },
+                    },
+                  },
+                },
+                number_of_seat: {
+                  required: true,
+                  number: true,
+                  remote: {
+                    url: "../../../normal-pattern/views/includes/validate/tour/validate_number_of_seat.php",
+                    type: TYPE_POST,
+                    data: {
+                      number_of_seat: function () {
+                        return $(
+                          "#form-update-tour :input[name='number_of_seat']"
+                        ).val();
+                      },
+                    },
+                  },
+                },
+                location_id: {
+                  required: true,
+                },
+              },
+              messages: {
+                title: {
+                  required: "*Bạn Chưa Nhập Tựa Đề",
+                  rangelength: "*Tựa Đề Chỉ Nhận Từ 6 Đến 50 Ký Tự",
+                },
+                price_total: {
+                  required: "*Bạn Chưa Nhập Giá Tiền",
+                  number: "*Giá Tiền Phải Là Ký Số",
+                  remote: "*Giá Tiền Chỉ Nhận Từ 0 VNĐ Đến 100.000.000 VNĐ",
+                },
+                price_children: {
+                  required: "*Bạn Chưa Nhập Giá Trẻ Em",
+                  number: "*Giá Trẻ Em Phải Là Ký Số",
+                  remote: "*Giá Trẻ Em Chỉ Nhận Từ 0 VNĐ Đến 10.000.000 VNĐ",
+                },
+                price_person: {
+                  required: "*Bạn Chưa Nhập Giá Người Lớn",
+                  number: "*Giá Người Lớn Phải Là Ký Số",
+                  remote: "*Giá Ngưởi Lớn Chỉ Nhận Từ 0 VNĐ Đến 10.000.000 VNĐ",
+                },
+                content: {
+                  required: "*Bạn Chưa Nhập Phần Nội Dung",
+                  minlength: "*Phần Nội Dung Chỉ Nhận Từ 50 Ký Tự Trở Lên",
+                },
+                thumbnail: {
+                  // required: "*Bạn Chưa Nhập Hình Ảnh 1",
+                },
+                images: {
+                  // required: "*Bạn Chưa Nhập Hình Ảnh 2",
+                },
+                days: {
+                  required: "*Bạn Chưa Nhập Số Ngày",
+                  number: "*Số Ngày Phải Là Ký Số",
+                  remote: "*Số Ngày Chỉ Nhận Từ 1 Đến 90 Ngày",
+                },
+                number_of_seat: {
+                  required: "*Bạn Chưa Nhập Số Chổ",
+                  number: "*Số Chỗ Phải Là Ký Số",
+                  remote: "*Số Chỗ Chỉ Nhận Từ 1 Đến 1000 Chỗ",
+                },
+                location_id: {
+                  required: "*Bạn Chưa Chọn Khu Vực",
+                },
+              },
+              errorPlacement: function (error, element) {
+                if (element.attr("name") == "location_id") {
+                  error.insertAfter("#modal-update-tour span.select2");
+                } else {
+                  error.insertAfter(element);
+                }
+              },
+              submitHandler: function (form) {
+                $.ajax({
+                  type: TYPE_POST,
+                  url: URL_ACTION_VALIDATE + "action_tour.php",
+                  data: new FormData(form),
+                  contentType: false,
+                  processData: false,
+                  // dataType: "json",
+                  // cache : false,
+                  success: function (data) {
+                    var datatables = $("#datatables-tour-list").DataTable();
+      
+                    datatables.ajax.reload();
+      
+                    // Close Modal
+                    $("#modal-update-tour").modal("hide");
+      
+                    // Form Input Reset
+                    $("#form-update-tour")[0].reset();
+                  },
+                });
+              },
+            });
+          },
+        });
+      });
+    }
     // Delete Modal
+    $("#datatables-tour-list").on(
+      "click",
+      "#btn-delete-tour",
+      function (e) {
+        var datatables = $("#datatables-tour-list").DataTable();
+        e.preventDefault();
+        // Get Id From tag data-id
+        var data_id = $(this).data("id");
 
+        // Create Sweetalert2
+        Swal.fire({
+          title: "Bạn có chắc không?",
+          text:
+            "Bạn sẽ không thể phục hồi sản phẩm mã [" + data_id + "] này nữa!",
+          icon: ICON_WARNING,
+          showCancelButton: true,
+          confirmButtonColor: CONFIRM_BUTTON_COLOR,
+          cancelButtonColor: CANCEL_BUTTON_COLOR,
+          confirmButtonText: CONFIRM_BUTTON_TEXT,
+          cancelButtonText: CANCEL_BUTTON_TEXT,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Delete
+            $.ajax({
+              url: URL_ACTION_FIND + "action_tour.php",
+              data: {
+                id: data_id,
+                action: "submit_tour_delete",
+              },
+              type: TYPE_POST,
+              success: function (data) {
+                datatables.ajax.reload();
+                // Check Status or Display Alert
+                Swal.fire({
+                  title: "Đã xóa!",
+                  text: "Dữ liệu đã xóa thành công.",
+                  icon: "success",
+                });
+              },
+            });
+          }
+        });
+      }
+    );
     // Detail Modal
     // if(document.querySelector("")) {
-
+      
     // }
   };
 })(jQuery);
