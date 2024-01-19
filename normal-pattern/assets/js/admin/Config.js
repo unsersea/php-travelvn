@@ -120,6 +120,17 @@ var MODAL_FEEDBACK_ADMIN;
         return console.log(ex);
       }
     }
+    if (document.querySelector("#select2-tour-schedule-create")) {
+      try {
+        return $("#select2-tour-schedule-create").select2({
+          theme: "bootstrap4",
+          placeholder: "Chọn Sản Phẩm",
+          allowClear: true,
+        });
+      } catch (ex) {
+        return console.log(ex);
+      }
+    }
   };
 
   CALCULATE_DATE = function calculate_date(today, day, month, year) {
@@ -1945,7 +1956,46 @@ var MODAL_FEEDBACK_ADMIN;
         return console.log(ex);
       }
     }
-  }
+    // Create Modal
+    // Setup
+    $(".submit-schedule-create").addClass("d-none");
+
+    $("#modal-create-schedule").on(
+      "click",
+      ".submit_schedule_select",
+      function (e) {
+        e.preventDefault();
+
+        const select_tour = $("#select2-tour-schedule-create").val();
+
+        if (select_tour === "" || select_tour === null || select_tour === undefined) {
+          // console.log("empty");
+          $(".select-result-form").addClass("d-none");
+          $(".submit-schedule-create").addClass("d-none");
+
+          // Clear Input
+          $("#start-datetime-schedule-create").val("");
+          $("#end-datetime-schedule-create").val("");
+          $("#note-schedule-create").val("");
+        } else {
+          // console.log("value");
+          $.ajax({
+            url: URL_ACTION_FIND + "action_schedule.php",
+            type: TYPE_POST,
+            data: { id: select_tour, action: "ajax_find_tour" },
+            success: function(data) { 
+              $(".select-result-form").removeClass("d-none");
+              $(".submit-schedule-create").removeClass("d-none");
+
+              var response = JSON.parse(data);
+              // Validate
+              
+            }
+          });
+        }
+      }
+    );
+  };
 })(jQuery);
 
 FILE_VALIDATE();

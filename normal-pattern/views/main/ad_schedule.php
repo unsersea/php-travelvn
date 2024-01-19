@@ -7,6 +7,8 @@ include "../../config/database.php";
 include "../../classes/AuthClass.php";
 include "../../classes/TourClass.php";
 
+$list_tour = TourClass::Read();
+
 ?>
 
 <?php include "../../views/includes/doctype.php"; ?>

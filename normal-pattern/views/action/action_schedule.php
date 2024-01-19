@@ -51,11 +51,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             return ScheduleClass::Delete($id);
         }
 
-        // Detail
+        // Find Schedule
         if ($action == "submit_schedule_detail") {
             $id = $_REQUEST["id"];
 
             return ScheduleClass::JsonEncodeFindById($id);
+        }
+
+        // Find Tour
+        if ($action == "ajax_find_tour") {
+            $id = $_REQUEST["id"];
+
+            return TourClass::JsonEncodeFindById($id);
         }
     }
 }
