@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($action == "submit_schedule_create") {
             $start_datetime = $_REQUEST["start_datetime"];
             $end_datetime = $_REQUEST["end_datetime"];
-            $remaining = $_REQUEST["days"];
+            $remaining = $_REQUEST["number_of_seat"];
             $note = $_REQUEST["note"];
             // Foreign Key
             $tour_id = $_REQUEST["tour_id"];
@@ -55,10 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Find Schedule
-        if ($action == "submit_schedule_detail") {
+        if ($action == "submit_schedule_find") {
             $id = $_REQUEST["id"];
+            // Find Tour
+            $find_tour_id = ScheduleClass::FindById($id);
 
-            return ScheduleClass::JsonEncodeFindById($id);
+            echo json_encode(array_merge(ScheduleClass::FindById($id), TourClass::FindById($find_tour_id["tour_id"])));
         }
 
         // Find Tour

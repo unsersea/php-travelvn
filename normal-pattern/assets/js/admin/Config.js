@@ -2028,6 +2028,7 @@ var MODAL_FEEDBACK_ADMIN;
               $("#single-create-id-schedule").val(response.id);
               $("#single-create-title-schedule").val(response.title);
               $("#single-create-days-schedule").val(response.days);
+              $("#single-create-number-of-seat-schedule").val(response.number_of_seat);
 
               // Validate
               const form_create_schedule = $("#form-create-schedule").validate({
@@ -2089,6 +2090,89 @@ var MODAL_FEEDBACK_ADMIN;
         }
       }
     );
+    
+    // Update Modal
+    $("#datatables-schedule-list").on(
+      "click",
+      "#btn-update-schedule",
+      function (e) {
+        // var datatables = $("#datatables-schedule-list").DataTable();
+        // Get Id From tag data-id
+        var data_id = $(this).data("id");
+
+        // Open Modal
+        $("#modal-update-schedule").modal("show");
+        // Call Ajax
+        $.ajax({
+          url: URL_ACTION_FIND + "action_schedule.php",
+          data: {
+            id: data_id,
+            action: "submit_schedule_find",
+          },
+          type: TYPE_POST,
+          success: function (data) {
+            var response = JSON.parse(data);
+
+            // Add Data in Input Value
+            $("#single-update-id-schedule").val(response.id);
+            $("#start-datetime-schedule-update").val(response.start_datetime);
+            $("#end-datetime-schedule-update").val(response.end_datetime);
+            $("#note-schedule-update").val(response.note);
+
+            console.log(response);
+
+            // Validate
+            const form_update_schedule = $("#form-update-schedule").validate({
+              ignore: "",
+              rules: {
+                start_datetime: {
+                  required: true,
+                },
+                end_datetime: {
+                  required: true,
+                },
+                note: {
+                  // required: false,
+                },
+              },
+              messages: {
+                start_datetime: {
+                  required: "*Bạn Chưa Có Dữ Liệu Ngày Bắt Đầu",
+                },
+                end_datetime: {
+                  required: "*Bạn Chưa Có Dữ Liệu Ngày Kết Thúc",
+                },
+                note: {},
+              },
+              submitHandler: function (form) {
+                $.ajax({
+                  type: TYPE_POST,
+                  url: URL_ACTION_VALIDATE + "action_schedule.php",
+                  data: $(form).serializeArray(),
+                  success: function (data) {
+                    // console.log($(form).serializeArray());
+                    // var datatables = $(
+                    //   "#datatables-schedule-list"
+                    // ).DataTable();
+
+                    // datatables.ajax.reload();
+                    // Close Modal
+                    // $("#modal-update-schedule").modal("hide");
+
+                    
+                  },
+                });
+              },
+            });
+          },
+        });
+      }
+    );
+
+    // Delete
+    
+
+    // Detail
   };
 })(jQuery);
 

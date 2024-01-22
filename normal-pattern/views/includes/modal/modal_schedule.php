@@ -52,6 +52,11 @@
                                 readonly="true">
                         </div>
                         <div class="field-modal">
+                            <label class="form-label">Số Chỗ</label>
+                            <input type="text" name="number_of_seat" class="form-control" id="single-create-number-of-seat-schedule"
+                                readonly="true">
+                        </div>
+                        <div class="field-modal">
                             <label class="form-label">Ngày Bắt Đầu</label>
                             <input type="text" id="start-datetime-schedule-create"
                                 class="form-control datepicker-config-2" name="start_datetime" readonly="true">
@@ -95,11 +100,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    
+                    <div class="field-modal d-none">
+                        <label class="form-label">Mã</label>
+                        <input type="text" name="id" class="form-control" id="single-update-id-schedule">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày Bắt Đầu</label>
+                        <input type="text" id="start-datetime-schedule-update"
+                            class="form-control datepicker-config-3" name="start_datetime" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày Kết Thúc</label>
+                        <input type="text" id="end-datetime-schedule-update" class="form-control"
+                            name="end_datetime" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ghi Chú</label>
+                        <textarea name="note" id="note-schedule-update" rows="4" class="form-control"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary" value="submit_update_update" name="action">Lưu
+                    <button type="submit" class="btn btn-primary" value="submit_schedule_update" name="action">Lưu
                         Thay Đổi</button>
                 </div>
             </form>

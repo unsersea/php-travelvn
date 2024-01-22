@@ -80,7 +80,7 @@ class ScheduleClass
         $conn = connectDB();
 
         $sql = "UPDATE `schedule` SET `start_datetime` = '$scheduleClass->start_datetime', `end_datetime` = '$scheduleClass->end_datetime', `remaining` = '$scheduleClass->remaining',
-                `note` = '$scheduleClass->note', `tour_id` = '$scheduleClass->tour_id', `feedback_id` = '$scheduleClass->feedback_id' WHERE `schedule`.`id` = '$id'";
+                `note` = '$scheduleClass->note', `tour_id` = '$scheduleClass->tour_id', `feedback_id` = '$scheduleClass->feedback_id' WHERE `schedule`.`schedule_id` = '$id'";
 
         $result = $conn->query($sql);
 
@@ -92,7 +92,7 @@ class ScheduleClass
     {
         $conn = connectDB();
 
-        $sql = "DELETE FROM `schedule` WHERE `schedule`.`id` = '$id'";
+        $sql = "DELETE FROM `schedule` WHERE `schedule`.`schedule_id` = '$id'";
 
         $result = $conn->query($sql);
 
@@ -104,7 +104,7 @@ class ScheduleClass
     {
         $conn = connectDB();
 
-        $sql = "SELECT * FROM `schedule` WHERE `id` = '$id'";
+        $sql = "SELECT * FROM `schedule` WHERE `schedule_id` = '$id'";
         $result = $conn->query($sql);
 
         if ($result === false) {
@@ -128,7 +128,7 @@ class ScheduleClass
     {
         $conn = connectDB();
 
-        $sql = "SELECT * FROM `schedule` WHERE `id` = '$id' LIMIT 1";
+        $sql = "SELECT * FROM `schedule` WHERE `schedule_id` = '$id' LIMIT 1";
 
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);

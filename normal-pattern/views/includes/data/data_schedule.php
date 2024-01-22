@@ -33,7 +33,7 @@ if (isset($_POST["search"]["value"])) {
 if (isset($_POST["order"])) {
     $query .= 'ORDER BY ' . $_POST['order']['0']['column'] . ' ' . $_POST['order']['0']['dir'] . ' ';
 } else {
-    $query .= 'ORDER BY id DESC ';
+    $query .= 'ORDER BY schedule_id DESC ';
 }
 
 // Check Length
@@ -51,19 +51,19 @@ foreach ($result as $row) {
     // Call Sub Array
     $sub_array = array();
     //
-    $sub_array[] = $row["id"];
+    $sub_array[] = $row["schedule_id"];
     $sub_array[] = '<span class="badge badge-watermelon">'. $row["start_datetime"] .'</span>';
     $sub_array[] = '<span class="badge badge-secondary">'. $row["end_datetime"] .'</span>';
     $sub_array[] = $row["note"];
     $sub_array[] =
         '
-        <a class="btn btn-info text-white" data-id="' . $row["id"] . '" id="btn-update-schedule">
+        <a class="btn btn-info text-white" data-id="' . $row["schedule_id"] . '" id="btn-update-schedule">
             <i class="bx bx-edit-alt"></i>
         </a>
-        <a class="btn btn-danger text-white" data-id="' . $row["id"] . '" id="btn-delete-schedule"> 
+        <a class="btn btn-danger text-white" data-id="' . $row["schedule_id"] . '" id="btn-delete-schedule"> 
             <i class="bx bx-trash"></i>
         </a>
-        <a class="btn btn-warning text-white" data-id="' . $row["id"] . '" id="btn-detail-schedule">
+        <a class="btn btn-warning text-white" data-id="' . $row["schedule_id"] . '" id="btn-detail-schedule">
             <i class="bx bx-detail"></i>
         </a>
     ';
