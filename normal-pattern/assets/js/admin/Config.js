@@ -161,6 +161,35 @@ var MODAL_FEEDBACK_ADMIN;
         return console.log(ex);
       }
     }
+    if (document.querySelector(".datepicker-config-2")) {
+      try {
+        return $(".datepicker-config-2").datepicker({
+          dateFormat: "dd/mm/yy",
+          minDate: +1,
+          duration: "fast",
+          yearRange: new Date().getFullYear() + ":" + new Date().getFullYear(),
+          onSelect: function (date) {
+            var start_date = $("#start-datetime-schedule-create").datepicker(
+              "getDate"
+            );
+            var days = $("#single-create-days-schedule").val();
+
+            var get_start_date = new Date(start_date);
+            get_start_date.setDate(get_start_date.getDate() + parseInt(days));
+            var end_date =
+              String(get_start_date.getDate()).padStart(2, "0") +
+              "/" +
+              String(get_start_date.getMonth() + 1).padStart(2, "0") +
+              "/" +
+              get_start_date.getFullYear();
+
+            return $("#end-datetime-schedule-create").val(end_date);
+          },
+        });
+      } catch (ex) {
+        return console.log(ex);
+      }
+    }
   };
 
   // Modal Category Admin
@@ -1968,12 +1997,19 @@ var MODAL_FEEDBACK_ADMIN;
 
         const select_tour = $("#select2-tour-schedule-create").val();
 
-        if (select_tour === "" || select_tour === null || select_tour === undefined) {
+        if (
+          select_tour === "" ||
+          select_tour === null ||
+          select_tour === undefined
+        ) {
           // console.log("empty");
           $(".select-result-form").addClass("d-none");
           $(".submit-schedule-create").addClass("d-none");
 
           // Clear Input
+          $("#single-create-id-schedule").val("");
+          $("#single-create-title-schedule").val("");
+          $("#single-create-days-schedule").val("");
           $("#start-datetime-schedule-create").val("");
           $("#end-datetime-schedule-create").val("");
           $("#note-schedule-create").val("");
@@ -1983,14 +2019,72 @@ var MODAL_FEEDBACK_ADMIN;
             url: URL_ACTION_FIND + "action_schedule.php",
             type: TYPE_POST,
             data: { id: select_tour, action: "ajax_find_tour" },
-            success: function(data) { 
+            success: function (data) {
               $(".select-result-form").removeClass("d-none");
               $(".submit-schedule-create").removeClass("d-none");
 
               var response = JSON.parse(data);
+              // Get Value
+              $("#single-create-id-schedule").val(response.id);
+              $("#single-create-title-schedule").val(response.title);
+              $("#single-create-days-schedule").val(response.days);
+
               // Validate
-              
-            }
+              const form_create_schedule = $("#form-create-schedule").validate({
+                ignore: "",
+                rules: {
+                  start_datetime: {
+                    required: true,
+                  },
+                  end_datetime: {
+                    required: true,
+                  },
+                  note: {
+                    // required: false,
+                  },
+                },
+                messages: {
+                  start_datetime: {
+                    required: "*Bạn Chưa Có Dữ Liệu Ngày Bắt Đầu",
+                  },
+                  end_datetime: {
+                    required: "*Bạn Chưa Có Dữ Liệu Ngày Kết Thúc",
+                  },
+                  note: {},
+                },
+                submitHandler: function (form) {
+                  $.ajax({
+                    type: TYPE_POST,
+                    url: URL_ACTION_VALIDATE + "action_schedule.php",
+                    data: $(form).serializeArray(),
+                    success: function (data) {
+                      // console.log($(form).serializeArray());
+                      var datatables = $(
+                        "#datatables-schedule-list"
+                      ).DataTable();
+
+                      datatables.ajax.reload();
+                      // Close Modal
+                      $("#modal-create-schedule").modal("hide");
+
+                      // Form Input Reset
+                      $("#form-create-schedule")[0].reset();
+
+                      // Close and Clear
+                      $("#select2-tour-schedule-create").select2({
+                        theme: "bootstrap4",
+                        placeholder: "Chọn Sản Phẩm",
+                        allowClear: true,
+                        tag: [],
+                      });
+
+                      $(".select-result-form").addClass("d-none");
+                      $(".submit-schedule-create").addClass("d-none");
+                    },
+                  });
+                },
+              });
+            },
           });
         }
       }

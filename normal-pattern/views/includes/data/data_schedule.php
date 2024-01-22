@@ -26,6 +26,7 @@ $query .= "SELECT * FROM $table ";
 // Check Isset Search Value
 if (isset($_POST["search"]["value"])) {
     $query .= 'WHERE note LIKE "%' . $_POST["search"]["value"] . '%" ';
+    $query .= 'OR tour_id LIKE "%'.$_POST["search"]["value"].'%" ';
 }
 
 // Check Order By
@@ -51,8 +52,8 @@ foreach ($result as $row) {
     $sub_array = array();
     //
     $sub_array[] = $row["id"];
-    $sub_array[] = $row["start_datetime"];
-    $sub_array[] = $row["end_datetime"];
+    $sub_array[] = '<span class="badge badge-watermelon">'. $row["start_datetime"] .'</span>';
+    $sub_array[] = '<span class="badge badge-secondary">'. $row["end_datetime"] .'</span>';
     $sub_array[] = $row["note"];
     $sub_array[] =
         '
