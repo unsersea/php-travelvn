@@ -2028,7 +2028,9 @@ var MODAL_FEEDBACK_ADMIN;
               $("#single-create-id-schedule").val(response.id);
               $("#single-create-title-schedule").val(response.title);
               $("#single-create-days-schedule").val(response.days);
-              $("#single-create-number-of-seat-schedule").val(response.number_of_seat);
+              $("#single-create-number-of-seat-schedule").val(
+                response.number_of_seat
+              );
 
               // Validate
               const form_create_schedule = $("#form-create-schedule").validate({
@@ -2090,7 +2092,7 @@ var MODAL_FEEDBACK_ADMIN;
         }
       }
     );
-    
+
     // Update Modal
     $("#datatables-schedule-list").on(
       "click",
@@ -2119,7 +2121,7 @@ var MODAL_FEEDBACK_ADMIN;
             $("#end-datetime-schedule-update").val(response.end_datetime);
             $("#note-schedule-update").val(response.note);
 
-            console.log(response);
+            // console.log(response);
 
             // Validate
             const form_update_schedule = $("#form-update-schedule").validate({
@@ -2154,12 +2156,9 @@ var MODAL_FEEDBACK_ADMIN;
                     // var datatables = $(
                     //   "#datatables-schedule-list"
                     // ).DataTable();
-
                     // datatables.ajax.reload();
                     // Close Modal
                     // $("#modal-update-schedule").modal("hide");
-
-                    
                   },
                 });
               },
@@ -2170,7 +2169,6 @@ var MODAL_FEEDBACK_ADMIN;
     );
 
     // Delete
-    
 
     // Detail
   };
