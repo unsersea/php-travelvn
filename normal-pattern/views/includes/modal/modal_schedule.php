@@ -150,3 +150,68 @@
 </div>
 
 <!-- Detail Modal -->
+<div class="modal fade" id="modal-detail-schedule" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="../../views/includes/modal/modal_schedule.php" id="form-detail-schedule"
+                class="form form-modal" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ex-modal-label">Xem Chi Tiết</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="bx bx-x"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="field-modal">
+                        <label class="form-label">Mã Lịch Trình</label>
+                        <input type="text" name="schedule_id" class="form-control" id="single-detail-id-schedule">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Mã Tour</label>
+                        <input type="text" name="tour_id" class="form-control" id="single-detail-tour-id-schedule"
+                            readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Tựa Đề</label>
+                        <input type="text" name="title" class="form-control" id="single-detail-title-schedule"
+                            readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Số Ngày</label>
+                        <input type="text" name="days" class="form-control" id="single-detail-days-schedule"
+                            readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày Bắt Đầu</label>
+                        <input type="text" id="start-datetime-schedule-detail" class="form-control"
+                            name="start_datetime" readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày Kết Thúc</label>
+                        <input type="text" id="end-datetime-schedule-detail" class="form-control" name="end_datetime"
+                            readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Phần Còn Lại</label>
+                        <input type="text" name="remaining" class="form-control" id="single-detail-remaining-schedule"
+                            readonly="true">
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ghi Chú</label>
+                        <textarea name="note" id="note-schedule-detail" rows="4" class="form-control" readonly="true"></textarea>
+                    </div>
+                    <div class="field-modal">
+                        <label class="form-label">Ngày Cập Nhật</label>
+                        <input type="text" name="create_at" class="form-control" id="single-detail-create-at-schedule"
+                            readonly="true">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

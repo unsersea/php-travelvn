@@ -2191,8 +2191,83 @@ var MODAL_FEEDBACK_ADMIN;
     );
 
     // Delete
+    $("#datatables-schedule-list").on("click", "#btn-delete-schedule", function (e) {
+      var datatables = $("#datatables-schedule-list").DataTable();
+      e.preventDefault();
+      // Get Id From tag data-id
+      var data_id = $(this).data("id");
+
+      // Create Sweetalert2
+      Swal.fire({
+        title: "Bạn có chắc không?",
+        text:
+          "Bạn sẽ không thể phục hồi lịch trình mã [" + data_id + "] này nữa!",
+        icon: ICON_WARNING,
+        showCancelButton: true,
+        confirmButtonColor: CONFIRM_BUTTON_COLOR,
+        cancelButtonColor: CANCEL_BUTTON_COLOR,
+        confirmButtonText: CONFIRM_BUTTON_TEXT,
+        cancelButtonText: CANCEL_BUTTON_TEXT,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Delete
+          $.ajax({
+            url: URL_ACTION_FIND + "action_schedule.php",
+            data: {
+              id: data_id,
+              action: "submit_schedule_delete",
+            },
+            type: TYPE_POST,
+            success: function (data) {
+              datatables.ajax.reload();
+              // Check Status or Display Alert
+              Swal.fire({
+                title: "Đã xóa!",
+                text: "Dữ liệu đã xóa thành công.",
+                icon: "success",
+              });
+            },
+          });
+        }
+      });
+    });
 
     // Detail
+    $("#datatables-schedule-list").on(
+      "click",
+      "#btn-detail-schedule",
+      function (e) {
+        // var datatables = $("#datatables-schedule-list").DataTable();
+        // Get Id From tag data-id
+        var data_id = $(this).data("id");
+
+        // Open Modal
+        $("#modal-detail-schedule").modal("show");
+        // Call Ajax
+        $.ajax({
+          url: URL_ACTION_FIND + "action_schedule.php",
+          data: {
+            id: data_id,
+            action: "submit_schedule_find",
+          },
+          type: TYPE_POST,
+          success: function (data) {
+            var response = JSON.parse(data);
+
+            // Add Data in Input Value
+            $("#single-detail-id-schedule").val(response.schedule_id);
+            $("#single-detail-tour-id-schedule").val(response.id);
+            $("#single-detail-title-schedule").val(response.title);
+            $("#single-detail-days-schedule").val(response.days);
+            $("#start-datetime-schedule-detail").val(response.start_datetime);
+            $("#end-datetime-schedule-detail").val(response.end_datetime);
+            $("#single-detail-remaining-schedule").val(response.remaining);
+            $("#note-schedule-detail").val(response.note);
+            $("#single-detail-create-at-schedule").val(response.create_at_schedule);
+          },
+        });
+      }
+    );
   };
 })(jQuery);
 
