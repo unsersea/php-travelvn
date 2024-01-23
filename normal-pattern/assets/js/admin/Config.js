@@ -169,6 +169,7 @@ var MODAL_FEEDBACK_ADMIN;
           duration: "fast",
           yearRange: new Date().getFullYear() + ":" + new Date().getFullYear(),
           onSelect: function (date) {
+            // Create
             var start_date = $("#start-datetime-schedule-create").datepicker(
               "getDate"
             );
@@ -183,7 +184,26 @@ var MODAL_FEEDBACK_ADMIN;
               "/" +
               get_start_date.getFullYear();
 
-            return $("#end-datetime-schedule-create").val(end_date);
+            $("#end-datetime-schedule-create").val(end_date);
+
+            // Update
+            var start_date_update = $(
+              "#start-datetime-schedule-update"
+            ).datepicker("getDate");
+            var days_update = $("#single-update-days-schedule").val();
+
+            var get_start_date_update = new Date(start_date_update);
+            get_start_date_update.setDate(
+              get_start_date_update.getDate() + parseInt(days_update)
+            );
+            var end_date_update =
+              String(get_start_date_update.getDate()).padStart(2, "0") +
+              "/" +
+              String(get_start_date_update.getMonth() + 1).padStart(2, "0") +
+              "/" +
+              get_start_date_update.getFullYear();
+
+            $("#end-datetime-schedule-update").val(end_date_update);
           },
         });
       } catch (ex) {
@@ -2116,9 +2136,13 @@ var MODAL_FEEDBACK_ADMIN;
             var response = JSON.parse(data);
 
             // Add Data in Input Value
-            $("#single-update-id-schedule").val(response.id);
+            $("#single-update-id-schedule").val(response.schedule_id);
+            $("#single-update-tour-id-schedule").val(response.id);
+            $("#single-update-title-schedule").val(response.title);
+            $("#single-update-days-schedule").val(response.days);
             $("#start-datetime-schedule-update").val(response.start_datetime);
             $("#end-datetime-schedule-update").val(response.end_datetime);
+            $("#single-update-remaining-schedule").val(response.remaining);
             $("#note-schedule-update").val(response.note);
 
             // console.log(response);
@@ -2153,12 +2177,10 @@ var MODAL_FEEDBACK_ADMIN;
                   data: $(form).serializeArray(),
                   success: function (data) {
                     // console.log($(form).serializeArray());
-                    // var datatables = $(
-                    //   "#datatables-schedule-list"
-                    // ).DataTable();
-                    // datatables.ajax.reload();
+                    var datatables = $("#datatables-schedule-list").DataTable();
+                    datatables.ajax.reload();
                     // Close Modal
-                    // $("#modal-update-schedule").modal("hide");
+                    $("#modal-update-schedule").modal("hide");
                   },
                 });
               },
