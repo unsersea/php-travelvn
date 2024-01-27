@@ -382,25 +382,25 @@ label.error {
 }
 
 /* Index | Service | Event | Contact (User) */
-article[article-type="index"] > header[type="top-page"] {
+article > header[type="top-page"] {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-article[article-type="index"] .logo-navbar {
+.logo-navbar {
     width: 45px;
     height: 45px;
 
 }
 
-article[article-type="index"] .logo-name {
+article .logo-name {
     font-family: var(--ff-bruno) !important;
     font-size: 1.125rem;
     margin-left: 0.125rem;
 }
 
-article[article-type="index"] .navbar-menu .navbar-nav .nav-item > a {
+article .navbar-menu .navbar-nav .nav-item > a {
     font-weight: 400;
     font-size: 1rem;
     font-family: var(--ff-poppins) !important;
@@ -492,4 +492,51 @@ body[page="index"] .section.section-promo .container .row .col-element:nth-child
 
 body[page="index"] .section.section-promo .container .row .col-element:nth-child(2) .img-promo {
     border-radius: 6px;
+}
+
+/* Event */
+body[page="event"] .section.section-event {
+    position: relative !important;
+    padding-block-start: 32px;
+    padding-block-end: 32px;
+}
+
+body[page="event"] .section.section-event .container {
+    position: relative;
+    max-width: 1200px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+body[page="event"] .section.section-event .container .row {
+    margin: auto !important;
+}
+
+body[page="event"] .section.section-event .container .row .col-element .card-element {
+    margin: 16px 0;
+}
+
+body[page="event"] .section.section-event .container .row .col-element .card-element img {
+    height: 200px;
+    object-fit: cover;
+}
+
+body[page="event"] .section.section-event .container .row .col-element .card-element .card-body .card-datetime {
+    font-weight: 400 !important;
+    font-size: 0.75rem !important;
+}
+
+body[page="event"] .section.section-event .container .row .col-element .card-element .card-body {
+    padding: 1rem !important;
+}
+
+body[page="event"] .section.section-event .container .row .col-element .card-element .card-body .card-title {
+    font-size: 1rem !important;
+    text-transform: uppercase !important;
+    font-weight: bolder !important;
+}
+
+body[page="event"] .section.section-event .container .row .col-element .card-element .card-body .card-header-text,
+body[page="event"] .section.section-event .container .row .col-element .card-element .card-body .card-header-text p {
+    font-weight: 400 !important;
 }

@@ -210,4 +210,40 @@ class EventClass
 
         return $statement->rowCount();
     }
+
+    // Pagination
+    public static function ReadByPagination()
+    {
+        $conn = connectDB();
+
+        // Check Method
+        if(isset($_GET["page"])) {
+            $page = $_GET["page"];
+        } else {
+            $page = 1;
+        }
+
+        $row_list = 10;
+        $from_list = ($page - 1) * $row_list;
+
+        $sql = "SELECT * FROM `event` ORDER BY `id` DESC LIMIT $from_list, $row_list";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+
+        } else {
+            $array = array();
+
+            while ($row = $result->fetch_assoc()) {
+                $array[] = $row;
+            }
+            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            //     $array = $row;
+            // }
+        }
+
+        disconnectDB($conn);
+        return $array;
+    }
 }
