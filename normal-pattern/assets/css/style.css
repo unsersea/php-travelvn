@@ -450,3 +450,46 @@ table {
 .main-copyright[type="logo"] {
     font-family: var(--ff-bruno) !important;
 }
+
+/* Index */
+body[page="index"] .section.section-fr-why,
+body[page="index"] .section.section-promo {
+    position: relative !important;
+    padding-block-start: 32px;
+    padding-block-end: 32px;
+}
+
+body[page="index"] .section.section-fr-why .container,
+body[page="index"] .section.section-promo .container {
+    position: relative;
+    max-width: 1200px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+body[page="index"] .section.section-fr-why .container .row,
+body[page="index"] .section.section-promo .container .row {
+    margin: auto !important;
+}
+
+body[page="index"] .section.section-fr-why .container .row-center {
+    text-align: center !important;
+}
+
+body[page="index"] .section.section-fr-why .container .col-element i {
+    font-size: 56px !important;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+body[page="index"] .section.section-fr-why .container .col-element p {
+    font-size: 18px !important;
+}
+
+body[page="index"] .section.section-promo .container .row .col-element:nth-child(1) .promo-content {
+    padding: 48px;
+}
+
+body[page="index"] .section.section-promo .container .row .col-element:nth-child(2) .img-promo {
+    border-radius: 6px;
+}

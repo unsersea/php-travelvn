@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../../assets/css/font.css">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <!-- SCSS -->
-<link rel="stylesheet" href="../../assets/scss/style.scss">
+<!-- <link rel="stylesheet" href="../../assets/scss/style.scss"> -->
 
 <!-- Script AjaX -->
 <script type="text/javascript" src="../../assets/js/Load.js"></script>
