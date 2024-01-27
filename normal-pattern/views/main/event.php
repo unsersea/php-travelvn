@@ -9,12 +9,20 @@ include "../../classes/EventClass.php";
 
 session_start();
 
+if (isset($_GET["page"])) {
+    $check_page = $_GET["page"];
+
+    if (empty($check_page)) {
+        return header("Location: ../../views/main/event.php");
+    }
+}
+
 ?>
 
 <?php include "../../views/includes/doctype.php"; ?>
 
 <head>
-    <title>php-travelvn | trang chủ người dùng | v1.0</title>
+    <title>php-travelvn | trang sự kiện người dùng | v1.0</title>
     <?php include "../../views/includes/head-user.php"; ?>
 </head>
 
@@ -29,9 +37,12 @@ session_start();
                 <div class="row row-padding">
                     <?php
 
-                    $list_category = EventClass::Read();
+                    $list_event = EventClass::ReadByPagination();
+                    $list_event_ = EventClass::Read();
 
-                    foreach ($list_category as $row) { ?>
+                    $sum_event = count($list_event_);
+                    $page_event = ceil((int) $sum_event / (int) EventClass::RowEvent());
+                    foreach ($list_event as $row) { ?>
 
                         <div class="col-element col-12 col-lg-4 col-md-6 col-sm-6">
                             <div class="card card-element" type="event" card-id="<?php echo $row["id"]; ?>">
@@ -52,13 +63,32 @@ session_start();
                                         <?php echo $row["header"]; ?>
                                     </div>
                                     <a class="link-event-detail btn btn-primary" link-id="<?php echo $row["id"]; ?>"
-                                        href="../main/event_detail.php?id=<?php echo $row["id"]; ?>">Xem
+                                        href="../main/event_detail.php?v=<?php echo $row["id"]; ?>">Xem
                                         Chi Tiết</a>
                                 </div>
                             </div>
                         </div>
 
                     <?php } ?>
+                </div>
+                <div class="row row-pagination">
+                    <div class="col-pagination col-12">
+                        <nav aria-label="page pagination">
+                            <ul class="pagination">
+                                <?php
+
+                                for ($i = 1; $i <= $page_event; $i++) { ?>
+
+                                    <li class="page-item">
+                                        <a class="page-link" href="../main/event.php?page=<?php echo $i; ?>">
+                                            <?php echo $i; ?>
+                                        </a>
+                                    </li>
+
+                                <?php } ?>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </section>

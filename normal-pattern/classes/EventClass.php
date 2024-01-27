@@ -217,7 +217,7 @@ class EventClass
         $conn = connectDB();
 
         // Check Method
-        if(isset($_GET["page"])) {
+        if (isset($_GET["page"])) {
             $page = $_GET["page"];
         } else {
             $page = 1;
@@ -226,7 +226,7 @@ class EventClass
         $row_list = 10;
         $from_list = ($page - 1) * $row_list;
 
-        $sql = "SELECT * FROM `event` ORDER BY `id` DESC LIMIT $from_list, $row_list";
+        $sql = "SELECT * FROM `event` ORDER BY id DESC LIMIT $from_list, $row_list";
 
         $result = $conn->query($sql);
 
@@ -245,5 +245,9 @@ class EventClass
 
         disconnectDB($conn);
         return $array;
+    }
+
+    public static function RowEvent($row = 10) {
+        return $row;
     }
 }
