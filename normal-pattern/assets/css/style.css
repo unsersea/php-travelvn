@@ -540,3 +540,89 @@ body[page="event"] .section.section-event .container .row .col-element .card-ele
 body[page="event"] .section.section-event .container .row .col-element .card-element .card-body .card-header-text p {
     font-weight: 400 !important;
 }
+
+/* Event Detail */
+body[page="event-detail"] .section.section-event-detail {
+    position: relative !important;
+    padding-block-start: 32px;
+    padding-block-end: 32px;
+}
+
+body[page="event-detail"] .section.section-event-detail .container {
+    position: relative;
+    max-width: 1200px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+body[page="event-detail"] .section.section-event-detail .container .row {
+    margin: auto !important;
+}
+
+body[page="event-detail"] .section.section-event-detail .container .row .content-datetime {
+    font-size: 0.9rem;
+    font-style: italic !important;
+    font-weight: 400;
+}
+
+body[page="event-detail"] .section.section-event-detail .container .row .content-datetime .icon-time {
+    font-size: 1rem;
+}
+
+body[page="event-detail"] .section.section-event-detail .container .row .content-header span p {
+    margin-bottom: 0 !important;
+}
+
+body[page="event-detail"] .section.section-event-detail .container .row .content-thumbnail {
+    padding-block-start: 16px;
+    padding-block-end: 16px;
+}
+
+body[page="event-detail"] .section.section-event-detail .container .row .title-limit {
+    text-transform: uppercase;
+    font-weight: bold !important;
+}
+
+@media (min-width: 1200px) {
+    body[page="event-detail"] .section.section-event-detail .container .row .content-thumbnail img {
+        width: 600px;
+        height: 300px;
+    }
+}
+
+/* Tour */
+body[page="tour"] .section.section-tour {
+    position: relative !important;
+    padding-block-start: 32px;
+    padding-block-end: 32px;
+}
+
+body[page="tour"] .section.section-tour .container {
+    position: relative;
+    max-width: 1200px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+body[page="tour"] .section.section-tour .container .row {
+    margin: auto !important;
+}
+
+body[page="tour"] .section.section-tour .container .row .title-search {
+    text-transform: uppercase;
+    font-weight: bold !important;
+}
+
+body[page="tour"] .section.section-tour .container .row .form-multiple-search-tour label.form-label {
+    text-transform: uppercase;
+    font-weight: bold !important;
+}
+
+body[page="tour"] .section.section-tour .container .row .form-multiple-search-tour .form-check-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+body[page="tour"] .section.section-tour .container .row .form-multiple-search-tour .field-modal {
+    padding: 8px 0;
+}

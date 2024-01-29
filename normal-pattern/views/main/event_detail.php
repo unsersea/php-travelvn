@@ -16,6 +16,8 @@ if (isset($_GET["v"])) {
 
     if ($v != $find_event["id"] || empty($v)) {
         return header("Location: ../../views/main/event.php");
+    } else {
+        $limit_event = EventClass::ReadByLimit();
     }
 
 } else {
@@ -40,7 +42,43 @@ if (isset($_GET["v"])) {
 
         <section class="section section-event-detail">
             <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-8 col-md-12 col-sm-12">
+                        <div class="content">
+                            <span class="content-datetime">
+                                <span class="icon-time">
+                                    <i class="bx bx-time"></i>
+                                </span>
+                                <?php echo $find_event["datetime"]; ?>
+                            </span>
+                            <div class="content-header">
+                                <span><?php echo $find_event["header"]; ?></span>
+                            </div>
+                            <div class="content-thumbnail">
+                                <span>
+                                    <img src="../../upload/thumbnail/<?php echo $find_event["thumbnail"]; ?>" alt="">
+                                </span>
+                            </div>
+                            <div class="content-detail">
+                                <span><?php echo $find_event["content"]; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                        <h5 class="title-limit">Một Số Sự Kiện</h5>
+                        <hr class="hr-line">
+                        <div class="row list-event" type="limit">
+                            <?php 
+                            
+                            foreach ($limit_event as $row) {
+                                ?>
 
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </article>

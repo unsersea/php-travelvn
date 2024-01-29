@@ -247,6 +247,31 @@ class EventClass
         return $array;
     }
 
+    public static function ReadByLimit($limit = 10)
+    {
+        $conn = connectDB();
+
+        $sql = "SELECT * FROM `event` ORDER BY id DESC LIMIT $limit";
+
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+
+        } else {
+            $array = array();
+
+            while ($row = $result->fetch_assoc()) {
+                $array[] = $row;
+            }
+            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            //     $array = $row;
+            // }
+        }
+
+        disconnectDB($conn);
+        return $array;
+    }
+
     public static function RowEvent($row = 10) {
         return $row;
     }

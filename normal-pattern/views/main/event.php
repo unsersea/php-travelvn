@@ -37,6 +37,8 @@ if (isset($_GET["page"])) {
                 <div class="row row-padding">
                     <?php
 
+                    $page = ((isset($_GET['page'])) && ($_GET['page'] != '')) ? $_GET['page'] : 1;
+
                     $list_event = EventClass::ReadByPagination();
                     $list_event_ = EventClass::Read();
 
@@ -75,17 +77,79 @@ if (isset($_GET["page"])) {
                     <div class="col-pagination col-12">
                         <nav aria-label="page pagination">
                             <ul class="pagination">
+
+                                <!-- Check if page_event = 1 -->
                                 <?php
+
+                                if ($page > 1) {
+                                    ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="../main/event.php?page=<?php echo $page - 1; ?>"
+                                            tabindex="-1">
+                                            <i class="bx bx-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">
+                                            <i class="bx bx-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+
+                                ?>
+                                <?php
+                                $show = 0;
 
                                 for ($i = 1; $i <= $page_event; $i++) { ?>
 
+                                    <?php $show++; ?>
+                                    <?php 
+                                    
+                                    if($page == $i) {
+                                        ?>
+                                        <li class="page-item active">
+                                            <a class="page-link">
+                                                <?php echo $i; ?>
+                                            </a>
+                                        </li>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="../main/event.php?page=<?php echo $i; ?>">
+                                                <?php echo $i; ?>
+                                            </a>
+                                        </li>
+                                        <?php
+                                    } ?>
+                                <?php } ?>
+
+                                <?php
+
+                                if ($page_event > $page) {
+                                    ?>
                                     <li class="page-item">
-                                        <a class="page-link" href="../main/event.php?page=<?php echo $i; ?>">
-                                            <?php echo $i; ?>
+                                        <a class="page-link" href="../main/event.php?page=<?php echo $page + 1; ?>"
+                                            tabindex="-1">
+                                            <i class="bx bx-chevron-right"></i>
                                         </a>
                                     </li>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">
+                                            <i class="bx bx-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
 
-                                <?php } ?>
+                                ?>
                             </ul>
                         </nav>
                     </div>
