@@ -218,11 +218,11 @@ class TourClass
         return $array;
     }
 
-    public static function ReadByLimit($limit = 10) 
+    public static function ReadByLimit($limit = 10)
     {
         $conn = connectDB();
 
-        $sql = "SELECT * FROM `event` ORDER BY id DESC LIMIT $limit";
+        $sql = "SELECT * FROM `tour` ORDER BY id DESC LIMIT $limit";
 
         $result = $conn->query($sql);
 
@@ -243,7 +243,7 @@ class TourClass
         return $array;
     }
 
-    public static function RowTour($row = 10) 
+    public static function RowTour($row = 10)
     {
         return $row;
     }

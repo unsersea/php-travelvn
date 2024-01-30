@@ -67,7 +67,7 @@ session_start();
                                             <input type="checkbox" class="form-check-input" name="option-price5"
                                                 id="check-price5">
                                             <span>
-                                                < 10.000.000</span>
+                                                > 10.000.000</span>
                                         </label>
                                     </div>
                                 </div>
@@ -132,6 +132,87 @@ session_start();
                                 </div>
 
                             <?php } ?>
+                        </div>
+                        <div class="row row-pagination">
+                            <div class="col-pagination col-12">
+                                <nav aria-label="page pagination">
+                                    <ul class="pagination">
+
+                                        <!-- Check if page_tour = 1 -->
+                                        <?php
+
+                                        if ($page > 1) {
+                                            ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="../main/tour.php?page=<?php echo $page - 1; ?>"
+                                                    tabindex="-1">
+                                                    <i class="bx bx-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">
+                                                    <i class="bx bx-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        }
+
+                                        ?>
+                                        <?php
+                                        $show = 0;
+
+                                        for ($i = 1; $i <= $page_tour; $i++) { ?>
+
+                                            <?php $show++; ?>
+                                            <?php
+
+                                            if ($page == $i) {
+                                                ?>
+                                                <li class="page-item active">
+                                                    <a class="page-link">
+                                                        <?php echo $i; ?>
+                                                    </a>
+                                                </li>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="../main/tour.php?page=<?php echo $i; ?>">
+                                                        <?php echo $i; ?>
+                                                    </a>
+                                                </li>
+                                                <?php
+                                            } ?>
+                                        <?php } ?>
+
+                                        <?php
+
+                                        if ($page_tour > $page) {
+                                            ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="../main/tour.php?page=<?php echo $page + 1; ?>"
+                                                    tabindex="-1">
+                                                    <i class="bx bx-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">
+                                                    <i class="bx bx-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        }
+
+                                        ?>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
