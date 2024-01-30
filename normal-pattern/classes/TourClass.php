@@ -197,7 +197,7 @@ class TourClass
         $row_list = 10;
         $from_list = ($page - 1) * $row_list;
 
-        $sql = "SELECT * FROM `tour` ORDER BY id DESC LIMIT $from_list, $row_list";
+        $sql = "SELECT * FROM `tour` WHERE `isShow` = '1' ORDER BY id DESC LIMIT $from_list, $row_list";
 
         $result = $conn->query($sql);
 
@@ -222,7 +222,7 @@ class TourClass
     {
         $conn = connectDB();
 
-        $sql = "SELECT * FROM `tour` ORDER BY id DESC LIMIT $limit";
+        $sql = "SELECT * FROM `tour` WHERE `isShow` = '1' ORDER BY id DESC LIMIT $limit";
 
         $result = $conn->query($sql);
 

@@ -36,36 +36,36 @@ session_start();
                                     <label class="form-label">Theo Giá Tiền</label>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price1">
-                                            <input type="checkbox" class="form-check-input" name="option-price1"
-                                                id="check-price1">
+                                            <input type="checkbox" class="form-check-input filter-price"
+                                                name="option-price1" id="check-price1">
                                             <span>0 - 1.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price2">
-                                            <input type="checkbox" class="form-check-input" name="option-price2"
-                                                id="check-price2">
+                                            <input type="checkbox" class="form-check-input filter-price"
+                                                name="option-price2" id="check-price2">
                                             <span>1.000.000 - 3.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price3">
-                                            <input type="checkbox" class="form-check-input" name="option-price3"
-                                                id="check-price3">
+                                            <input type="checkbox" class="form-check-input filter-price"
+                                                name="option-price3" id="check-price3">
                                             <span>3.000.000 - 5.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price4">
-                                            <input type="checkbox" class="form-check-input" name="option-price4"
-                                                id="check-price4">
+                                            <input type="checkbox" class="form-check-input filter-price"
+                                                name="option-price4" id="check-price4">
                                             <span>5.000.000 - 10.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price5">
-                                            <input type="checkbox" class="form-check-input" name="option-price5"
-                                                id="check-price5">
+                                            <input type="checkbox" class="form-check-input filter-price"
+                                                name="option-price5" id="check-price5">
                                             <span>
                                                 > 10.000.000</span>
                                         </label>
@@ -73,7 +73,8 @@ session_start();
                                 </div>
                                 <div class="field-modal">
                                     <label class="form-label">Theo Tên</label>
-                                    <input type="text" name="title" class="form-control" placeholder="Tìm Kiếm">
+                                    <input type="text" name="title" class="form-control" placeholder="Tìm Kiếm"
+                                        id="search-title-ajax">
                                 </div>
                             </form>
                         </div>
@@ -221,6 +222,25 @@ session_start();
     </article>
 
     <?php include "../../views/includes/footer-user.php"; ?>
+
+    <script type="text/javascript">
+        (function () {
+            function filter_data() {
+                var action = "fetch_data_tour";
+                var search_title = $("#search-title-ajax").val();
+                var filter_price = get_filter('filter-price');
+            }
+
+            function get_filter(class_name) {
+                var filter = [];
+                $('.' + class_name + ':checked').each(function () {
+                    filter.push($(this).val());
+                });
+
+                return filter;
+            }
+        })(jQuery);
+    </script>
 </body>
 
 </html>
