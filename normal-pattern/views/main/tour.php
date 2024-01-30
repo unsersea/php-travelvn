@@ -34,6 +34,9 @@ session_start();
                             <form method="POST" class="form-multiple-search-tour" enctype="multipart/form-data">
                                 <div class="field-modal">
                                     <label class="form-label">Theo Giá Tiền</label>
+                                </div>
+                                <!-- <div class="field-modal">
+                                    <label class="form-label">Theo Giá Tiền</label>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price1">
                                             <input type="checkbox" class="form-check-input filter-price"
@@ -70,7 +73,7 @@ session_start();
                                                 > 10.000.000</span>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="field-modal">
                                     <label class="form-label">Theo Tên</label>
                                     <input type="text" name="title" class="form-control" placeholder="Tìm Kiếm"
@@ -81,7 +84,7 @@ session_start();
                         <hr class="hr-line pt-2 pb-2">
                     </div>
                     <div class="col-12 col-lg-9 col-md-12 col-sm-12 p-0">
-                        <div class="row">
+                        <!-- <div class="row row-filter-data">
 
                             <?php
 
@@ -133,13 +136,12 @@ session_start();
                                 </div>
 
                             <?php } ?>
-                        </div>
-                        <div class="row row-pagination">
+                        </div> -->
+                        <!-- <div class="row row-pagination">
                             <div class="col-pagination col-12">
                                 <nav aria-label="page pagination">
                                     <ul class="pagination">
 
-                                        <!-- Check if page_tour = 1 -->
                                         <?php
 
                                         if ($page > 1) {
@@ -214,6 +216,9 @@ session_start();
                                     </ul>
                                 </nav>
                             </div>
+                        </div> -->
+                        <div class="row row-filter-data">
+                            
                         </div>
                     </div>
                 </div>
@@ -225,36 +230,38 @@ session_start();
 
     <script type="text/javascript">
         (function () {
+            filter_data();
+
             function filter_data() {
                 var action = "fetch_data_tour";
                 var search_title = $("#search-title-ajax").val();
-                var filter_price = get_filter('filter-price');
+                // var filter_price = get_filter('filter-price');
                 $.ajax({
                     url: "../includes/ajax/ajax_tour.php",
                     method: "POST",
                     data: {
                         action: action,
                         search_title: search_title,
-                        filter_price: filter_price
+                        // filter_price: filter_price
                     },
                     success: function (data) {
-
+                        $(".row-filter-data").html(data);
                     }
                 });
             }
 
-            function get_filter(class_name) {
-                var filter = [];
-                $('.' + class_name + ':checked').each(function () {
-                    filter.push($(this).val());
-                });
+            // function get_filter(class_name) {
+            //     var filter = [];
+            //     $('.' + class_name + ':checked').each(function () {
+            //         filter.push($(this).val());
+            //     });
 
-                return filter;
-            }
+            //     return filter;
+            // }
 
-            $(".form-check-input.filter-price").click(function () {
-                filter_data();
-            });
+            // $(".form-check-input.filter-price").click(function () {
+            //     filter_data();
+            // });
 
             $("#search-title-ajax").keyup(function () {
                 filter_data();
