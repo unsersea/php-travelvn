@@ -88,54 +88,54 @@ session_start();
 
                             <?php
 
-                            $page = ((isset($_GET['page'])) && ($_GET['page'] != '')) ? $_GET['page'] : 1;
+                            // $page = ((isset($_GET['page'])) && ($_GET['page'] != '')) ? $_GET['page'] : 1;
 
-                            $list_tour = TourClass::ReadByPagination();
-                            $list_tour_ = TourClass::Read();
+                            // $list_tour = TourClass::ReadByPagination();
+                            // $list_tour_ = TourClass::Read();
 
-                            $sum_tour = count($list_tour_);
-                            $page_tour = ceil((int) $sum_tour / (int) TourClass::RowTour());
+                            // $sum_tour = count($list_tour_);
+                            // $page_tour = ceil((int) $sum_tour / (int) TourClass::RowTour());
 
-                            foreach ($list_tour as $row) {
+                            // foreach ($list_tour as $row) {
                                 ?>
 
                                 <div class="col-element col-12 col-xl-4 col-lg-6 col-md-6 col-sm-12 pb-4">
-                                    <div class="card card-element" type="tour" card-id="<?php echo $row["id"]; ?>">
-                                        <img src="../../upload/thumbnail/<?php echo $row["thumbnail"]; ?>" alt=""
+                                    <div class="card card-element" type="tour" card-id="<?php // echo $row["id"]; ?>">
+                                        <img src="../../upload/thumbnail/<?php // echo $row["thumbnail"]; ?>" alt=""
                                             class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-title">
-                                                <?php echo $row["title"]; ?>
+                                                <?php // echo $row["title"]; ?>
                                             </h5>
                                             <hr class="hr-line">
                                             <p class="card-text card-days">
                                                 <i class="bx bx-calendar-week"></i>
                                                 <span>
-                                                    <?php echo "Số Ngày: " . $row["days"]; ?>
+                                                    <?php // echo "Số Ngày: " . $row["days"]; ?>
                                                 </span>
                                             </p>
                                             <p class="card-text card-nos">
                                                 <i class="bx bx-run"></i>
                                                 <span>
-                                                    <?php echo "Số Chỗ: " . $row["number_of_seat"]; ?>
+                                                    <?php // echo "Số Chỗ: " . $row["number_of_seat"]; ?>
                                                 </span>
                                             </p>
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="div-price-total">
                                                     <p class="card-text card-price-total">
-                                                        <?php echo number_format($row["price_total"], 0, ',', ',') . " VNĐ "; ?>
+                                                        <?php // echo number_format($row["price_total"], 0, ',', ',') . " VNĐ "; ?>
                                                     </p>
                                                 </div>
                                                 <div class="div-link">
                                                     <a class="link-tour-detail btn btn-primary btn-sm"
-                                                        link-id="<?php echo $row["id"]; ?>" href="#">Xem Chi Tiết</a>
+                                                        link-id="<?php // echo $row["id"]; ?>" href="#">Xem Chi Tiết</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                            <?php } ?>
+                            <?php // } ?>
                         </div> -->
                         <!-- <div class="row row-pagination">
                             <div class="col-pagination col-12">
@@ -144,16 +144,16 @@ session_start();
 
                                         <?php
 
-                                        if ($page > 1) {
+                                        // if ($page > 1) {
                                             ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="../main/tour.php?page=<?php echo $page - 1; ?>"
+                                                <a class="page-link" href="../main/tour.php?page=<?php // echo $page - 1; ?>"
                                                     tabindex="-1">
                                                     <i class="bx bx-chevron-left"></i>
                                                 </a>
                                             </li>
                                             <?php
-                                        } else {
+                                        // } else {
                                             ?>
                                             <li class="page-item disabled">
                                                 <a class="page-link" href="#" tabindex="-1">
@@ -161,48 +161,48 @@ session_start();
                                                 </a>
                                             </li>
                                             <?php
-                                        }
+                                        // }
 
                                         ?>
                                         <?php
-                                        $show = 0;
+                                        // $show = 0;
 
-                                        for ($i = 1; $i <= $page_tour; $i++) { ?>
+                                        // for ($i = 1; $i <= $page_tour; $i++) { ?>
 
-                                            <?php $show++; ?>
+                                            <?php // $show++; ?>
                                             <?php
 
-                                            if ($page == $i) {
+                                            // if ($page == $i) {
                                                 ?>
                                                 <li class="page-item active">
                                                     <a class="page-link">
-                                                        <?php echo $i; ?>
+                                                        <?php // echo $i; ?>
                                                     </a>
                                                 </li>
                                                 <?php
-                                            } else {
+                                            // } else {
                                                 ?>
                                                 <li class="page-item">
-                                                    <a class="page-link" href="../main/tour.php?page=<?php echo $i; ?>">
-                                                        <?php echo $i; ?>
+                                                    <a class="page-link" href="../main/tour.php?page=<?php // echo $i; ?>">
+                                                        <?php // echo $i; ?>
                                                     </a>
                                                 </li>
                                                 <?php
-                                            } ?>
-                                        <?php } ?>
+                                            // } ?>
+                                        <?php // } ?>
 
                                         <?php
 
-                                        if ($page_tour > $page) {
+                                        // if ($page_tour > $page) {
                                             ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="../main/tour.php?page=<?php echo $page + 1; ?>"
+                                                <a class="page-link" href="../main/tour.php?page=<?php // echo $page + 1; ?>"
                                                     tabindex="-1">
                                                     <i class="bx bx-chevron-right"></i>
                                                 </a>
                                             </li>
                                             <?php
-                                        } else {
+                                        // } else {
                                             ?>
                                             <li class="page-item disabled">
                                                 <a class="page-link" href="#" tabindex="-1">
@@ -210,7 +210,7 @@ session_start();
                                                 </a>
                                             </li>
                                             <?php
-                                        }
+                                        // }
 
                                         ?>
                                     </ul>

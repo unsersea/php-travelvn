@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         foreach ($array as $row) {
             $output = '
                 <div class="col-element col-12 col-xl-4 col-lg-6 col-md-6 col-sm-12 pb-4">
-                    <div class="card card-element" type="tour" card-id="<?php echo $row["id"]; ?>">
+                    <div class="card card-element" type="tour" card-id="'. $row["id"] .'">
                         <img src="../../upload/thumbnail/' . $row["thumbnail"] . '" alt=""
                             class="card-img-top">
                         <div class="card-body">
