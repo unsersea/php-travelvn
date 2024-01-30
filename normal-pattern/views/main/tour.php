@@ -40,7 +40,7 @@ session_start();
                                 <div class="field-modal">
                                     <label class="form-label">Theo Giá Tiền</label>
                                 </div>
-                                <p id="price-show">0 VNĐ - 10.000.000 VNĐ</p>
+                                <p id="price-show" style="font-size: 0.9rem;">0 VNĐ - 10.000.000 VNĐ</p>
                                 <div id="price-range"></div>
                                 <!-- <div class="field-modal">
                                     <label class="form-label">Theo Giá Tiền</label>
