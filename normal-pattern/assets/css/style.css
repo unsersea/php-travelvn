@@ -626,3 +626,38 @@ body[page="tour"] .section.section-tour .container .row .form-multiple-search-to
 body[page="tour"] .section.section-tour .container .row .form-multiple-search-tour .field-modal {
     padding: 8px 0;
 }
+
+body[page="tour"] .section.section-tour .container .row .col-element .card-element img {
+    height: 200px;
+    object-fit: cover;
+}
+
+body[page="tour"] .section.section-tour .container .row .col-element .card-element .card-body {
+    padding: 1rem;
+}
+
+body[page="tour"] .section.section-tour .container .row .col-element .card-element .card-body .card-title {
+    font-size: 1rem;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+
+body[page="tour"] .section.section-tour .container .row .col-element .card-element .card-body .card-days,
+body[page="tour"] .section.section-tour .container .row .col-element .card-element .card-body .card-nos {
+    font-size: 0.9rem !important;
+    font-weight: 400;
+    margin-bottom: 4px !important;
+}
+
+body[page="tour"] .section.section-tour .container .row .col-element .card-element .card-body .card-price-total {
+    font-size: 1.05rem;
+    color: var(--c-red);
+    font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+    body[page="tour"] .section.section-tour .container .row .col-element .card-element img {
+        height: 180px;
+        object-fit: cover;
+    }
+}
