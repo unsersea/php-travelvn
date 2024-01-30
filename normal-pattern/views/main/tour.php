@@ -37,35 +37,35 @@ session_start();
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price1">
                                             <input type="checkbox" class="form-check-input filter-price"
-                                                name="option-price1" id="check-price1">
+                                                name="option-price1" id="check-price1" value="price1">
                                             <span>0 - 1.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price2">
                                             <input type="checkbox" class="form-check-input filter-price"
-                                                name="option-price2" id="check-price2">
+                                                name="option-price2" id="check-price2" value="price2">
                                             <span>1.000.000 - 3.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price3">
                                             <input type="checkbox" class="form-check-input filter-price"
-                                                name="option-price3" id="check-price3">
+                                                name="option-price3" id="check-price3" value="price3">
                                             <span>3.000.000 - 5.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price4">
                                             <input type="checkbox" class="form-check-input filter-price"
-                                                name="option-price4" id="check-price4">
+                                                name="option-price4" id="check-price4" value="price4">
                                             <span>5.000.000 - 10.000.000</span>
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="check-price5">
                                             <input type="checkbox" class="form-check-input filter-price"
-                                                name="option-price5" id="check-price5">
+                                                name="option-price5" id="check-price5" value="price5">
                                             <span>
                                                 > 10.000.000</span>
                                         </label>
@@ -229,6 +229,18 @@ session_start();
                 var action = "fetch_data_tour";
                 var search_title = $("#search-title-ajax").val();
                 var filter_price = get_filter('filter-price');
+                $.ajax({
+                    url: "../includes/ajax/ajax_tour.php",
+                    method: "POST",
+                    data: {
+                        action: action,
+                        search_title: search_title,
+                        filter_price: filter_price
+                    },
+                    success: function (data) {
+
+                    }
+                });
             }
 
             function get_filter(class_name) {
@@ -239,6 +251,14 @@ session_start();
 
                 return filter;
             }
+
+            $(".form-check-input.filter-price").click(function () {
+                filter_data();
+            });
+
+            $("#search-title-ajax").keyup(function () {
+                filter_data();
+            })
         })(jQuery);
     </script>
 </body>
