@@ -302,7 +302,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $output .= '
                     </ul>
                 </nav>
-            </div>        
+            </div>
         ';
 
         echo $output;
