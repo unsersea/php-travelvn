@@ -95,15 +95,15 @@ session_start();
                         <hr class="hr-line pt-2 pb-2">
                     </div>
                     <div class="col-12 col-lg-9 col-md-12 col-sm-12 p-0">
-                        <?php 
+                        <?php
+
+                        // $page = ((isset($_GET['page'])) && ($_GET['page'] != '')) ? $_GET['page'] : 1;
                         
-                            // $page = ((isset($_GET['page'])) && ($_GET['page'] != '')) ? $_GET['page'] : 1;
-
-                            // // $list_tour = TourClass::ReadByPagination();
-                            // $list_tour_ = TourClass::Read();
-
-                            // $sum_tour = count($list_tour_);
-                            // $page_tour = ceil((int) $sum_tour / (int) TourClass::RowTour());
+                        // // $list_tour = TourClass::ReadByPagination();
+                        // $list_tour_ = TourClass::Read();
+                        
+                        // $sum_tour = count($list_tour_);
+                        // $page_tour = ceil((int) $sum_tour / (int) TourClass::RowTour());
                         
                         ?>
                         <div class="row row-filter-data">
@@ -233,9 +233,9 @@ session_start();
                                     </ul>
                                 </nav>
                             </div> -->
-                        </div>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
     </article>
@@ -244,9 +244,10 @@ session_start();
     <script type="text/javascript">
 
         (function () {
-            filter_data();
 
-            function filter_data() {
+            filter_data(1);
+
+            function filter_data(page, query = '', min_price = '', max_price = '') {
                 var action = "fetch_data_tour";
                 var search_title = $("#search-title-ajax").val();
 
@@ -261,6 +262,8 @@ session_start();
                         search_title: search_title,
                         min_price: min_price,
                         max_price: max_price,
+                        page: page,
+                        query: query,
                         // filter_price: filter_price
                     },
                     success: function (data) {
@@ -268,6 +271,7 @@ session_start();
                     }
                 });
             }
+
 
             // function get_filter(class_name) {
             //     var filter = [];
@@ -283,7 +287,11 @@ session_start();
             // });
 
             $("#search-title-ajax").keyup(function () {
-                filter_data();
+                var query = $('#search-title-ajax').val();
+                var min_price = $("#hd-min-price").val();
+                var max_price = $("#hd-max-price").val();
+
+                filter_data(1, query, min_price, max_price);
             });
 
             $("#price-range").slider({
@@ -297,8 +305,22 @@ session_start();
                     $("#hd-min-price").val(ui.values[0]);
                     $("#hd-max-price").val(ui.values[1]);
 
-                    filter_data();
+                    var query = $('#search-title-ajax').val();
+                    var min_price = $("#hd-min-price").val();
+                    var max_price = $("#hd-max-price").val();
+
+                    filter_data(1, query, min_price, max_price);
                 }
+            });
+
+            $(document).on('click', '.page-link', function () {
+                var page = $(this).data('page_number');
+
+                var query = $('#search-title-ajax').val();
+                var min_price = $("#hd-min-price").val();
+                var max_price = $("#hd-max-price").val();
+
+                filter_data(page, query, min_price, max_price);
             });
 
         })(jQuery);
