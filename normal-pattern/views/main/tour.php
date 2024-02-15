@@ -40,7 +40,11 @@ session_start();
                                 <div class="field-modal">
                                     <label class="form-label">Theo Giá Tiền</label>
                                 </div>
-                                <p id="price-show" style="font-size: 0.9rem;">0 VNĐ - 10.000.000 VNĐ</p>
+                                <div class="d-none price-hidden">
+                                    <input type="hidden" id="hd-min-price" value="1000">
+                                    <input type="hidden" id="hd-max-price" value="10000000">
+                                </div>
+                                <p id="price-show" style="font-size: 0.9rem;">10000 VNĐ - 10.000.000 VNĐ</p>
                                 <div id="price-range"></div>
                                 <!-- <div class="field-modal">
                                     <label class="form-label">Theo Giá Tiền</label>
@@ -91,18 +95,24 @@ session_start();
                         <hr class="hr-line pt-2 pb-2">
                     </div>
                     <div class="col-12 col-lg-9 col-md-12 col-sm-12 p-0">
+                        <?php 
+                        
+                            // $page = ((isset($_GET['page'])) && ($_GET['page'] != '')) ? $_GET['page'] : 1;
+
+                            // // $list_tour = TourClass::ReadByPagination();
+                            // $list_tour_ = TourClass::Read();
+
+                            // $sum_tour = count($list_tour_);
+                            // $page_tour = ceil((int) $sum_tour / (int) TourClass::RowTour());
+                        
+                        ?>
+                        <div class="row row-filter-data">
+
+                        </div>
                         <!-- <div class="row row-filter-data">
 
                             <?php
 
-                            // $page = ((isset($_GET['page'])) && ($_GET['page'] != '')) ? $_GET['page'] : 1;
-                            
-                            // $list_tour = TourClass::ReadByPagination();
-                            // $list_tour_ = TourClass::Read();
-                            
-                            // $sum_tour = count($list_tour_);
-                            // $page_tour = ceil((int) $sum_tour / (int) TourClass::RowTour());
-                            
                             // foreach ($list_tour as $row) {
                             ?>
 
@@ -151,16 +161,16 @@ session_start();
 
                                         <?php
 
-                                        // if ($page > 1) {
-                                        ?>
+                                        if ($page > 1) {
+                                            ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="../main/tour.php?page=<?php // echo $page - 1; ?>"
+                                                <a class="page-link" href="../main/tour.php?page=<?php echo $page - 1; ?>"
                                                     tabindex="-1">
                                                     <i class="bx bx-chevron-left"></i>
                                                 </a>
                                             </li>
                                             <?php
-                                            // } else {
+                                        } else {
                                             ?>
                                             <li class="page-item disabled">
                                                 <a class="page-link" href="#" tabindex="-1">
@@ -168,48 +178,48 @@ session_start();
                                                 </a>
                                             </li>
                                             <?php
-                                            // }
-                                            
-                                            ?>
+                                        }
+
+                                        ?>
                                         <?php
                                         // $show = 0;
                                         
-                                        // for ($i = 1; $i <= $page_tour; $i++) { ?>
+                                        for ($i = 1; $i <= $page_tour; $i++) { ?>
 
                                             <?php // $show++; ?>
                                             <?php
 
-                                            // if ($page == $i) {
-                                            ?>
+                                            if ($page == $i) {
+                                                ?>
                                                 <li class="page-item active">
                                                     <a class="page-link">
-                                                        <?php // echo $i; ?>
+                                                        <?php echo $i; ?>
                                                     </a>
                                                 </li>
                                                 <?php
-                                                // } else {
+                                            } else {
                                                 ?>
                                                 <li class="page-item">
-                                                    <a class="page-link" href="../main/tour.php?page=<?php // echo $i; ?>">
-                                                        <?php // echo $i; ?>
+                                                    <a class="page-link" href="../main/tour.php?page=<?php echo $i; ?>">
+                                                        <?php echo $i; ?>
                                                     </a>
                                                 </li>
                                                 <?php
-                                                // } ?>
-                                        <?php // } ?>
+                                            } ?>
+                                        <?php } ?>
 
                                         <?php
 
-                                        // if ($page_tour > $page) {
-                                        ?>
+                                        if ($page_tour > $page) {
+                                            ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="../main/tour.php?page=<?php // echo $page + 1; ?>"
+                                                <a class="page-link" href="../main/tour.php?page=<?php echo $page + 1; ?>"
                                                     tabindex="-1">
                                                     <i class="bx bx-chevron-right"></i>
                                                 </a>
                                             </li>
                                             <?php
-                                            // } else {
+                                        } else {
                                             ?>
                                             <li class="page-item disabled">
                                                 <a class="page-link" href="#" tabindex="-1">
@@ -217,15 +227,12 @@ session_start();
                                                 </a>
                                             </li>
                                             <?php
-                                            // }
-                                            
-                                            ?>
+                                        }
+
+                                        ?>
                                     </ul>
                                 </nav>
-                            </div>
-                        </div> -->
-                        <div class="row row-filter-data">
-
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -234,14 +241,17 @@ session_start();
     </article>
 
     <?php include "../../views/includes/footer-user.php"; ?>
-
     <script type="text/javascript">
+
         (function () {
             filter_data();
 
             function filter_data() {
                 var action = "fetch_data_tour";
                 var search_title = $("#search-title-ajax").val();
+
+                var min_price = $("#hd-min-price").val();
+                var max_price = $("#hd-max-price").val();
                 // var filter_price = get_filter('filter-price');
                 $.ajax({
                     url: "../includes/ajax/ajax_tour.php",
@@ -249,6 +259,8 @@ session_start();
                     data: {
                         action: action,
                         search_title: search_title,
+                        min_price: min_price,
+                        max_price: max_price,
                         // filter_price: filter_price
                     },
                     success: function (data) {
@@ -276,14 +288,19 @@ session_start();
 
             $("#price-range").slider({
                 range: true,
-                min: 0,
+                min: 10000,
                 max: 10000000,
-                values: [0, 10000000],
+                values: [10000, 10000000],
                 step: 100000,
                 stop: function (event, ui) {
                     $("#price-show").html(Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(ui.values[0]).replace("₫", "VNĐ") + ' - ' + Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(ui.values[1]).replace("₫", "VNĐ"));
+                    $("#hd-min-price").val(ui.values[0]);
+                    $("#hd-max-price").val(ui.values[1]);
+
+                    filter_data();
                 }
             });
+
         })(jQuery);
     </script>
 </body>

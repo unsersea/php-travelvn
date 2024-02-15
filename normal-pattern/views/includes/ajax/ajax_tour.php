@@ -23,6 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $sql = "SELECT * FROM `tour` WHERE `isShow` = '1' ";
 
+        // Check Price
+        if (isset($_POST["min_price"], $_POST["max_price"]) && !empty($_POST["min_price"]) && !empty($_POST["max_price"])) {
+            $sql .= " AND `price_total` BETWEEN '" . $_POST["min_price"] . "' AND '" . $_POST["max_price"] . "'";
+        }
+
+        if (isset($_POST["search_title"]) && !empty($_POST["search_title"])) {
+            $sql .= " AND `title` LIKE '%" . $_POST["search_title"] . "%'";
+        }
+
         $sql .= " ORDER BY id DESC LIMIT $from_list, $row_list ";
 
         $result = $conn->query($sql);
@@ -45,10 +54,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // print_r($array);
         // die();
+
+        // $list_tour_ = TourClass::Read();
+
+        // $sum_tour = count($list_tour_);
+        // $page_tour = ceil((int) $sum_tour / (int) TourClass::RowTour());
+
         foreach ($array as $row) {
             $output = '
                 <div class="col-element col-12 col-xl-4 col-lg-6 col-md-6 col-sm-12 pb-4">
-                    <div class="card card-element" type="tour" card-id="'. $row["id"] .'">
+                    <div class="card card-element" type="tour" card-id="' . $row["id"] . '">
                         <img src="../../upload/thumbnail/' . $row["thumbnail"] . '" alt=""
                             class="card-img-top">
                         <div class="card-body">
@@ -85,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ';
             echo $output;
         }
+
         disconnectDB($conn);
     }
 }
