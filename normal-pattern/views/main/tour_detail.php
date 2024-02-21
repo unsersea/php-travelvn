@@ -153,8 +153,24 @@ if (isset($_GET["v"])) {
                                     </tr>
                                 </table>
                             </div>
+                            <div class="button-modal-booking">
+                                <a href="#" data-id="" data-toggle="modal" data-target="#modal-create-booking" class="btn btn-primary">
+                                    <i class="bx bx-notepad"></i>
+                                    Đặt Tour
+                                </a>
+                                <a href="../main/tour.php" class="btn btn-danger">
+                                    <i class="bx bx-arrow-back"></i>
+                                    Quay Lại
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    <!-- <div class="col-12 col-lg-12 col-md-12 col-sm-12 pb-4">
+                        <div class="content">
+                            <div class="content-detail">
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </section>
