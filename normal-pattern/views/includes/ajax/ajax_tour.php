@@ -172,13 +172,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <p class="card-text card-days">
                                     <i class="bx bx-calendar-week"></i>
                                     <span>
-                                        Số Ngày:' . $row["days"] . '
+                                        Số Ngày: ' . $row["days"] . '
                                     </span>
                                 </p>
                                 <p class="card-text card-nos">
                                     <i class="bx bx-run"></i>
                                     <span>
-                                        Số Chỗ:' . $row["number_of_seat"] . '
+                                        Số Chỗ: ' . $row["number_of_seat"] . '
                                     </span>
                                 </p>
                                 <div class="d-flex align-items-center justify-content-between">
@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </div>
                                     <div class="div-link">
                                         <a class="link-tour-detail btn btn-primary btn-sm"
-                                            link-id="' . $row["id"] . '" href="#">Xem Chi Tiết</a>
+                                            link-id="' . $row["id"] . '" href="../main/tour_detail?v=' . $row["id"] . '">Xem Chi Tiết</a>
                                     </div>
                                 </div>
                             </div>

@@ -661,3 +661,36 @@ body[page="tour"] .section.section-tour .container .row .col-element .card-eleme
         object-fit: cover;
     }
 }
+
+/* Tour Detail */
+body[page="tour-detail"] .section.section-tour-detail {
+    position: relative !important;
+    padding-block-start: 32px;
+    padding-block-end: 32px;
+}
+
+body[page="tour-detail"] .section.section-tour-detail .container {
+    position: relative;
+    max-width: 1200px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+body[page="tour-detail"] .section.section-tour-detail .container .row {
+    margin: auto !important;
+}
+
+body[page="tour-detail"] .section.section-tour-detail .container .row .content-title span {
+    font-weight: bold !important;
+    font-size: 1.325rem !important;
+    text-transform: uppercase !important;
+}
+
+body[page="tour-detail"] .section.section-tour-detail .container .row .content-create-at {
+    margin-bottom: 0.5rem !important;
+}
+
+body[page="tour-detail"] .section.section-tour-detail .container .row .content-create-at span {
+    font-size: 0.9rem !important;
+    font-style: italic !important;
+}
