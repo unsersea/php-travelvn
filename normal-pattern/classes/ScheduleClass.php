@@ -124,6 +124,30 @@ class ScheduleClass
         return $array;
     }
 
+    public static function FindByTourId($tour_id)
+    {
+        $conn = connectDB();
+
+        $sql = "SELECT * FROM `schedule` WHERE `tour_id` = '$tour_id'";
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+
+        } else {
+            $array = array();
+
+            while ($row = $result->fetch_assoc()) {
+                $array = $row;
+            }
+            // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            //     $array = $row;
+            // }
+        }
+
+        disconnectDB($conn);
+        return $array;
+    }
+
     public static function JsonEncodeFindById($id)
     {
         $conn = connectDB();

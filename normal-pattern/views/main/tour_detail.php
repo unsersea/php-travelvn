@@ -5,17 +5,20 @@ include "../../config/database.php";
 include "../../classes/AuthClass.php";
 // Include Tour / Location / Booking
 include "../../classes/TourClass.php";
+include "../../classes/ScheduleClass.php";
 include "../../classes/LocationClass.php";
 include "../../classes/BookingClass.php";
 
 session_start();
 
-if (isset($_GET["v"])) { 
+if (isset($_GET["v"])) {
     $v = $_GET["v"];
 
     $find_tour = TourClass::FindById($v);
-    
+
     $find_location = LocationClass::FindById($find_tour["location_id"]);
+
+    $find_schedule = ScheduleClass::FindByTourId($v);
 
     if ($v != $find_tour["id"] || empty($v)) {
         return header("Location: ../../views/main/tour.php");
@@ -49,7 +52,7 @@ if (isset($_GET["v"])) {
 
     <article class="article" article-type="tour-detail">
         <?php include "../../views/includes/user/navbar.php"; ?>
-        
+
         <section class="section section-tour-detail">
             <div class="container">
                 <div class="row">
@@ -74,23 +77,55 @@ if (isset($_GET["v"])) {
                     <div class="col-12 col-lg-7 col-md-12 col-sm-12 pb-4">
                         <div class="content">
                             <div class="content-title">
-                                <span><?php echo $find_tour["title"]; ?></span>
+                                <span>
+                                    <?php echo $find_tour["title"]; ?>
+                                </span>
                             </div>
                             <hr class="hr-line">
                             <div class="content-create-at">
-                                <span><?php echo $find_tour["create_at"]; ?></span>
+                                <span>
+                                    <?php echo $find_tour["create_at"]; ?>
+                                </span>
                             </div>
                             <div class="content-days">
                                 <i class="bx bx-calendar-week"></i>
-                                <span><?php echo "Số Ngày: " . $find_tour["days"]; ?></span>
+                                <span>
+                                    <?php echo "Số Ngày: " . $find_tour["days"]; ?>
+                                </span>
                             </div>
                             <div class="content-nos">
                                 <i class="bx bx-run"></i>
-                                <span><?php echo "Số Chỗ: " . $find_tour["number_of_seat"] ?></span>
+                                <span>
+                                    <?php echo "Số Chỗ: " . $find_tour["number_of_seat"]; ?>
+                                </span>
                             </div>
                             <div class="content-location-id">
                                 <i class="bx bx-globe"></i>
-                                <span><?php echo "Khu Vực: " . $find_location["city"] ?></span>
+                                <span>
+                                    <?php echo "Khu Vực: " . $find_location["city"]; ?>
+                                </span>
+                            </div>
+                            <div class="content-schedule-status">
+
+                                <?php
+
+                                if (empty($find_schedule)) {
+                                    ?>
+                                    <div>
+                                        <i class="bx bx-calendar-alt"></i> Trạng Thái Lịch Trình:
+                                        <span class="badge badge-danger">Không Thể Đặt</span>
+                                    </div>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <div>
+                                        <i class="bx bx-calendar-alt"></i> Trạng Thái Lịch Trình:
+                                        <span class="badge badge-success">Có Thể Đặt</span>
+                                    </div>
+                                    <?php
+                                }
+
+                                ?>
                             </div>
                             <div class="content-table-price table-responsive pt-2 pb-2">
                                 <table class="table table-striped table-bordered table-sm">
@@ -100,15 +135,21 @@ if (isset($_GET["v"])) {
                                     </tr>
                                     <tr>
                                         <td>Người Lớn</td>
-                                        <td><?php echo number_format($find_tour["price_person"], 0, '', ',') . " VNĐ"; ?></td>
+                                        <td>
+                                            <?php echo number_format($find_tour["price_person"], 0, '', ',') . " VNĐ"; ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Trẻ Em</td>
-                                        <td><?php echo number_format($find_tour["price_children"], 0, '', ',') . " VNĐ"; ?></td>
+                                        <td>
+                                            <?php echo number_format($find_tour["price_children"], 0, '', ',') . " VNĐ"; ?>
+                                        </td>
                                     </tr>
                                     <tr class="tr-total">
                                         <td>Tổng Giá</td>
-                                        <td><?php echo number_format($find_tour["price_total"], 0, '', ',') . " VNĐ"; ?></td>
+                                        <td>
+                                            <?php echo number_format($find_tour["price_total"], 0, '', ',') . " VNĐ"; ?>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -117,7 +158,7 @@ if (isset($_GET["v"])) {
                 </div>
             </div>
         </section>
-        
+
     </article>
 
     <?php include "../../views/includes/footer-user.php"; ?>
