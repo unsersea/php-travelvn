@@ -137,7 +137,7 @@ class ScheduleClass
             $array = array();
 
             while ($row = $result->fetch_assoc()) {
-                $array = $row;
+                $array[] = $row;
             }
             // while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             //     $array = $row;

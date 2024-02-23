@@ -38,11 +38,16 @@ if (isset($_GET["v"])) {
 <head>
     <title>php-travelvn | trang sản phẩm chi tiết | v1.0</title>
     <?php include "../../views/includes/head-user.php"; ?>
+
     <style>
         body[page="tour-detail"] .section.section-tour-detail .content-table-price .tr-total td {
             font-size: 1rem !important;
             font-weight: bold !important;
             color: #d93025 !important;
+        }
+
+        label:not(.form-check-label):not(.custom-file-label) {
+            font-weight: 700 !important;
         }
     </style>
 </head>
@@ -154,10 +159,20 @@ if (isset($_GET["v"])) {
                                 </table>
                             </div>
                             <div class="button-modal-booking">
-                                <a href="#" data-id="" data-toggle="modal" data-target="#modal-create-booking" class="btn btn-primary">
-                                    <i class="bx bx-notepad"></i>
-                                    Đặt Tour
-                                </a>
+                                <?php
+
+                                if (!empty($find_schedule)) {
+                                    ?>
+                                    <a href="#" data-id="" data-toggle="modal" data-target="#modal-create-booking"
+                                        class="btn btn-primary">
+                                        <i class="bx bx-notepad"></i>
+                                        Đặt Tour
+                                    </a>
+                                    <?php
+                                } else {
+
+                                }
+                                ?>
                                 <a href="../main/tour.php" class="btn btn-danger">
                                     <i class="bx bx-arrow-back"></i>
                                     Quay Lại
@@ -176,6 +191,73 @@ if (isset($_GET["v"])) {
         </section>
 
     </article>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-create-booking" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="../../views/main/tour_detail.php" id="form-create-booking" class="form form-modal" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ex-modal-label">Đặt Tour</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                <i class="bx bx-x"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="field-modal">
+                            <label class="form-label">Tựa Đề</label>
+                            <input type="text" name="title" class="form-control"
+                                value="<?php echo $find_tour["title"]; ?>" readonly="true">
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Giá Người Lớn</label>
+                            <input type="text" name="price_person" id="price_person_booking_create" class="form-control"
+                                value=<?php echo $find_tour["price_person"]; ?>>
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Giá Trẻ Em</label>
+                            <input type="text" name="price_children" id="price_children_booking_create"
+                                class="form-control" value=<?php echo $find_tour["price_children"]; ?>>
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Số Lượng Người Lớn</label>
+                            <input type="number" name="amount_person" class="form-control" min="1" value="1">
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Số Lượng Trẻ Em</label>
+                            <input type="number" name="amount_children" class="form-control" min="1" value="1">
+                        </div>
+                        <div class="field-modal">
+                            <label class="form-label">Lịch Trình</label>
+                            <select name="schedule_id" id="select2-schedule-booking-create"
+                                class="form-control select2bs4-schedule-booking-create">
+                                <option value=""></option>
+                                <?php
+
+                                foreach ($find_schedule as $row_schedule) {
+                                    ?>
+                                    <option data-select-id="<?php echo $row_schedule["schedule_id"]; ?>"
+                                        value="<?php echo $row_schedule["schedule_id"]; ?>">
+                                        <?php echo $row_schedule["start_datetime"]; ?>
+                                    </option>
+                                    <?php
+                                }
+
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary" value="submit_booking_create" name="action">Xác
+                            Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <?php include "../../views/includes/footer-user.php"; ?>
 </body>

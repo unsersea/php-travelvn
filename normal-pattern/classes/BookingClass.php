@@ -18,7 +18,7 @@ class BookingClass
     // public $id
 
     // Booking
-    public $payment_method, $note, $datetime, $total_price_children, $total_price_person, $amount_children, $amount_person, $status, $isShow;
+    public $payment_method, $note, $datetime, $total_price_children, $total_price_person, $amount_children, $amount_person, $total_all, $status, $isShow;
 
     // Foreign Key
     public $account_id, $schedule_id;
@@ -26,7 +26,7 @@ class BookingClass
     /**
      * Construct
      */
-    public function __construct($payment_method, $note, $datetime, $total_price_children, $total_price_person, $amount_children, $amount_person, $status, $isShow, $account_id, $schedule_id)
+    public function __construct($payment_method, $note, $datetime, $total_price_children, $total_price_person, $amount_children, $amount_person, $total_all, $status, $isShow, $account_id, $schedule_id)
     {
         $this->payment_method = $payment_method;
         $this->note = $note;
@@ -35,6 +35,7 @@ class BookingClass
         $this->total_price_person = $total_price_person;
         $this->amount_children = $amount_children;
         $this->amount_person = $amount_person;
+        $this->total_all = $total_all;
         $this->status = $status;
         $this->isShow = $isShow;
         $this->account_id = $account_id;
@@ -46,8 +47,8 @@ class BookingClass
     {
         $conn = connectDB();
 
-        $sql = "INSERT INTO `booking` (`payment_method`, `note`, `datetime`, `total_price_children`, `total_price_person`, `amount_children`, `amount_person`, `status`, `isShow`, `account_id`, `schedule_id`) 
-                VALUES ('$bookingClass->payment_method', '$bookingClass->note', '$bookingClass->datetime', '$bookingClass->total_price_children', '$bookingClass->total_price_person', '$bookingClass->amount_children', '$bookingClass->amount_person', '$bookingClass->status', '$bookingClass->isShow', '$bookingClass->account_id', '$bookingClass->schedule_id')";
+        $sql = "INSERT INTO `booking` (`payment_method`, `note`, `datetime`, `total_price_children`, `total_price_person`, `amount_children`, `amount_person`, `total_all`, `status`, `isShow`, `account_id`, `schedule_id`) 
+                VALUES ('$bookingClass->payment_method', '$bookingClass->note', '$bookingClass->datetime', '$bookingClass->total_price_children', '$bookingClass->total_price_person', '$bookingClass->amount_children', '$bookingClass->amount_person', '$bookingClass->total_all', '$bookingClass->status', '$bookingClass->isShow', '$bookingClass->account_id', '$bookingClass->schedule_id')";
 
         $result = $conn->query($sql);
 
