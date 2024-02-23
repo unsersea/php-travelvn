@@ -151,7 +151,7 @@ if (isset($_GET["v"])) {
                                         </td>
                                     </tr>
                                     <tr class="tr-total">
-                                        <td>Tổng Giá</td>
+                                        <td>Chuyến Du Lịch</td>
                                         <td>
                                             <?php echo number_format($find_tour["price_total"], 0, '', ',') . " VNĐ"; ?>
                                         </td>
@@ -196,7 +196,8 @@ if (isset($_GET["v"])) {
     <div class="modal fade" id="modal-create-booking" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="../../views/main/tour_detail.php" id="form-create-booking" class="form form-modal" enctype="multipart/form-data">
+                <form action="../../views/main/tour_detail.php" id="form-create-booking" class="form form-modal"
+                    enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ex-modal-label">Đặt Tour</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -214,20 +215,24 @@ if (isset($_GET["v"])) {
                         <div class="field-modal">
                             <label class="form-label">Giá Người Lớn</label>
                             <input type="text" name="price_person" id="price_person_booking_create" class="form-control"
-                                value=<?php echo $find_tour["price_person"]; ?>>
+                                value="<?php echo number_format($find_tour["price_person"], 0, '', ',') . " VNĐ"; ?>"
+                                readonly="true">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Giá Trẻ Em</label>
-                            <input type="text" name="price_children" id="price_children_booking_create"
-                                class="form-control" value=<?php echo $find_tour["price_children"]; ?>>
+                            <input type="text" name="price_children" id="price_children_booking_create" class="form-control"
+                                value="<?php echo number_format($find_tour["price_children"], 0, '', ',') . " VNĐ"; ?>"
+                                readonly="true">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Số Lượng Người Lớn</label>
-                            <input type="number" name="amount_person" class="form-control" min="1" value="1">
+                            <input type="number" name="amount_person" id="amount_person" class="form-control" min="1"
+                                value="1">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Số Lượng Trẻ Em</label>
-                            <input type="number" name="amount_children" class="form-control" min="1" value="1">
+                            <input type="number" name="amount_children" id="amount_children" class="form-control"
+                                min="1" value="1">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Lịch Trình</label>
@@ -247,6 +252,13 @@ if (isset($_GET["v"])) {
 
                                 ?>
                             </select>
+                        </div>
+                        <hr class="hr-line">
+                        <div class="field-modal field-total">
+                            <div class="cal-total-price-person" id="cal-total-price-person"></div>
+                            <div class="cal-total-price-children" id="cal-total-price-children"></div>
+                            <div class="cal-total-price" id="cal-total-price"></div>
+                            <div class="cal-total-all" id="cal-total-all"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
