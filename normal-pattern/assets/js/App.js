@@ -21,17 +21,14 @@ var CHANGE_AMOUNT;
   CHANGE_AMOUNT = function change_amount() {
     var amount_children = $("#amount_children");
 
-    var price_children = $("#price_children_booking_create")
+    var price_children = $("#price_children_booking_create");
 
     // Total Person
-    $("#cal-total-price-person").change(function() {
+    $("#cal-total-price-person").change(function () {
       var amount_person = $("#amount_person");
       var price_person = $("#price_person_booking_create");
-
-      
     });
-
-  }
+  };
 })(jQuery);
 
 SELECT2_BOOTSTRAP4_US();
