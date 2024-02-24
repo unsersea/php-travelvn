@@ -10,7 +10,7 @@ var CHANGE_AMOUNT;
           theme: "bootstrap4",
           placeholder: "Chọn Lịch Trình",
           allowClear: true,
-          dropdownParent: $("#modal-create-booking"),
+          // dropdownParent: $("#modal-create-booking"),
         });
       } catch (ex) {
         return console.log(ex);
@@ -19,13 +19,15 @@ var CHANGE_AMOUNT;
   };
 
   CHANGE_AMOUNT = function change_amount() {
-    var amount_person = $("#amount_person");
     var amount_children = $("#amount_children");
 
-    var price_person = $("#price_person_booking_create");
     var price_children = $("#price_children_booking_create")
 
-    $(amount_children, amount_person).change(function() {
+    // Total Person
+    $("#cal-total-price-person").change(function() {
+      var amount_person = $("#amount_person");
+      var price_person = $("#price_person_booking_create");
+
       
     });
 

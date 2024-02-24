@@ -220,7 +220,8 @@ if (isset($_GET["v"])) {
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Giá Trẻ Em</label>
-                            <input type="text" name="price_children" id="price_children_booking_create" class="form-control"
+                            <input type="text" name="price_children" id="price_children_booking_create"
+                                class="form-control"
                                 value="<?php echo number_format($find_tour["price_children"], 0, '', ',') . " VNĐ"; ?>"
                                 readonly="true">
                         </div>
@@ -255,10 +256,27 @@ if (isset($_GET["v"])) {
                         </div>
                         <hr class="hr-line">
                         <div class="field-modal field-total">
-                            <div class="cal-total-price-person" id="cal-total-price-person"></div>
-                            <div class="cal-total-price-children" id="cal-total-price-children"></div>
-                            <div class="cal-total-price" id="cal-total-price"></div>
-                            <div class="cal-total-all" id="cal-total-all"></div>
+                            <div class="div-total">
+                                <label class="form-label">Tổng Giá Người Lớn:</label>
+                                <input type="text" name="cal-total-price-person" id="cal-total-price-person"
+                                    class="form-control" readonly="true">
+                            </div>
+                            <div class="div-total">
+                                <label class="form-label">Tổng Giá Trẻ Em:</label>
+                                <input type="text" name="cal-total-price-children" id="cal-total-price-children"
+                                    class="form-control" readonly="true">
+                            </div>
+                            <div class="div-total">
+                                <label class="form-label">Giá Chuyến Du Lịch:</label>
+                                <input type="text" name="cal-total-price" id="cal-total-price" class="form-control"
+                                    value="<?php echo number_format($find_tour["price_total"], 0, '', ',') . " VNĐ"; ?>"
+                                    readonly="true">
+                            </div>
+                            <div class="div-total">
+                                <label class="form-label">Tổng Thành Tiền:</label>
+                                <input type="text" name="cal-total-all" id="cal-total-all" class="form-control"
+                                    readonly="true">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
