@@ -213,27 +213,32 @@ if (isset($_GET["v"])) {
                                 value="<?php echo $find_tour["title"]; ?>" readonly="true">
                         </div>
                         <div class="field-modal">
+                            <label class="form-label">Số Chỗ</label>
+                            <input type="text" name="number_of_seat" class="form-control"
+                                value="<?php echo $find_tour["number_of_seat"]; ?>" readonly="true">
+                        </div>
+                        <div class="field-modal">
                             <label class="form-label">Giá Người Lớn</label>
                             <input type="text" name="price_person" id="price_person_booking_create" class="form-control"
-                                value="<?php echo number_format($find_tour["price_person"], 0, '', ',') . " VNĐ"; ?>"
+                                value="<?php echo number_format($find_tour["price_person"], 0, '', ',')?> VNĐ"
                                 readonly="true">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Giá Trẻ Em</label>
                             <input type="text" name="price_children" id="price_children_booking_create"
                                 class="form-control"
-                                value="<?php echo number_format($find_tour["price_children"], 0, '', ',') . " VNĐ"; ?>"
+                                value="<?php echo number_format($find_tour["price_children"], 0, '', ',') ?> VNĐ"
                                 readonly="true">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Số Lượng Người Lớn</label>
-                            <input type="number" name="amount_person" id="amount_person" class="form-control" min="1"
+                            <input type="number" name="amount_person" id="amount_person" class="form-control" min="1" max="50"
                                 value="1">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Số Lượng Trẻ Em</label>
                             <input type="number" name="amount_children" id="amount_children" class="form-control"
-                                min="1" value="1">
+                                min="1" max="100" value="1">
                         </div>
                         <div class="field-modal">
                             <label class="form-label">Lịch Trình</label>
@@ -259,23 +264,23 @@ if (isset($_GET["v"])) {
                             <div class="div-total">
                                 <label class="form-label">Tổng Giá Người Lớn:</label>
                                 <input type="text" name="cal-total-price-person" id="cal-total-price-person"
-                                    class="form-control" readonly="true">
+                                    class="form-control" readonly="true" value="<?php echo number_format($find_tour["price_person"], 0, '', ',')?> VNĐ">
                             </div>
                             <div class="div-total">
                                 <label class="form-label">Tổng Giá Trẻ Em:</label>
                                 <input type="text" name="cal-total-price-children" id="cal-total-price-children"
-                                    class="form-control" readonly="true">
+                                    class="form-control" readonly="true" value="<?php echo number_format($find_tour["price_children"], 0, '', ',')?> VNĐ"">
                             </div>
                             <div class="div-total">
                                 <label class="form-label">Giá Chuyến Du Lịch:</label>
                                 <input type="text" name="cal-total-price" id="cal-total-price" class="form-control"
-                                    value="<?php echo number_format($find_tour["price_total"], 0, '', ',') . " VNĐ"; ?>"
+                                    value="<?php echo number_format($find_tour["price_total"], 0, '', ','); ?> VNĐ"
                                     readonly="true">
                             </div>
                             <div class="div-total">
                                 <label class="form-label">Tổng Thành Tiền:</label>
                                 <input type="text" name="cal-total-all" id="cal-total-all" class="form-control"
-                                    readonly="true">
+                                    readonly="true" value="<?php echo number_format($find_tour["price_total"] + ($find_tour["price_person"]*1) + ($find_tour["price_children"]*1), 0, '', ','); ?> VNĐ">
                             </div>
                         </div>
                     </div>
