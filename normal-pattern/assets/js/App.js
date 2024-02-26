@@ -5,6 +5,7 @@ const URL_ACTION_VALIDATE = "../../views/action/";
 
 // var SELECT2;
 var SELECT2_BOOTSTRAP4_US;
+var SELECT2_BOOTSTRAP4_US_;
 var CHANGE_TOTAL;
 var MODAL_BOOKING_USER;
 var AMOUNT_VALIDATE;
@@ -76,6 +77,21 @@ Number.prototype.format = function (n, x) {
         return $("#select2-schedule-booking-create").select2({
           theme: "bootstrap4",
           placeholder: "Chọn Lịch Trình",
+          allowClear: true,
+          // dropdownParent: $("#modal-create-booking"),
+        });
+      } catch (ex) {
+        return console.log(ex);
+      }
+    }
+  };
+
+  SELECT2_BOOTSTRAP4_US_ = function select2bs4us_() {
+    if (document.querySelector("#select2-payment-method-booking")) {
+      try {
+        return $("#select2-payment-method-booking").select2({
+          theme: "bootstrap4",
+          placeholder: "Chọn Hình Thức Thanh Toán",
           allowClear: true,
           // dropdownParent: $("#modal-create-booking"),
         });
@@ -184,6 +200,9 @@ Number.prototype.format = function (n, x) {
         schedule_id: {
           required: true,
         },
+        payment_method: {
+          required: true,
+        },
       },
       messages: {
         // number_of_seat: {
@@ -201,10 +220,23 @@ Number.prototype.format = function (n, x) {
         schedule_id: {
           required: "*Bạn Chưa Chọn Lịch Trình",
         },
+        payment_method: {
+          required: "*Bạn Chưa Chọn Hình Thức Thanh Toán",
+        },
       },
       errorPlacement: function (error, element) {
         if (element.attr("name") == "schedule_id") {
-          error.insertAfter("#modal-create-booking span.select2");
+          error.insertAfter(
+            "#modal-create-booking .field-schedule span.select2"
+          );
+        } else {
+          error.insertAfter(element);
+        }
+
+        if (element.attr("name") == "payment_method") {
+          error.insertAfter(
+            "#modal-create-booking .field-payment-method span.select2"
+          );
         } else {
           error.insertAfter(element);
         }
@@ -218,7 +250,9 @@ Number.prototype.format = function (n, x) {
           processData: false,
           // dataType: "json",
           // cache : false,
-          success: function (data) {},
+          success: function (data) {
+            // return location.href = "../../views/main/index.php";
+          },
         });
       },
     });
@@ -227,5 +261,6 @@ Number.prototype.format = function (n, x) {
 
 // AMOUNT_VALIDATE();
 SELECT2_BOOTSTRAP4_US();
+SELECT2_BOOTSTRAP4_US_();
 CHANGE_TOTAL();
 MODAL_BOOKING_USER();

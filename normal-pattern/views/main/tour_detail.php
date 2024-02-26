@@ -214,6 +214,11 @@ if (isset($_GET["v"])) {
                         </button>
                     </div>
                     <div class="modal-body">
+                        <!-- <div class="field-modal d-none">
+                            <label class="form-label">Mã Tour</label>
+                            <input type="hidden" name="tour_id" class="form-control"
+                                value="<?php echo $find_tour["id"]; ?>" readonly="true">
+                        </div> -->
                         <div class="field-modal">
                             <label class="form-label">Tựa Đề</label>
                             <input type="text" name="title" class="form-control"
@@ -248,6 +253,10 @@ if (isset($_GET["v"])) {
                                 class="form-control three-values-amount" min="1" max="1000" value="1">
                         </div>
                         <div class="field-modal">
+                            <label class="form-label">Ghi Chú</label>
+                            <textarea name="note" rows="4" class="form-control"></textarea>
+                        </div>
+                        <div class="field-modal field-schedule">
                             <label class="form-label">Lịch Trình</label>
                             <select name="schedule_id" id="select2-schedule-booking-create"
                                 class="form-control select2bs4-schedule-booking-create">
@@ -264,6 +273,15 @@ if (isset($_GET["v"])) {
                                 }
 
                                 ?>
+                            </select>
+                        </div>
+                        <div class="field-modal field-payment-method">
+                            <label class="form-label">Hình Thức Thanh Toán</label>
+                            <select name="payment_method" id="select2-payment-method-booking"
+                                class="form-control select2bs4-payment-method-booking">
+                                <option value=""></option>
+                                <option data-select-id="Trực Tiếp" value="Trực Tiếp">Trực Tiếp</option>
+                                <option data-select-id="Momo" value="Momo">Thanh Toán Momo</option>
                             </select>
                         </div>
                         <hr class="hr-line">
