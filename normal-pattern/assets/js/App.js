@@ -26,6 +26,50 @@ Number.prototype.format = function (n, x) {
   //   });
   // };
 
+  // AMOUNT_VALIDATE = function amount_validate() {
+  //   jQuery.validator.addMethod("maxAmount", function(value, element, param) {
+
+  //       var amount_person = $("#form-create-booking #amount_person").val();
+  //       var amount_children = $("#form-create-booking #amount_children").val();
+  //       var total_amount = (Number(amount_person) + Number(amount_children));
+
+  //       return total_amount <= param;
+
+  //   }, "*Số Lượng Vượt Quá Mức Số Chỗ");
+  // }
+
+  // AMOUNT_VALIDATE = function amount_validate() {
+
+  // };
+  // jQuery.validator.addMethod(
+  //   "amountLimit",
+  //   function (value, element, params) {
+  //     var $element = $("#form-create-booking .three-values-amount");
+
+  //     var number_of_seat_amount = $element.eq(0).val();
+  //     var person_amount = $element.eq(1).val();
+  //     var children_amount = $element.eq(2).val();
+
+  //     var isValid;
+
+  //     $.ajax({
+  //       url: "../../../normal-pattern/views/includes/validate/booking/validate_number_of_seat.php",
+  //       type: TYPE_POST,
+  //       data: {
+  //         values: [number_of_seat_amount, person_amount, children_amount],
+  //       },
+  //       // dataType: "json",
+  //       success: function (response) {
+  //         // Assuming the server response is a boolean indicating validity
+  //         isValid = response;
+  //       },
+  //     });
+
+  //     return isValid;
+  //   },
+  //   "*Số Lượng Vượt Quá Mức Số Chỗ"
+  // );
+
   SELECT2_BOOTSTRAP4_US = function select2bs4us() {
     if (document.querySelector("#select2-schedule-booking-create")) {
       try {
@@ -86,10 +130,7 @@ Number.prototype.format = function (n, x) {
   };
 
   MODAL_BOOKING_USER = function modal_booking_user() {
-
-    // var amount_person = $("#form-create-booking #amount_person").val();
-    // var amount_children = $("#form-create-booking #amount_children").val();
-    // var total_amount = (Number(amount_person) + Number(amount_children));
+    // var number_of_seat = Number($("#form-create-booking #number_of_seat").val());
 
     // var nos = Number($("#form-create-booking #number_of_seat").val());
     // Create
@@ -114,16 +155,48 @@ Number.prototype.format = function (n, x) {
           // range: [
           //   total_amount, nos
           // ]
+
+          // maxAmount: number_of_seat,
+
+          // amountLimit: true,
+          remote: {
+            url: "../../../normal-pattern/views/includes/validate/booking/validate_number_of_seat.php",
+            type: TYPE_POST,
+            data: {
+              number_of_seat: function () {
+                return $(
+                  "#form-create-booking :input[name='number_of_seat']"
+                ).val();
+              },
+              amount_person: function () {
+                return $(
+                  "#form-create-booking :input[name='amount_person']"
+                ).val();
+              },
+              amount_children: function () {
+                return $(
+                  "#form-create-booking :input[name='amount_children']"
+                ).val();
+              },
+            },
+          },
         },
         schedule_id: {
           required: true,
         },
       },
       messages: {
+        // number_of_seat: {
+        //   // remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
+        //   // NosLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
+        //   // range: "*Số Lượng Vượt Quá Mức Số Chỗ",
+        //   maxAmount: "*Số Lượng Vượt Quá Mức Số Chỗ",
+        // },
+        // number_of_seat: {
+        //   amountLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
+        // },
         number_of_seat: {
-          // remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
-          // NosLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
-          // range: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
         },
         schedule_id: {
           required: "*Bạn Chưa Chọn Lịch Trình",
