@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </div>
                                     <div class="div-link">
                                         <a class="link-tour-detail btn btn-primary btn-sm"
-                                            link-id="' . $row["id"] . '" href="../main/tour_detail?v=' . $row["id"] . '">Xem Chi Tiết</a>
+                                            link-id="' . $row["id"] . '" href="../main/tour_detail.php?v=' . $row["id"] . '">Xem Chi Tiết</a>
                                     </div>
                                 </div>
                             </div>

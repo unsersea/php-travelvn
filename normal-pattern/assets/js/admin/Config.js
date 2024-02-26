@@ -1494,9 +1494,7 @@ var MODAL_FEEDBACK_ADMIN;
               type: TYPE_POST,
               data: {
                 number_of_seat: function () {
-                  return $(
-                    "#form-create-tour :input[name='number_of_seat']"
-                  ).val();
+                  return $("#form-create-tour :input[name='number_of_seat']").val(), $("#form-create-tour :input[name='amount_person']").val(), $("#form-create-tour :input[name='amount_children']").val();                  
                 },
               },
             },
@@ -2191,46 +2189,52 @@ var MODAL_FEEDBACK_ADMIN;
     );
 
     // Delete
-    $("#datatables-schedule-list").on("click", "#btn-delete-schedule", function (e) {
-      var datatables = $("#datatables-schedule-list").DataTable();
-      e.preventDefault();
-      // Get Id From tag data-id
-      var data_id = $(this).data("id");
+    $("#datatables-schedule-list").on(
+      "click",
+      "#btn-delete-schedule",
+      function (e) {
+        var datatables = $("#datatables-schedule-list").DataTable();
+        e.preventDefault();
+        // Get Id From tag data-id
+        var data_id = $(this).data("id");
 
-      // Create Sweetalert2
-      Swal.fire({
-        title: "Bạn có chắc không?",
-        text:
-          "Bạn sẽ không thể phục hồi lịch trình mã [" + data_id + "] này nữa!",
-        icon: ICON_WARNING,
-        showCancelButton: true,
-        confirmButtonColor: CONFIRM_BUTTON_COLOR,
-        cancelButtonColor: CANCEL_BUTTON_COLOR,
-        confirmButtonText: CONFIRM_BUTTON_TEXT,
-        cancelButtonText: CANCEL_BUTTON_TEXT,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Delete
-          $.ajax({
-            url: URL_ACTION_FIND + "action_schedule.php",
-            data: {
-              id: data_id,
-              action: "submit_schedule_delete",
-            },
-            type: TYPE_POST,
-            success: function (data) {
-              datatables.ajax.reload();
-              // Check Status or Display Alert
-              Swal.fire({
-                title: "Đã xóa!",
-                text: "Dữ liệu đã xóa thành công.",
-                icon: "success",
-              });
-            },
-          });
-        }
-      });
-    });
+        // Create Sweetalert2
+        Swal.fire({
+          title: "Bạn có chắc không?",
+          text:
+            "Bạn sẽ không thể phục hồi lịch trình mã [" +
+            data_id +
+            "] này nữa!",
+          icon: ICON_WARNING,
+          showCancelButton: true,
+          confirmButtonColor: CONFIRM_BUTTON_COLOR,
+          cancelButtonColor: CANCEL_BUTTON_COLOR,
+          confirmButtonText: CONFIRM_BUTTON_TEXT,
+          cancelButtonText: CANCEL_BUTTON_TEXT,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Delete
+            $.ajax({
+              url: URL_ACTION_FIND + "action_schedule.php",
+              data: {
+                id: data_id,
+                action: "submit_schedule_delete",
+              },
+              type: TYPE_POST,
+              success: function (data) {
+                datatables.ajax.reload();
+                // Check Status or Display Alert
+                Swal.fire({
+                  title: "Đã xóa!",
+                  text: "Dữ liệu đã xóa thành công.",
+                  icon: "success",
+                });
+              },
+            });
+          }
+        });
+      }
+    );
 
     // Detail
     $("#datatables-schedule-list").on(
@@ -2263,7 +2267,9 @@ var MODAL_FEEDBACK_ADMIN;
             $("#end-datetime-schedule-detail").val(response.end_datetime);
             $("#single-detail-remaining-schedule").val(response.remaining);
             $("#note-schedule-detail").val(response.note);
-            $("#single-detail-create-at-schedule").val(response.create_at_schedule);
+            $("#single-detail-create-at-schedule").val(
+              response.create_at_schedule
+            );
           },
         });
       }

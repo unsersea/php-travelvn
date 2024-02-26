@@ -27,7 +27,7 @@ if (isset($_GET["v"])) {
     }
 
 } else {
-    return header("Location: ../../views/main/tour.php");
+    // return header("Location: ../../views/main/tour.php");
 }
 
 
@@ -46,8 +46,15 @@ if (isset($_GET["v"])) {
             color: #d93025 !important;
         }
 
-        label:not(.form-check-label):not(.custom-file-label) {
-            font-weight: 700 !important;
+        body[page="tour-detail"] label.error {
+            color: var(--c-red) !important;
+            font-size: 0.875rem !important;
+            font-weight: 400 !important;
+            margin-bottom: 0.25rem !important;
+        }
+
+        body[page="tour-detail"] label {
+            font-weight: 700;
         }
     </style>
 </head>
@@ -196,7 +203,7 @@ if (isset($_GET["v"])) {
     <div class="modal fade" id="modal-create-booking" tabindex="-1" aria-labelledby="ex-modal-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="../../views/main/tour_detail.php" id="form-create-booking" class="form form-modal"
+                <form action="../../views/main/tour_detail.php?v=<?php echo $v; ?>" id="form-create-booking" class="form form-modal"
                     enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ex-modal-label">Đặt Tour</h5>

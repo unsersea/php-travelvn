@@ -1,6 +1,13 @@
+const TYPE_POST = "POST";
+const TYPE_GET = "GET";
+
+const URL_ACTION_VALIDATE = "../../views/action/";
+
 // var SELECT2;
 var SELECT2_BOOTSTRAP4_US;
-var CHANGE_AMOUNT;
+var CHANGE_TOTAL;
+var MODAL_BOOKING_USER;
+var AMOUNT_VALIDATE;
 
 Number.prototype.format = function (n, x) {
   var re = "\\d(?=(\\d{" + (x || 3) + "})+" + (n > 0 ? "\\." : "$") + ")";
@@ -8,6 +15,17 @@ Number.prototype.format = function (n, x) {
 };
 
 (function () {
+  // AMOUNT_VALIDATE = function amount_validate() {
+  //   jQuery.validator.addMethod("NosLimit", function(value, element) {
+  //     var amount_person = $("#form-create-booking #amount_person").val();
+  //     var amount_children = $("#form-create-booking #amount_children").val();
+
+  //     var total_amount = (Number(amount_person) + Number(amount_children));
+
+  //     return this.optional(element) || value > total_amount;
+  //   });
+  // };
+
   SELECT2_BOOTSTRAP4_US = function select2bs4us() {
     if (document.querySelector("#select2-schedule-booking-create")) {
       try {
@@ -23,7 +41,7 @@ Number.prototype.format = function (n, x) {
     }
   };
 
-  CHANGE_AMOUNT = function change_amount() {
+  CHANGE_TOTAL = function change_total() {
     var amount_person = $("#amount_person");
     var price_person = $("#price_person_booking_create");
 
@@ -52,19 +70,89 @@ Number.prototype.format = function (n, x) {
       cal_children.val(cal_chl_.format() + " VNĐ");
     });
 
-    $("#modal-create-booking").on('change keyup' ,function () {
+    $("#modal-create-booking").on("change keyup", function () {
       var cal_tl_ps = $("#cal-total-price-person").val().replace(/,|VNĐ/g, "");
-      var cal_tl_chl = $("#cal-total-price-children").val().replace(/,|VNĐ/g, "");
+      var cal_tl_chl = $("#cal-total-price-children")
+        .val()
+        .replace(/,|VNĐ/g, "");
       var cal_tl_pr = cal_total_price.val().replace(/,|VNĐ/g, "");
 
-      var cal_tl = (Number(cal_tl_ps) + Number(cal_tl_chl)) + Number(cal_tl_pr);
+      var cal_tl = Number(cal_tl_ps) + Number(cal_tl_chl) + Number(cal_tl_pr);
 
       cal_total_all.val(cal_tl.format() + " VNĐ");
 
       // console.log(cal_tl);
     });
   };
+
+  MODAL_BOOKING_USER = function modal_booking_user() {
+
+    // var amount_person = $("#form-create-booking #amount_person").val();
+    // var amount_children = $("#form-create-booking #amount_children").val();
+    // var total_amount = (Number(amount_person) + Number(amount_children));
+
+    // var nos = Number($("#form-create-booking #number_of_seat").val());
+    // Create
+    const form_create_booking = $("#form-create-booking").validate({
+      ignore: [],
+      rules: {
+        number_of_seat: {
+          // remote: {
+          //   url: "../../../normal-pattern/views/includes/validate/booking/validate_number_of_seat.php",
+          //   type: TYPE_POST,
+          //   data: {
+          //     number_of_seat: function () {
+          //       return $("#form-create-booking :input[name='number_of_seat']").val();
+          //       // $("#form-create-booking :input[name='amount_person']").val();
+          //       // $("#form-create-booking :input[name='amount_children']").val();
+          //     },
+          //   },
+          // },
+
+          // NosLimit: true,
+
+          // range: [
+          //   total_amount, nos
+          // ]
+        },
+        schedule_id: {
+          required: true,
+        },
+      },
+      messages: {
+        number_of_seat: {
+          // remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          // NosLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          // range: "*Số Lượng Vượt Quá Mức Số Chỗ",
+        },
+        schedule_id: {
+          required: "*Bạn Chưa Chọn Lịch Trình",
+        },
+      },
+      errorPlacement: function (error, element) {
+        if (element.attr("name") == "schedule_id") {
+          error.insertAfter("#modal-create-booking span.select2");
+        } else {
+          error.insertAfter(element);
+        }
+      },
+      submitHandler: function (form) {
+        $.ajax({
+          type: TYPE_POST,
+          url: URL_ACTION_VALIDATE + "action_booking.php",
+          data: new FormData(form),
+          contentType: false,
+          processData: false,
+          // dataType: "json",
+          // cache : false,
+          success: function (data) {},
+        });
+      },
+    });
+  };
 })(jQuery);
 
+// AMOUNT_VALIDATE();
 SELECT2_BOOTSTRAP4_US();
-CHANGE_AMOUNT();
+CHANGE_TOTAL();
+MODAL_BOOKING_USER();
