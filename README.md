@@ -3,15 +3,15 @@
 
 > **Thành Viên**: 4.
 
+> **Đồ Án Kỳ 2**: Du Lịch Ba Miền (Được Làm Lại Từ Bản 2021 - FPT Aptech).
+
 Tên Thành Viên:
 + Phạm Quốc Thắng
 + Trần Hoàng Quốc Tài
 + Trịnh Gia Bảo
 + Dương Hòa Long
 
-> **Đồ Án Kỳ 2**: Du Lịch Ba Miền (Được Làm Lại Từ Bản 2021 - FPT Aptech).
-
-Task Công Việc
+**Task Công Việc**
 - [ ] Thiết Kế Tài Liệu, Sơ Đồ
 - [ ] Tạo Template Cho Người Dùng Và Quản Trị Viên
 - [ ] Deloy Trang Web
@@ -27,7 +27,8 @@ Task Công Việc
 - [ ] Sơ Đồ Thống Kê Cho Trang Quản Trị Viên
 - [x] Tạo Cơ Sở Dữ Liệu
 - [ ] Xử Lý Thanh Toán Bằng Momo Khi Đặt Tour
-Phần Còn Lại
-1. Document: <link>
-2. Execl: <link>
-3. Link Deloy: <link>
+
+**Phần Còn Lại**
+1. Document: Chưa có
+2. Execl: Chưa có
+3. Link Deloy: Chưa có
