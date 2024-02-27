@@ -13,7 +13,7 @@
 
 **Task Công Việc**:
 - [ ] Thiết Kế Tài Liệu, Sơ Đồ
-- [ ] Tạo Template Cho Người Dùng Và Quản Trị Viên
+- [x] Tạo Template Cho Người Dùng Và Quản Trị Viên
 - [ ] Deloy Trang Web
 - [x] CRUD Trang Thể Loại
 - [x] CRUD Trang Sự Kiện
@@ -21,7 +21,7 @@
 - [x] CRUD Trang Khu Vực
 - [x] CRUD Trang Lịch Trình
 - [x] Đặt Tour
-- [ ] Xử Lý Duyệt Tour
+- [x] Xử Lý Duyệt Tour
 - [x] Đăng Nhập Bằng Google API
 - [x] Tạo Đăng Nhập Thông Thường và Đăng Ký Thông Thường
 - [ ] Sơ Đồ Thống Kê Cho Trang Quản Trị Viên
@@ -29,6 +29,8 @@
 - [ ] Xử Lý Thanh Toán Bằng Momo Khi Đặt Tour
 
 **Phần Còn Lại**:
-1. Document: Chưa có
-2. Execl: Chưa có
-3. Link Deloy: Chưa có
+1. Document:
+2. Execl:
+3. Link Deloy:
+
+_Hiện tại đồ án này sẽ **tạm dừng** từ ngày 27/02/2024 đến 27/03/2024 vì lý do bận một số công việc khác_
