@@ -1,7 +1,7 @@
-const TYPE_POST = "POST";
-const TYPE_GET = "GET";
+// const TYPE_POST = "POST";
+// const TYPE_GET = "GET";
 
-const URL_ACTION_VALIDATE = "../../views/action/";
+// const URL_ACTION_VALIDATE = "../../views/action/";
 
 // var SELECT2;
 var SELECT2_BOOTSTRAP4_US;
@@ -150,149 +150,150 @@ Number.prototype.format = function (n, x) {
 
     // var nos = Number($("#form-create-booking #number_of_seat").val());
     // Create
-    const form_create_booking = $("#form-create-booking").validate({
-      ignore: [],
-      rules: {
-        number_of_seat: {
-          // remote: {
-          //   url: "../../../normal-pattern/views/includes/validate/booking/validate_number_of_seat.php",
-          //   type: TYPE_POST,
-          //   data: {
-          //     number_of_seat: function () {
-          //       return $("#form-create-booking :input[name='number_of_seat']").val();
-          //       // $("#form-create-booking :input[name='amount_person']").val();
-          //       // $("#form-create-booking :input[name='amount_children']").val();
-          //     },
-          //   },
-          // },
+    if (document.querySelector("#modal-create-booking")) {
+      const form_create_booking = $("#form-create-booking").validate({
+        ignore: [],
+        rules: {
+          number_of_seat: {
+            // remote: {
+            //   url: "../../../normal-pattern/views/includes/validate/booking/validate_number_of_seat.php",
+            //   type: TYPE_POST,
+            //   data: {
+            //     number_of_seat: function () {
+            //       return $("#form-create-booking :input[name='number_of_seat']").val();
+            //       // $("#form-create-booking :input[name='amount_person']").val();
+            //       // $("#form-create-booking :input[name='amount_children']").val();
+            //     },
+            //   },
+            // },
 
-          // NosLimit: true,
+            // NosLimit: true,
 
-          // range: [
-          //   total_amount, nos
-          // ]
+            // range: [
+            //   total_amount, nos
+            // ]
 
-          // maxAmount: number_of_seat,
+            // maxAmount: number_of_seat,
 
-          // amountLimit: true,
-          remote: {
-            url: "../../../normal-pattern/views/includes/validate/booking/validate_number_of_seat.php",
-            type: TYPE_POST,
-            data: {
-              number_of_seat: function () {
-                return $(
-                  "#form-create-booking :input[name='number_of_seat']"
-                ).val();
-              },
-              amount_person: function () {
-                return $(
-                  "#form-create-booking :input[name='amount_person']"
-                ).val();
-              },
-              amount_children: function () {
-                return $(
-                  "#form-create-booking :input[name='amount_children']"
-                ).val();
+            // amountLimit: true,
+            remote: {
+              url: "../../../normal-pattern/views/includes/validate/booking/validate_number_of_seat.php",
+              type: "POST",
+              data: {
+                number_of_seat: function () {
+                  return $(
+                    "#form-create-booking :input[name='number_of_seat']"
+                  ).val();
+                },
+                amount_person: function () {
+                  return $(
+                    "#form-create-booking :input[name='amount_person']"
+                  ).val();
+                },
+                amount_children: function () {
+                  return $(
+                    "#form-create-booking :input[name='amount_children']"
+                  ).val();
+                },
               },
             },
           },
-        },
-        schedule_id: {
-          required: true,
-        },
-        payment_method: {
-          required: true,
-        },
-      },
-      messages: {
-        // number_of_seat: {
-        //   // remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
-        //   // NosLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
-        //   // range: "*Số Lượng Vượt Quá Mức Số Chỗ",
-        //   maxAmount: "*Số Lượng Vượt Quá Mức Số Chỗ",
-        // },
-        // number_of_seat: {
-        //   amountLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
-        // },
-        number_of_seat: {
-          remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
-        },
-        schedule_id: {
-          required: "*Bạn Chưa Chọn Lịch Trình",
-        },
-        payment_method: {
-          required: "*Bạn Chưa Chọn Hình Thức Thanh Toán",
-        },
-      },
-      errorPlacement: function (error, element) {
-        if (element.attr("name") == "schedule_id") {
-          error.insertAfter(
-            "#modal-create-booking .field-schedule span.select2"
-          );
-        } else {
-          error.insertAfter(element);
-        }
-
-        if (element.attr("name") == "payment_method") {
-          error.insertAfter(
-            "#modal-create-booking .field-payment-method span.select2"
-          );
-        } else {
-          error.insertAfter(element);
-        }
-      },
-      submitHandler: function (form) {
-        $.ajax({
-          type: TYPE_POST,
-          url: URL_ACTION_VALIDATE + "action_booking.php",
-          data: new FormData(form),
-          contentType: false,
-          processData: false,
-          // dataType: "json",
-          // cache : false,
-          success: function (data) {
-            // return location.href = "../../views/main/index.php";
-            var response = JSON.parse(data);
-
-            // Sweetalert2
-            if (response == true) {
-
-              // Close Modal
-              $("#modal-create-booking").modal("hide");
-
-              // Form Input Reset
-              $("#form-create-booking")[0].reset();
-
-              // 
-              $("#select2-schedule-booking-create").select2({
-                theme: "bootstrap4",
-                placeholder: "Chọn Lịch Trình",
-                tag: [], // Set Tag
-              });
-
-              $("#select2-payment-method-booking").select2({
-                theme: "bootstrap4",
-                placeholder: "Chọn Hình Thức Thanh Toán",
-                tag: [], // Set Tag
-              });
-
-              Swal.fire({
-                icon: "success",
-                title: "Thành Công",
-                text: "Đã thanh toán thành công!",
-                confirmButtonText: "Xác Nhận",
-              }).then((result) => {
-                return location.href = "../../views/main/index.php";
-                // if (result.isConfirmed) {
-                // } else {
-
-                // }
-              });
-            }
+          schedule_id: {
+            required: true,
           },
-        });
-      },
-    });
+          payment_method: {
+            required: true,
+          },
+        },
+        messages: {
+          // number_of_seat: {
+          //   // remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          //   // NosLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          //   // range: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          //   maxAmount: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          // },
+          // number_of_seat: {
+          //   amountLimit: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          // },
+          number_of_seat: {
+            remote: "*Số Lượng Vượt Quá Mức Số Chỗ",
+          },
+          schedule_id: {
+            required: "*Bạn Chưa Chọn Lịch Trình",
+          },
+          payment_method: {
+            required: "*Bạn Chưa Chọn Hình Thức Thanh Toán",
+          },
+        },
+        errorPlacement: function (error, element) {
+          if (element.attr("name") == "schedule_id") {
+            error.insertAfter(
+              "#modal-create-booking .field-schedule span.select2"
+            );
+          } else {
+            error.insertAfter(element);
+          }
+
+          if (element.attr("name") == "payment_method") {
+            error.insertAfter(
+              "#modal-create-booking .field-payment-method span.select2"
+            );
+          } else {
+            error.insertAfter(element);
+          }
+        },
+        submitHandler: function (form) {
+          $.ajax({
+            type: TYPE_POST,
+            url: "../../views/action/action_booking.php",
+            data: new FormData(form),
+            contentType: false,
+            processData: false,
+            // dataType: "json",
+            // cache : false,
+            success: function (data) {
+              // return location.href = "../../views/main/index.php";
+              var response = JSON.parse(data);
+
+              // Sweetalert2
+              if (response == true) {
+                // Close Modal
+                $("#modal-create-booking").modal("hide");
+
+                // Form Input Reset
+                $("#form-create-booking")[0].reset();
+
+                //
+                $("#select2-schedule-booking-create").select2({
+                  theme: "bootstrap4",
+                  placeholder: "Chọn Lịch Trình",
+                  tag: [], // Set Tag
+                });
+
+                $("#select2-payment-method-booking").select2({
+                  theme: "bootstrap4",
+                  placeholder: "Chọn Hình Thức Thanh Toán",
+                  tag: [], // Set Tag
+                });
+
+                Swal.fire({
+                  icon: "success",
+                  title: "Thành Công",
+                  text: "Đã thanh toán thành công!",
+                  confirmButtonText: "Xác Nhận",
+                }).then((result) => {
+                  return (location.href = "../../views/main/index.php");
+                  // if (result.isConfirmed) {
+                  // } else {
+
+                  // }
+                });
+              }
+            },
+          });
+        },
+      });
+    }
   };
 })(jQuery);
 

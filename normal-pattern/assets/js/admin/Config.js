@@ -1494,7 +1494,11 @@ var MODAL_FEEDBACK_ADMIN;
               type: TYPE_POST,
               data: {
                 number_of_seat: function () {
-                  return $("#form-create-tour :input[name='number_of_seat']").val(), $("#form-create-tour :input[name='amount_person']").val(), $("#form-create-tour :input[name='amount_children']").val();                  
+                  return (
+                    $("#form-create-tour :input[name='number_of_seat']").val(),
+                    $("#form-create-tour :input[name='amount_person']").val(),
+                    $("#form-create-tour :input[name='amount_children']").val()
+                  );
                 },
               },
             },
@@ -2275,6 +2279,58 @@ var MODAL_FEEDBACK_ADMIN;
       }
     );
   };
+
+  // Modal Booking
+  MODAL_BOOKING_ADMIN = function modal_booking_admin() {
+    // DataTables Setup
+    if (document.getElementById("datatables-booking-list")) {
+      try {
+        $("#datatables-booking-list").DataTable({
+          language: { url: LANG_VI_URL_DATATABLES },
+          processing: true,
+          serverSide: true,
+          padding: true,
+          responsive: true,
+          //
+          colReorder: true,
+          autoWidth: true,
+          scrollX: true,
+          stateSave: true,
+          //
+          order: [],
+          // Button
+          dom: "Bfrtip",
+          buttons: ["csv", "excel", "print"],
+          ajax: {
+            url: "../../views/includes/data/data_booking.php",
+            type: TYPE_POST,
+          },
+          fnCreateRow: function (nRow, aData, iDataIndex) {
+            // Add Data Id in tag <tr>
+            $(nRow).attr("id", aData[0]);
+            //
+          },
+          columnDefs: [
+            {
+              targets: [0, 4],
+              searchable: false,
+              orderable: false,
+              // "visible": false
+            },
+            // {
+            //     "targets": '_all',
+            //     "visible": false
+            // }
+          ],
+        });
+      } catch (ex) {
+        return console.log(ex);
+      }
+    }
+
+    // Update Modal
+    
+  };
 })(jQuery);
 
 FILE_VALIDATE();
@@ -2287,3 +2343,4 @@ MODAL_EVENT_ADMIN();
 MODAL_LOCATION_ADMIN();
 MODAL_TOUR_ADMIN();
 MODAL_SCHEDULE_ADMIN();
+MODAL_BOOKING_ADMIN();

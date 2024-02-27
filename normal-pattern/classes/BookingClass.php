@@ -141,4 +141,20 @@ class BookingClass
         disconnectDB($conn);
         echo json_encode($row);
     }
+
+    // Datatables
+    public static function ListByPDO()
+    {
+        $conn = connectPDO();
+
+        $sql = "SELECT * FROM `booking`";
+
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $statement->fetchAll();
+
+        // $conn = null;
+
+        return $statement->rowCount();
+    }
 }
