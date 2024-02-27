@@ -21,7 +21,7 @@
 - [x] CRUD Trang Khu Vực
 - [x] CRUD Trang Lịch Trình
 - [x] Đặt Tour
-- [x] Xử Lý Duyệt Tour
+- [ ] Xử Lý Duyệt Tour
 - [x] Đăng Nhập Bằng Google API
 - [x] Tạo Đăng Nhập Thông Thường và Đăng Ký Thông Thường
 - [ ] Sơ Đồ Thống Kê Cho Trang Quản Trị Viên
