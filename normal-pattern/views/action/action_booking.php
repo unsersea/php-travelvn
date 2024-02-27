@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $start_date = "";
 
             $isShow = 1;
-            $status = 0;
+            $status;
 
             $price_person = str_replace($array_character, "", $_REQUEST["cal-total-price-person"]);
             $price_children = str_replace($array_character, "", $_REQUEST["cal-total-price-children"]);
@@ -45,14 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $note = $_REQUEST["note"];
 
+            $username = $_REQUEST["username"];
+
             // Check Payment Method
             if ($payment_method == "Trực Tiếp") {
+                $status = 0;
 
-                $create_booking = new BookingClass($payment_method, $note, $start_date, $price_children, $price_person, $amount_children, $amount_person, $price_total, $status, $isShow, "", $schedule_id);
+                $create_booking = new BookingClass($payment_method, $note, $start_date, $price_children, $price_person, $amount_children, $amount_person, $price_total, $status, $isShow, $username, $schedule_id);
             
-                // BookingClass::Create($create_booking);
+                BookingClass::Create($create_booking);
 
-                print_r($create_booking);
+                // print_r($create_booking);
+                echo json_encode(true);
+            } else {
+                echo json_encode(false);
             }
         }
 

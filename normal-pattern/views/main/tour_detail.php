@@ -30,7 +30,6 @@ if (isset($_GET["v"])) {
     // return header("Location: ../../views/main/tour.php");
 }
 
-
 ?>
 
 <?php include "../../views/includes/doctype.php"; ?>
@@ -214,11 +213,11 @@ if (isset($_GET["v"])) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!-- <div class="field-modal d-none">
-                            <label class="form-label">Mã Tour</label>
-                            <input type="hidden" name="tour_id" class="form-control"
-                                value="<?php echo $find_tour["id"]; ?>" readonly="true">
-                        </div> -->
+                        <div class="field-modal d-none">
+                            <label class="form-label">Tên Tài Khoản</label>
+                            <input type="hidden" name="username" class="form-control"
+                                value="<?php echo $username; ?>" readonly="true">
+                        </div>
                         <div class="field-modal">
                             <label class="form-label">Tựa Đề</label>
                             <input type="text" name="title" class="form-control"

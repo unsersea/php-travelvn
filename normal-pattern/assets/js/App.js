@@ -252,6 +252,43 @@ Number.prototype.format = function (n, x) {
           // cache : false,
           success: function (data) {
             // return location.href = "../../views/main/index.php";
+            var response = JSON.parse(data);
+
+            // Sweetalert2
+            if (response == true) {
+
+              // Close Modal
+              $("#modal-create-booking").modal("hide");
+
+              // Form Input Reset
+              $("#form-create-booking")[0].reset();
+
+              // 
+              $("#select2-schedule-booking-create").select2({
+                theme: "bootstrap4",
+                placeholder: "Chọn Lịch Trình",
+                tag: [], // Set Tag
+              });
+
+              $("#select2-payment-method-booking").select2({
+                theme: "bootstrap4",
+                placeholder: "Chọn Hình Thức Thanh Toán",
+                tag: [], // Set Tag
+              });
+
+              Swal.fire({
+                icon: "success",
+                title: "Thành Công",
+                text: "Đã thanh toán thành công!",
+                confirmButtonText: "Xác Nhận",
+              }).then((result) => {
+                return location.href = "../../views/main/index.php";
+                // if (result.isConfirmed) {
+                // } else {
+
+                // }
+              });
+            }
           },
         });
       },
