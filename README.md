@@ -1,9 +1,16 @@
 # php-travelvn 2024
-> **Trạng Thái Đồ Án**: 85%
+> **Trạng Thái Đồ Án**: 85%.
 
-> **Thành Viên**: 4 [Phạm Quốc Thắng, Trịnh Gia Bảo, Dương Hoàng Long, Trần Hoàng Quốc Tài]
+> **Thành Viên**: 4.
 
-> **Đồ Án Kỳ 2**: Du Lịch Ba Miền (Được Làm Lại Từ Bản 2021 - FPT Aptech)
+Tên Thành Viên:
++ Phạm Quốc Thắng
++ Trần Hoàng Quốc Tài
++ Trịnh Gia Bảo
++ Dương Hòa Long
+
+> **Đồ Án Kỳ 2**: Du Lịch Ba Miền (Được Làm Lại Từ Bản 2021 - FPT Aptech).
+
 Task Công Việc
 - [ ] Thiết Kế Tài Liệu, Sơ Đồ
 - [ ] Tạo Template Cho Người Dùng Và Quản Trị Viên
